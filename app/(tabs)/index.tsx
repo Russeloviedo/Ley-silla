@@ -33,8 +33,8 @@ export default function SeleccionUnidadNegocioScreen() {
     setSeleccion(unidad);
     // Navegar automáticamente a la siguiente pantalla
     const params = { unidad: unidad };
-    if (validateNavigationParams(params)) {
-      router.push({ pathname: '/seleccion-puesto', params });
+      if (validateNavigationParams(params)) {
+        router.push({ pathname: '/seleccion-puesto', params });
     }
   };
 
@@ -161,8 +161,8 @@ export default function SeleccionUnidadNegocioScreen() {
                 </Text>
               </View>
             </ScrollView>
-          </View>
-        </View>
+      </View>
+    </View>
       )}
     </AnimatedBackground>
   );

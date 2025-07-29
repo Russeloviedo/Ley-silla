@@ -76,8 +76,8 @@ export default function PreguntasInicialesScreen() {
           <Text style={styles.topBarButtonText}>?</Text>
         </TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Evaluación Inicial</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Evaluación Inicial</Text>
         <Text style={styles.subtitle}>Por favor responda las siguientes preguntas para determinar si se continúa con la identificación de posible riesgo de bipedestación.</Text>
       {PREGUNTAS.map((pregunta) => (
         <View key={pregunta.id} style={styles.preguntaBox}>
@@ -135,12 +135,12 @@ export default function PreguntasInicialesScreen() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Definiciones</Text>
-              <TouchableOpacity 
+      <TouchableOpacity
                 style={styles.modalCloseButton} 
                 onPress={() => setShowHelpModal(false)}
-              >
+      >
                 <Text style={styles.modalCloseText}>✕</Text>
-              </TouchableOpacity>
+      </TouchableOpacity>
             </View>
             
             <ScrollView style={styles.modalScrollView}>
@@ -267,27 +267,35 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   opcion: {
-    backgroundColor: '#00c4cc',
+    backgroundColor: 'rgba(0, 196, 204, 0.8)',
     paddingVertical: 14,
     paddingHorizontal: 18,
     borderRadius: 14,
     marginHorizontal: 4,
     marginVertical: 4,
     alignItems: 'center',
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.18,
+    shadowColor: 'rgba(0, 196, 204, 0.3)',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
   opcionSeleccionada: {
-    backgroundColor: '#b6e600',
+    backgroundColor: 'rgba(182, 230, 0, 0.9)',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    shadowColor: 'rgba(182, 230, 0, 0.4)',
+    shadowOpacity: 0.3,
   },
   opcionTexto: {
     fontSize: 18,
-    color: '#222',
+    color: '#fff',
     fontWeight: '700',
     letterSpacing: 1.1,
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   topBar: {
     flexDirection: 'row',
