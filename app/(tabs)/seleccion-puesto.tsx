@@ -56,9 +56,19 @@ export default function SeleccionPuestoScreen() {
     ? [...new Set(DATA[unidad as string].filter((item: { puesto: string }) => item.puesto === puesto).map((item: { subpuesto: string }) => item.subpuesto))]
     : [];
 
-  const handleContinuar = () => {
-    if (puesto && subpuesto) {
-      router.push({ pathname: '/preguntas-iniciales', params: { unidad, puesto, subpuesto } });
+
+
+  // Navegar automáticamente cuando se seleccione puesto y subpuesto
+  const handlePuestoChange = (value: string) => {
+    setPuesto(value);
+    setSubpuesto('');
+  };
+
+  const handleSubpuestoChange = (value: string) => {
+    setSubpuesto(value);
+    // Navegar automáticamente cuando se complete la selección
+    if (puesto && value) {
+      router.push({ pathname: '/preguntas-iniciales', params: { unidad, puesto, subpuesto: value } });
     }
   };
 
@@ -68,6 +78,10 @@ export default function SeleccionPuestoScreen() {
 
   const handleAnalisis = () => {
     router.push({ pathname: '/resultados-finales' });
+  };
+
+  const handleAtras = () => {
+    router.replace('/');
   };
 
   return (
@@ -90,10 +104,7 @@ export default function SeleccionPuestoScreen() {
           <View style={styles.pickerContainer}>
             <Picker
               selectedValue={puesto}
-              onValueChange={value => {
-                setPuesto(value);
-                setSubpuesto('');
-              }}
+              onValueChange={handlePuestoChange}
               style={styles.picker}
             >
               <Picker.Item label="Seleccione un puesto..." value="" />
@@ -105,7 +116,7 @@ export default function SeleccionPuestoScreen() {
           <View style={styles.pickerContainer}>
             <Picker
               selectedValue={subpuesto}
-              onValueChange={value => setSubpuesto(value)}
+              onValueChange={handleSubpuestoChange}
               enabled={!!puesto}
               style={[styles.picker, !puesto && styles.pickerDisabled]}
             >
@@ -114,18 +125,18 @@ export default function SeleccionPuestoScreen() {
             </Picker>
           </View>
         </View>
-        <TouchableOpacity
-          style={[styles.botonContinuar, (!puesto || !subpuesto) && styles.botonContinuarDeshabilitado]}
-          onPress={handleContinuar}
-          disabled={!puesto || !subpuesto}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.botonContinuarTexto}>Continuar</Text>
-        </TouchableOpacity>
-        <Text style={styles.info}>Seleccione puesto y subpuesto para continuar con el análisis de riesgo</Text>
+        <Text style={styles.info}>Seleccione puesto y subpuesto para continuar automáticamente</Text>
       </ScrollView>
       {/* Barra inferior */}
       <View style={styles.bottomBar}>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAtras}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>⬅️</Text>
+          <Text style={styles.bottomBarLabel}>Atrás</Text>
+        </TouchableOpacity>
         <TouchableOpacity 
           style={styles.bottomBarItem} 
           onPress={handleInicio}

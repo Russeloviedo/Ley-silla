@@ -91,13 +91,13 @@ export default function ResultadosFinalesScreen() {
         pregunta1: respuestasIniciales[1] || '',
         pregunta2: respuestasIniciales[2] || '',
         // Preguntas 3-9 mapeadas desde el diagrama de flujo
-        pregunta3: respuestasFlujoData[1] || '', // ¿Hay personas trabajadoras en bipedestación?
-        pregunta4: respuestasFlujoData[2] || '', // ¿La bipedestación es prolongada?
-        pregunta5: respuestasFlujoData[3] || '', // ¿Puede realizar actividades sentada?
-        pregunta6: respuestasFlujoData[4] || '', // ¿Existe espacio para silla?
-        pregunta7: respuestasFlujoData[5] || '', // ¿Requiere estar cerca del trabajo?
-        pregunta8: '', // Vacío - no hay pregunta 6 en el flujo
-        pregunta9: '', // Vacío - no hay pregunta 7 en el flujo
+        pregunta3: flujoString === 'NO_DECRETO' ? 'N/A' : (respuestasFlujoData[1] || ''), // ¿Hay personas trabajadoras en bipedestación?
+        pregunta4: flujoString === 'NO_DECRETO' ? 'N/A' : (respuestasFlujoData[2] || ''), // ¿La bipedestación es prolongada?
+        pregunta5: flujoString === 'NO_DECRETO' ? 'N/A' : (respuestasFlujoData[3] || ''), // ¿Puede realizar actividades sentada?
+        pregunta6: flujoString === 'NO_DECRETO' ? 'N/A' : (respuestasFlujoData[4] || ''), // ¿Existe espacio para silla?
+        pregunta7: flujoString === 'NO_DECRETO' ? 'N/A' : (respuestasFlujoData[5] || ''), // ¿Requiere estar cerca del trabajo?
+        pregunta8: 'N/A', // Siempre N/A - no existe en el diagrama de flujo
+        pregunta9: 'N/A', // Siempre N/A - no existe en el diagrama de flujo
         // Ponderaciones (1-7)
         ponderacion1: respuestasPonderacion[1] || 0,
         ponderacion2: respuestasPonderacion[2] || 0,
@@ -166,6 +166,34 @@ export default function ResultadosFinalesScreen() {
     }
   };
 
+  // Función auxiliar para determinar si una pregunta debe aparecer como N/A
+  const getRespuestaConNA = (respuesta: string, preguntaNumero: number, flujo: string): string => {
+    // Si no hay flujo o es "NO_DECRETO", todas las preguntas del diagrama de flujo son N/A
+    if (!flujo || flujo.toLowerCase().includes('no aplica') || flujo === 'NO_DECRETO') {
+      if (preguntaNumero >= 3 && preguntaNumero <= 9) {
+        return 'N/A';
+      }
+    }
+    
+    // Si hay respuesta, devolverla
+    if (respuesta && respuesta.trim() !== '') {
+      return respuesta;
+    }
+    
+    // Si no hay respuesta y es una pregunta del diagrama de flujo (3-7), devolver N/A
+    if (preguntaNumero >= 3 && preguntaNumero <= 7) {
+      return 'N/A';
+    }
+    
+    // Las preguntas 8 y 9 SIEMPRE deben aparecer como N/A porque no existen en el diagrama de flujo
+    if (preguntaNumero === 8 || preguntaNumero === 9) {
+      return 'N/A';
+    }
+    
+    // Si no hay respuesta y no es N/A por el flujo, devolver vacío
+    return '';
+  };
+
   // Exportar historial a Excel compatible con web y móvil (NUEVO FORMATO)
   const exportarExcel = async () => {
     // --- Hoja 1: Identificación ---
@@ -206,13 +234,13 @@ export default function ResultadosFinalesScreen() {
       'SUBPUESTO DE TRABAJO': item.subpuesto || '',
       'PREGUNTA 1': item.pregunta1 === '8 horas' || item.pregunta1 === '10 horas' || item.pregunta1 === '12 horas' ? item.pregunta1 : '',
       'PREGUNTA 2': item.pregunta2 === 'Sí' ? 'Sí' : item.pregunta2 === 'No' ? 'No' : '',
-      'PREGUNTA 3': item.pregunta3 || '', // ¿Hay personas trabajadoras en bipedestación?
-      'PREGUNTA 4': item.pregunta4 || '', // ¿La bipedestación es prolongada?
-      'PREGUNTA 5': item.pregunta5 || '', // ¿Puede realizar actividades sentada?
-      'PREGUNTA 6': item.pregunta6 || '', // ¿Existe espacio para silla?
-      'PREGUNTA 7': item.pregunta7 || '', // ¿Requiere estar cerca del trabajo?
-      'PREGUNTA 8': item.pregunta8 || '', // Vacío
-      'PREGUNTA 9': item.pregunta9 || '', // Vacío
+      'PREGUNTA 3': getRespuestaConNA(item.pregunta3, 3, item.flujo), // ¿Hay personas trabajadoras en bipedestación?
+      'PREGUNTA 4': getRespuestaConNA(item.pregunta4, 4, item.flujo), // ¿La bipedestación es prolongada?
+      'PREGUNTA 5': getRespuestaConNA(item.pregunta5, 5, item.flujo), // ¿Puede realizar actividades sentada?
+      'PREGUNTA 6': getRespuestaConNA(item.pregunta6, 6, item.flujo), // ¿Existe espacio para silla?
+      'PREGUNTA 7': getRespuestaConNA(item.pregunta7, 7, item.flujo), // ¿Requiere estar cerca del trabajo?
+      'PREGUNTA 8': getRespuestaConNA(item.pregunta8, 8, item.flujo), // Vacío - pero puede ser N/A
+      'PREGUNTA 9': getRespuestaConNA(item.pregunta9, 9, item.flujo), // Vacío - pero puede ser N/A
       'REQUIERE ANALISIS': (item.flujo ? (item.flujo.toLowerCase().includes('no aplica') ? 'No' : 'Sí') : ''),
     }));
 

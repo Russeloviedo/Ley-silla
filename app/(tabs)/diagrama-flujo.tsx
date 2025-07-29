@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text } from '@/components/Themed';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { AppColors } from '@/constants/Colors';
 
 const FLUJO = [
   {
@@ -92,6 +93,18 @@ export default function DiagramaFlujoScreen() {
     });
   };
 
+  const handleInicio = () => {
+    router.replace('/');
+  };
+
+  const handleAnalisis = () => {
+    router.push({ pathname: '/resultados-finales' });
+  };
+
+  const handleAtras = () => {
+    router.push({ pathname: '/preguntas-iniciales', params: { unidad, puesto, subpuesto } });
+  };
+
   if (final) {
     return (
       <View style={styles.container}>
@@ -129,6 +142,33 @@ export default function DiagramaFlujoScreen() {
                 : 'Ir al Cuestionario de Ponderación'
               }
             </Text>
+          </TouchableOpacity>
+        </View>
+        {/* Barra inferior */}
+        <View style={styles.bottomBar}>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleAtras}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>⬅️</Text>
+            <Text style={styles.bottomBarLabel}>Atrás</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleInicio}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>🏠</Text>
+            <Text style={styles.bottomBarLabel}>Inicio</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleAnalisis}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>📋</Text>
+            <Text style={styles.bottomBarLabel}>Análisis</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -191,6 +231,33 @@ export default function DiagramaFlujoScreen() {
             <Text style={styles.botonVolverTexto}>Volver</Text>
           </TouchableOpacity>
         )}
+      </View>
+      {/* Barra inferior */}
+      <View style={styles.bottomBar}>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAtras}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>⬅️</Text>
+          <Text style={styles.bottomBarLabel}>Atrás</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleInicio}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>🏠</Text>
+          <Text style={styles.bottomBarLabel}>Inicio</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAnalisis}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>📋</Text>
+          <Text style={styles.bottomBarLabel}>Análisis</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -431,5 +498,33 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     fontWeight: 'bold',
+  },
+  // Barra inferior
+  bottomBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: AppColors.background,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+    paddingVertical: 10,
+    elevation: 8,
+    shadowColor: AppColors.shadowColorDark,
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+  },
+  bottomBarItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  bottomBarIcon: {
+    fontSize: 22,
+    marginBottom: 2,
+  },
+  bottomBarLabel: {
+    fontSize: 13,
+    color: AppColors.primary,
+    fontWeight: '600',
   },
 }); 

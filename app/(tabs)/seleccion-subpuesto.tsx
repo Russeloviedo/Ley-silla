@@ -20,12 +20,8 @@ export default function SeleccionSubpuestoScreen() {
 
   const handleSeleccion = (subpuesto: string) => {
     setSeleccion(subpuesto);
-  };
-
-  const handleContinuar = () => {
-    if (seleccion) {
-      router.push({ pathname: '/preguntas-iniciales', params: { unidad, puesto, subpuesto: seleccion } });
-    }
+    // Navegar automáticamente a la siguiente pantalla
+    router.push({ pathname: '/preguntas-iniciales', params: { unidad, puesto, subpuesto } });
   };
 
   const handleInicio = () => {
@@ -72,15 +68,7 @@ export default function SeleccionSubpuestoScreen() {
             </TouchableOpacity>
           ))}
         </View>
-        <TouchableOpacity
-          style={[styles.botonContinuar, !seleccion && styles.botonContinuarDeshabilitado]}
-          onPress={handleContinuar}
-          disabled={!seleccion}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.botonContinuarTexto}>Continuar</Text>
-        </TouchableOpacity>
-        <Text style={styles.info}>Seleccione un subpuesto para continuar con el análisis de riesgo</Text>
+        <Text style={styles.info}>Toque un subpuesto para continuar automáticamente</Text>
       </ScrollView>
       {/* Barra inferior */}
       <View style={styles.bottomBar}>

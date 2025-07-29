@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
+import { AppColors } from '@/constants/Colors';
 
 const PREGUNTAS = [
   {
@@ -23,23 +24,52 @@ export default function PreguntasInicialesScreen() {
   const router = useRouter();
 
   const handleRespuesta = (id: number, valor: string) => {
-    setRespuestas((prev) => ({ ...prev, [id]: valor }));
+    const nuevasRespuestas = { ...respuestas, [id]: valor };
+    setRespuestas(nuevasRespuestas);
+    
+    // Verificar si ambas preguntas han sido respondidas
+    const todasRespondidas = nuevasRespuestas[1] !== null && nuevasRespuestas[2] !== null;
+    
+    // Navegar automáticamente si ambas preguntas están respondidas
+    if (todasRespondidas) {
+      router.push({ 
+        pathname: '/diagrama-flujo', 
+        params: { 
+          unidad, 
+          puesto, 
+          subpuesto, 
+          respuestas: JSON.stringify(nuevasRespuestas) 
+        } 
+      });
+    }
   };
 
-  // Validar si ambas preguntas han sido respondidas
-  const puedeContinuar = respuestas[1] !== null && respuestas[2] !== null;
-  const [intento, setIntento] = useState(false);
 
-  const handleContinuar = () => {
-    setIntento(true);
-    if (!puedeContinuar) return;
-    router.push({ pathname: '/diagrama-flujo', params: { unidad, puesto, subpuesto, respuestas: JSON.stringify(respuestas) } });
+
+  const handleInicio = () => {
+    router.replace('/');
+  };
+
+  const handleAnalisis = () => {
+    router.push({ pathname: '/resultados-finales' });
+  };
+
+  const handleAtras = () => {
+    router.push({ pathname: '/seleccion-puesto', params: { unidad, puesto, subpuesto } });
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Evaluación Inicial</Text>
-      <Text style={styles.subtitle}>Por favor responda las siguientes preguntas para determinar si se continúa con el análisis de riesgo.</Text>
+    <View style={{ flex: 1, backgroundColor: AppColors.background }}>
+      {/* Barra superior */}
+      <View style={styles.topBar}>
+        <Text style={styles.topBarTitle}>Análisis de Riesgo{`\n`}EHS</Text>
+        <TouchableOpacity style={styles.topBarButton}>
+          <Text style={styles.topBarButtonText}>?</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Evaluación Inicial</Text>
+        <Text style={styles.subtitle}>Por favor responda las siguientes preguntas para determinar si se continúa con el análisis de riesgo.</Text>
       {PREGUNTAS.map((pregunta) => (
         <View key={pregunta.id} style={styles.preguntaBox}>
           <View style={styles.numeroPreguntaBox}>
@@ -60,17 +90,36 @@ export default function PreguntasInicialesScreen() {
           </View>
         </View>
       ))}
-      <TouchableOpacity
-        style={[styles.botonContinuar, !puedeContinuar && styles.botonContinuarDeshabilitado]}
-        onPress={handleContinuar}
-        disabled={!puedeContinuar}
-      >
-        <Text style={styles.botonContinuarTexto}>Continuar Evaluación</Text>
-      </TouchableOpacity>
-      {intento && !puedeContinuar && (
-        <Text style={styles.mensajeError}>Por favor responde ambas preguntas para continuar.</Text>
-      )}
-    </ScrollView>
+      <Text style={styles.info}>Responda ambas preguntas para continuar automáticamente</Text>
+      </ScrollView>
+      {/* Barra inferior */}
+      <View style={styles.bottomBar}>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAtras}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>⬅️</Text>
+          <Text style={styles.bottomBarLabel}>Atrás</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleInicio}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>🏠</Text>
+          <Text style={styles.bottomBarLabel}>Inicio</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAnalisis}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>📋</Text>
+          <Text style={styles.bottomBarLabel}>Análisis</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
@@ -80,7 +129,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: AppColors.background,
   },
   title: {
     fontSize: 22,
@@ -160,32 +209,71 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 1.1,
   },
-  botonContinuar: {
-    backgroundColor: '#00c4cc',
-    paddingVertical: 16,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginTop: 24,
-    width: '100%',
+  topBar: {
+    flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    justifyContent: 'space-between',
+    backgroundColor: AppColors.primary,
+    paddingTop: 36,
+    paddingBottom: 16,
+    paddingHorizontal: 18,
+    borderBottomLeftRadius: 18,
+    borderBottomRightRadius: 18,
+    elevation: 4,
   },
-  botonContinuarTexto: {
+  topBarTitle: {
+    color: AppColors.textWhite,
+    fontWeight: 'bold',
     fontSize: 18,
-    color: '#222',
+    letterSpacing: 1.1,
+    flex: 1,
+    lineHeight: 22,
+  },
+  topBarButton: {
+    backgroundColor: AppColors.secondary,
+    borderRadius: 16,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 12,
+  },
+  topBarButtonText: {
+    color: AppColors.textWhite,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  bottomBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: AppColors.background,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+    paddingVertical: 10,
+    elevation: 8,
+    shadowColor: AppColors.shadowColorDark,
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+  },
+  bottomBarItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  bottomBarIcon: {
+    fontSize: 22,
+    marginBottom: 2,
+  },
+  bottomBarLabel: {
+    fontSize: 13,
+    color: AppColors.primary,
     fontWeight: '600',
   },
-  botonContinuarDeshabilitado: {
-    backgroundColor: '#bdbdbd',
-  },
-  mensajeError: {
-    color: '#f44336',
-    fontSize: 15,
-    marginTop: 10,
+  info: {
+    marginTop: 30,
+    fontSize: 14,
+    color: AppColors.textMuted,
     textAlign: 'center',
   },
 }); 

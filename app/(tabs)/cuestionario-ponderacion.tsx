@@ -133,6 +133,18 @@ export default function CuestionarioPonderacionScreen() {
     }
   };
 
+  const handleInicio = () => {
+    router.replace('/');
+  };
+
+  const handleAnalisis = () => {
+    router.push({ pathname: '/resultados-finales' });
+  };
+
+  const handleAtras = () => {
+    router.push({ pathname: '/diagrama-flujo', params: { unidad, puesto, subpuesto, respuestas } });
+  };
+
   return (
     <View style={styles.container}>
       {/* Barra superior con información */}
@@ -214,6 +226,33 @@ export default function CuestionarioPonderacionScreen() {
           <Text style={styles.botonFinalizarTexto}>Ver Resultados Finales</Text>
         </TouchableOpacity>
       </ScrollView>
+      {/* Barra inferior */}
+      <View style={styles.bottomBar}>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAtras}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>⬅️</Text>
+          <Text style={styles.bottomBarLabel}>Atrás</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleInicio}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>🏠</Text>
+          <Text style={styles.bottomBarLabel}>Inicio</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={styles.bottomBarItem} 
+          onPress={handleAnalisis}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.bottomBarIcon}>📋</Text>
+          <Text style={styles.bottomBarLabel}>Análisis</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -441,5 +480,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     shadowOpacity: 0,
     elevation: 0,
+  },
+  // Barra inferior
+  bottomBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: AppColors.background,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+    paddingVertical: 10,
+    elevation: 8,
+    shadowColor: AppColors.shadowColorDark,
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+  },
+  bottomBarItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  bottomBarIcon: {
+    fontSize: 22,
+    marginBottom: 2,
+  },
+  bottomBarLabel: {
+    fontSize: 13,
+    color: AppColors.primary,
+    fontWeight: '600',
   },
 }); 

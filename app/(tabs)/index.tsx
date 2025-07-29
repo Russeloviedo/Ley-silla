@@ -27,16 +27,14 @@ export default function SeleccionUnidadNegocioScreen() {
 
   const handleSeleccion = (unidad: UnidadNegocio) => {
     setSeleccion(unidad);
-  };
-
-  const handleContinuar = () => {
-    if (seleccion) {
-      const params = { unidad: seleccion };
-      if (validateNavigationParams(params)) {
-        router.push({ pathname: '/seleccion-puesto', params });
-      }
+    // Navegar automáticamente a la siguiente pantalla
+    const params = { unidad: unidad };
+    if (validateNavigationParams(params)) {
+      router.push({ pathname: '/seleccion-puesto', params });
     }
   };
+
+
 
   const handleAnalisis = () => {
     router.push({ pathname: '/resultados-finales' });
@@ -70,14 +68,7 @@ export default function SeleccionUnidadNegocioScreen() {
             </TouchableOpacity>
           ))}
         </View>
-        <TouchableOpacity
-          style={[styles.botonContinuar, !seleccion && styles.botonContinuarDeshabilitado]}
-          onPress={handleContinuar}
-          disabled={!seleccion}
-        >
-          <Text style={styles.botonContinuarTexto}>Continuar</Text>
-        </TouchableOpacity>
-        <Text style={styles.info}>Seleccione una unidad de negocio para continuar con el análisis de riesgo</Text>
+        <Text style={styles.info}>Toque una unidad de negocio para continuar automáticamente</Text>
       </ScrollView>
       {/* Barra inferior */}
       <View style={styles.bottomBar}>
