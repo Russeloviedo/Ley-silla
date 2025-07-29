@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: AppColors.background,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 22,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   preguntaBox: {
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     borderRadius: 16,
     padding: 24,
     marginBottom: 32,

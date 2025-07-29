@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: AppColors.background,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 22,
