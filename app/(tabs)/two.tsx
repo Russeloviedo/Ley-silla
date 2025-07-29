@@ -37,7 +37,7 @@ export default function SeleccionPuestoScreen() {
           <Text style={styles.buttonText}>{puesto}</Text>
         </TouchableOpacity>
       ))}
-      <Text style={styles.info}>Seleccione un puesto de trabajo para continuar con el análisis de riesgo</Text>
+              <Text style={styles.info}>Seleccione un puesto de trabajo para continuar con la identificación de posible riesgo de bipedestación</Text>
     </ScrollView>
   );
 }

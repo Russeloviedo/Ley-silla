@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, View, Alert } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Alert, Image } from 'react-native';
 import { Text } from '@/components/Themed';
 import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
@@ -84,6 +84,7 @@ export default function CuestionarioPonderacionScreen() {
   const { unidad, puesto, subpuesto, flujo, respuestas, respuestasFlujo } = useLocalSearchParams();
   const [respuestasPonderacion, setRespuestasPonderacion] = useState<RespuestasPonderacion>({ 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null });
   const router = useRouter();
+  const [showHelpModal, setShowHelpModal] = useState(false);
 
   const handleRespuesta = (id: number, puntos: number) => {
     setRespuestasPonderacion((prev) => ({ ...prev, [id]: puntos }));
@@ -145,27 +146,25 @@ export default function CuestionarioPonderacionScreen() {
     router.push({ pathname: '/diagrama-flujo', params: { unidad, puesto, subpuesto, respuestas } });
   };
 
+  const handleHelp = () => {
+    setShowHelpModal(true);
+  };
+
   return (
     <View style={styles.container}>
       {/* Barra superior con información */}
       <View style={styles.topBar}>
-        <View style={styles.topBarInfo}>
-          <Text style={styles.topBarTitle}>Cuestionario de Ponderación</Text>
-          <Text style={styles.topBarSubtitle}>{unidad} • {puesto}</Text>
+        <View style={styles.topBarContent}>
+          <Image 
+            source={require('@/assets/images/logo-ehs.png')} 
+            style={styles.logoImage}
+            resizeMode="cover"
+          />
+          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
         </View>
-        <View style={styles.progressContainer}>
-          <Text style={styles.progressText}>
-            {Object.values(respuestasPonderacion).filter(val => val !== null).length}/7
-          </Text>
-          <View style={styles.progressBar}>
-            <View 
-              style={[
-                styles.progressFill, 
-                { width: `${(Object.values(respuestasPonderacion).filter(val => val !== null).length / 7) * 100}%` }
-              ]} 
-            />
-          </View>
-        </View>
+        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
+          <Text style={styles.topBarButtonText}>?</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Contenido principal */}
@@ -253,6 +252,74 @@ export default function CuestionarioPonderacionScreen() {
           <Text style={styles.bottomBarLabel}>Análisis</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Modal de Ayuda */}
+      {showHelpModal && (
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Definiciones</Text>
+              <TouchableOpacity 
+                style={styles.modalCloseButton} 
+                onPress={() => setShowHelpModal(false)}
+              >
+                <Text style={styles.modalCloseText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            
+            <ScrollView style={styles.modalScrollView}>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación</Text>
+                <Text style={styles.definitionText}>
+                  La postura de pie de las personas trabajadoras.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Disposiciones</Text>
+                <Text style={styles.definitionText}>
+                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
+                <Text style={styles.definitionText}>
+                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Posición sedente</Text>
+                <Text style={styles.definitionText}>
+                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
+                </Text>
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
@@ -264,54 +331,34 @@ const styles = StyleSheet.create({
   },
   // Barra superior
   topBar: {
-    backgroundColor: '#003b4c',
-    paddingTop: 50,
-    paddingBottom: 20,
-    paddingHorizontal: 20,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#00BCD4',
+    paddingTop: 36,
+    paddingBottom: 16,
+    paddingHorizontal: 18,
+    borderBottomLeftRadius: 18,
+    borderBottomRightRadius: 18,
+    elevation: 4,
   },
-  topBarInfo: {
-    marginBottom: 15,
+  topBarContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  logoImage: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
   },
   topBarTitle: {
-    fontSize: 24,
+    color: AppColors.textWhite,
     fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  topBarSubtitle: {
-    fontSize: 14,
-    color: '#b6e600',
-    textAlign: 'center',
-    fontWeight: '500',
-  },
-  progressContainer: {
-    alignItems: 'center',
-  },
-  progressText: {
-    fontSize: 14,
-    color: '#fff',
-    marginBottom: 8,
-    fontWeight: '600',
-  },
-  progressBar: {
-    width: '100%',
-    height: 6,
-    backgroundColor: 'rgba(255,255,255,0.3)',
-    borderRadius: 3,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: '#b6e600',
-    borderRadius: 3,
+    fontSize: 16,
+    letterSpacing: 1.1,
+    flex: 1,
+    lineHeight: 20,
   },
   // Scroll view
   scrollView: {
@@ -508,5 +555,94 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: AppColors.primary,
     fontWeight: '600',
+  },
+  // Botón de ayuda
+  topBarButton: {
+    backgroundColor: AppColors.secondary,
+    borderRadius: 16,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 12,
+  },
+  topBarButtonText: {
+    color: AppColors.textWhite,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  // Estilos del modal de ayuda
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 20,
+    margin: 20,
+    width: '90%',
+    maxWidth: 400,
+    maxHeight: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+    elevation: 8,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: AppColors.primary,
+  },
+  modalCloseButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#f0f0f0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalCloseText: {
+    fontSize: 18,
+    color: '#666',
+    fontWeight: 'bold',
+  },
+  modalScrollView: {
+    flex: 1,
+  },
+  definitionItem: {
+    marginBottom: 20,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  definitionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: AppColors.primary,
+    marginBottom: 8,
+  },
+  definitionText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+    textAlign: 'justify',
   },
 }); 

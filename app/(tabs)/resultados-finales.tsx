@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, View, TouchableOpacity, FlatList, Platform, Alert, TextInput } from 'react-native';
+import { StyleSheet, ScrollView, View, TouchableOpacity, FlatList, Platform, Alert, TextInput, Image } from 'react-native';
 import { Text } from '@/components/Themed';
 import { useLocalSearchParams } from 'expo-router';
 import { useState, useEffect } from 'react';
@@ -40,6 +40,12 @@ export default function ResultadosFinalesScreen() {
   const [historial, setHistorial] = useState<HistorialAnalisis[]>([]);
   const [showBorrarModal, setShowBorrarModal] = useState(false);
   const [codigoConfirmacion, setCodigoConfirmacion] = useState('');
+  const [showHelpModal, setShowHelpModal] = useState(false);
+
+  // Debug: verificar estado del modal
+  useEffect(() => {
+    console.log('Estado del modal de ayuda:', showHelpModal);
+  }, [showHelpModal]);
 
   // Validar que tenemos los parámetros necesarios
   useEffect(() => {
@@ -137,6 +143,12 @@ export default function ResultadosFinalesScreen() {
     };
     leerHistorial();
   }, []);
+
+  // Función para mostrar el modal de ayuda
+  const handleHelp = () => {
+    console.log('handleHelp ejecutado');
+    setShowHelpModal(true);
+  };
 
   // Función para borrar el historial
   const borrarHistorial = async () => {
@@ -298,10 +310,20 @@ export default function ResultadosFinalesScreen() {
     <View style={styles.container}>
       {/* Barra superior con información */}
       <View style={styles.topBar}>
-        <View style={styles.topBarInfo}>
-          <Text style={styles.topBarTitle}>Resultados Finales</Text>
-          <Text style={styles.topBarSubtitle}>{unidad} • {puesto}</Text>
+        <View style={styles.topBarContent}>
+          <Image 
+            source={require('@/assets/images/logo-ehs.png')} 
+            style={styles.logoImage}
+            resizeMode="cover"
+          />
+          <View style={styles.topBarInfo}>
+            <Text style={styles.topBarTitle}>Resultados Finales</Text>
+            <Text style={styles.topBarSubtitle}>{unidad} • {puesto}</Text>
+          </View>
         </View>
+        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
+          <Text style={styles.topBarButtonText}>?</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Contenido principal */}
@@ -488,9 +510,70 @@ export default function ResultadosFinalesScreen() {
            </View>
          </View>
        )}
-     </View>
-   );
- }
+
+      {/* Modal de Ayuda */}
+      {showHelpModal && (
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Definiciones</Text>
+              <TouchableOpacity 
+                style={styles.modalCloseButton} 
+                onPress={() => setShowHelpModal(false)}
+              >
+                <Text style={styles.modalCloseText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            <ScrollView style={styles.modalScrollView}>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación</Text>
+                <Text style={styles.definitionText}>
+                  La postura de pie de las personas trabajadoras.
+                </Text>
+              </View>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
+                </Text>
+              </View>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
+                </Text>
+              </View>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
+                </Text>
+              </View>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Disposiciones</Text>
+                <Text style={styles.definitionText}>
+                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
+                </Text>
+              </View>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
+                <Text style={styles.definitionText}>
+                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
+                </Text>
+              </View>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Posición sedente</Text>
+                <Text style={styles.definitionText}>
+                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
+                </Text>
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      )}
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -499,7 +582,10 @@ const styles = StyleSheet.create({
   },
   // Barra superior
   topBar: {
-    backgroundColor: '#003b4c',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#00BCD4',
     paddingTop: 50,
     paddingBottom: 20,
     paddingHorizontal: 20,
@@ -511,20 +597,32 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 8,
   },
-  topBarInfo: {
+  topBarContent: {
+    flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
+  },
+  logoImage: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+  },
+  topBarInfo: {
+    alignItems: 'flex-start',
+    flex: 1,
   },
   topBarTitle: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
-    textAlign: 'center',
-    marginBottom: 5,
+    textAlign: 'left',
+    flex: 1,
+    lineHeight: 20,
   },
   topBarSubtitle: {
     fontSize: 14,
     color: '#b6e600',
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: '500',
   },
   // Scroll view
@@ -888,12 +986,17 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     elevation: 8,
   },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   modalTitle: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#f44336',
     textAlign: 'center',
-    marginBottom: 20,
   },
   modalText: {
     fontSize: 16,
@@ -940,5 +1043,57 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
+  },
+  // Botón de ayuda
+  topBarButton: {
+    backgroundColor: AppColors.secondary,
+    borderRadius: 16,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 12,
+  },
+  topBarButtonText: {
+    color: AppColors.textWhite,
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  // Botón de cerrar modal
+  modalCloseButton: {
+    backgroundColor: '#f44336',
+    borderRadius: 16,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalCloseText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  // Modal de Ayuda
+  modalScrollView: {
+    maxHeight: 300, // Limit the height of the scroll view
+  },
+  definitionItem: {
+    backgroundColor: '#f0f9eb', // Light green background
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#a5d6a7', // Lighter green border
+  },
+  definitionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#2e7d32', // Darker green
+    marginBottom: 5,
+  },
+  definitionText: {
+    fontSize: 14,
+    color: '#388e3c', // Darker green text
+    lineHeight: 22,
   },
 }); 

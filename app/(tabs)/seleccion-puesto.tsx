@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -48,6 +48,7 @@ export default function SeleccionPuestoScreen() {
   const router = useRouter();
   const [puesto, setPuesto] = useState('');
   const [subpuesto, setSubpuesto] = useState('');
+  const [showHelpModal, setShowHelpModal] = useState(false);
 
   const puestos = unidad && DATA[unidad as string]
     ? [...new Set(DATA[unidad as string].map((item: { puesto: string }) => item.puesto))]
@@ -84,12 +85,19 @@ export default function SeleccionPuestoScreen() {
     router.replace('/');
   };
 
+  const handleHelp = () => {
+    setShowHelpModal(true);
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: AppColors.background }}>
       {/* Barra superior */}
       <View style={styles.topBar}>
-        <Text style={styles.topBarTitle}>Análisis de Riesgo{`\n`}EHS</Text>
-        <TouchableOpacity style={styles.topBarButton}>
+        <View style={styles.topBarContent}>
+          <Text style={styles.logoText}>EHS</Text>
+          <Text style={styles.topBarTitle} numberOfLines={2} ellipsizeMode="tail">Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+        </View>
+        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
           <Text style={styles.topBarButtonText}>?</Text>
         </TouchableOpacity>
       </View>
@@ -154,6 +162,74 @@ export default function SeleccionPuestoScreen() {
           <Text style={styles.bottomBarLabel}>Análisis</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Modal de Ayuda */}
+      {showHelpModal && (
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Definiciones</Text>
+              <TouchableOpacity 
+                style={styles.modalCloseButton} 
+                onPress={() => setShowHelpModal(false)}
+              >
+                <Text style={styles.modalCloseText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            
+            <ScrollView style={styles.modalScrollView}>
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación</Text>
+                <Text style={styles.definitionText}>
+                  La postura de pie de las personas trabajadoras.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
+                <Text style={styles.definitionText}>
+                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Disposiciones</Text>
+                <Text style={styles.definitionText}>
+                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
+                <Text style={styles.definitionText}>
+                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
+                </Text>
+              </View>
+
+              <View style={styles.definitionItem}>
+                <Text style={styles.definitionTitle}>Posición sedente</Text>
+                <Text style={styles.definitionText}>
+                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
+                </Text>
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      )}
     </View>
   );
 }
@@ -213,7 +289,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: AppColors.primary,
+    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -221,13 +297,30 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 18,
     elevation: 4,
   },
+  topBarContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 0,
+  },
+  logoText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginRight: 10,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
   topBarTitle: {
     color: AppColors.textWhite,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
     letterSpacing: 1.1,
-    flex: 1,
     lineHeight: 22,
+    flexShrink: 1,
+    backgroundColor: 'transparent',
+    maxWidth: 280,
   },
   topBarButton: {
     backgroundColor: AppColors.secondary,
@@ -327,5 +420,79 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: AppColors.textWhite,
     fontWeight: '600',
+  },
+  // Estilos del modal de ayuda
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 20,
+    margin: 20,
+    width: '90%',
+    maxWidth: 400,
+    maxHeight: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+    elevation: 8,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e0e0e0',
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: AppColors.primary,
+  },
+  modalCloseButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#f0f0f0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalCloseText: {
+    fontSize: 18,
+    color: '#666',
+    fontWeight: 'bold',
+  },
+  modalScrollView: {
+    flex: 1,
+  },
+  definitionItem: {
+    marginBottom: 20,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  definitionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: AppColors.primary,
+    marginBottom: 8,
+  },
+  definitionText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+    textAlign: 'justify',
   },
 }); 

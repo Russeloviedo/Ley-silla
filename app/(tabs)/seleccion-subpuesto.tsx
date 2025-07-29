@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
@@ -36,7 +36,14 @@ export default function SeleccionSubpuestoScreen() {
     <View style={{ flex: 1, backgroundColor: AppColors.background }}>
       {/* Barra superior */}
       <View style={styles.topBar}>
-        <Text style={styles.topBarTitle}>Análisis de Riesgo{`\n`}EHS</Text>
+        <View style={styles.topBarContent}>
+          <Image 
+            source={require('@/assets/images/logo-ehs.png')} 
+            style={styles.logoImage}
+            resizeMode="cover"
+          />
+          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+        </View>
         <TouchableOpacity style={styles.topBarButton}>
           <Text style={styles.topBarButtonText}>?</Text>
         </TouchableOpacity>
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: AppColors.primary,
+    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -149,13 +156,23 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 18,
     elevation: 4,
   },
+  topBarContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  logoImage: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+  },
   topBarTitle: {
     color: AppColors.textWhite,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
     letterSpacing: 1.1,
     flex: 1,
-    lineHeight: 22,
+    lineHeight: 20,
   },
   topBarButton: {
     backgroundColor: AppColors.secondary,
