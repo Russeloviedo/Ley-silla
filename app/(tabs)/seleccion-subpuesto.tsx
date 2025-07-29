@@ -4,6 +4,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { AppColors } from '@/constants/Colors';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const SUBPUESTOS_GENERICOS = [
   { key: 'Operador de Excavadora', icon: '🚜' },
@@ -33,70 +34,72 @@ export default function SeleccionSubpuestoScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: AppColors.background }}>
-      {/* Barra superior */}
-      <View style={styles.topBar}>
-        <View style={styles.topBarContent}>
-          <Image 
-            source={require('@/assets/images/logo-ehs.png')} 
-            style={styles.logoImage}
-            resizeMode="cover"
-          />
-          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+    <AnimatedBackground>
+      <View style={{ flex: 1, backgroundColor: 'transparent' }}>
+        {/* Barra superior */}
+        <View style={styles.topBar}>
+          <View style={styles.topBarContent}>
+            <Image 
+              source={require('@/assets/images/logo-ehs.png')} 
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
+            <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+          </View>
+          <TouchableOpacity style={styles.topBarButton}>
+            <Text style={styles.topBarButtonText}>?</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.topBarButton}>
-          <Text style={styles.topBarButtonText}>?</Text>
-        </TouchableOpacity>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.title}>Selección de Subpuesto de Trabajo</Text>
+          <Text style={styles.subtitle}>Unidad de Negocio Seleccionada:</Text>
+          <View style={styles.selectedContainer}>
+            <Text style={styles.selectedText}>{unidad}</Text>
+          </View>
+          <Text style={styles.subtitle}>Puesto Seleccionado:</Text>
+          <View style={styles.selectedContainer}>
+            <Text style={styles.selectedText}>{puesto}</Text>
+          </View>
+          <Text style={styles.subtitle}>Seleccione el subpuesto de trabajo:</Text>
+          <View style={styles.boxUnidades}>
+            {SUBPUESTOS_GENERICOS.map((subpuesto) => (
+              <TouchableOpacity
+                key={subpuesto.key}
+                style={[styles.opcionUnidad, seleccion === subpuesto.key && styles.opcionUnidadSeleccionada]}
+                onPress={() => handleSeleccion(subpuesto.key)}
+                activeOpacity={0.85}
+              >
+                <View style={styles.iconoUnidad}><Text style={styles.iconoText}>{subpuesto.icon}</Text></View>
+                <Text style={styles.opcionUnidadTexto}>{subpuesto.key}</Text>
+                <View style={styles.radioOuter}>
+                  {seleccion === subpuesto.key && <View style={styles.radioInner} />}
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <Text style={styles.info}>Toque un subpuesto para continuar automáticamente</Text>
+        </ScrollView>
+        {/* Barra inferior */}
+        <View style={styles.bottomBar}>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleInicio}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>🏠</Text>
+            <Text style={styles.bottomBarLabel}>Inicio</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleAnalisis}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>📋</Text>
+            <Text style={styles.bottomBarLabel}>Análisis</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Selección de Subpuesto de Trabajo</Text>
-        <Text style={styles.subtitle}>Unidad de Negocio Seleccionada:</Text>
-        <View style={styles.selectedContainer}>
-          <Text style={styles.selectedText}>{unidad}</Text>
-        </View>
-        <Text style={styles.subtitle}>Puesto Seleccionado:</Text>
-        <View style={styles.selectedContainer}>
-          <Text style={styles.selectedText}>{puesto}</Text>
-        </View>
-        <Text style={styles.subtitle}>Seleccione el subpuesto de trabajo:</Text>
-        <View style={styles.boxUnidades}>
-          {SUBPUESTOS_GENERICOS.map((subpuesto) => (
-            <TouchableOpacity
-              key={subpuesto.key}
-              style={[styles.opcionUnidad, seleccion === subpuesto.key && styles.opcionUnidadSeleccionada]}
-              onPress={() => handleSeleccion(subpuesto.key)}
-              activeOpacity={0.85}
-            >
-              <View style={styles.iconoUnidad}><Text style={styles.iconoText}>{subpuesto.icon}</Text></View>
-              <Text style={styles.opcionUnidadTexto}>{subpuesto.key}</Text>
-              <View style={styles.radioOuter}>
-                {seleccion === subpuesto.key && <View style={styles.radioInner} />}
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-        <Text style={styles.info}>Toque un subpuesto para continuar automáticamente</Text>
-      </ScrollView>
-      {/* Barra inferior */}
-      <View style={styles.bottomBar}>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleInicio}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>🏠</Text>
-          <Text style={styles.bottomBarLabel}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAnalisis}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>📋</Text>
-          <Text style={styles.bottomBarLabel}>Análisis</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </AnimatedBackground>
   );
 }
 

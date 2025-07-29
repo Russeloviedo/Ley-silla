@@ -3,6 +3,7 @@ import { StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'react-nat
 import { Text } from '@/components/Themed';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const FLUJO = [
   {
@@ -112,14 +113,96 @@ export default function DiagramaFlujoScreen() {
 
   if (final) {
     return (
+      <AnimatedBackground>
+        <View style={styles.container}>
+          {/* Barra superior */}
+          <View style={styles.topBar}>
+            <View style={styles.topBarContent}>
+              <Image 
+                source={require('@/assets/images/logo-ehs.png')} 
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
+              <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+            </View>
+            <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
+              <Text style={styles.topBarButtonText}>?</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Contenido del resultado */}
+          <View style={styles.content}>
+            <View style={styles.resultadoBox}>
+              <View style={styles.resultadoIcon}>
+                <Text style={styles.resultadoIconText}>
+                  {final === 'NO_DECRETO' ? '📋' : '✅'}
+                </Text>
+              </View>
+              <Text style={styles.resultadoTitulo}>
+                {final === 'NO_DECRETO' ? 'No Aplica Decreto' : 'Recomendación'}
+              </Text>
+              <Text style={styles.resultado}>{RECOMENDACIONES[final as keyof typeof RECOMENDACIONES]}</Text>
+            </View>
+
+            <TouchableOpacity 
+              style={styles.botonContinuar} 
+              onPress={handleContinuar}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.botonContinuarIcon}>📊</Text>
+              <Text style={styles.botonContinuarTexto}>
+                {final === 'NO_DECRETO' 
+                  ? 'Realizar Cuestionario de Ponderación' 
+                  : 'Ir al Cuestionario de Ponderación'
+                }
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* Barra inferior */}
+          <View style={styles.bottomBar}>
+            <TouchableOpacity 
+              style={styles.bottomBarItem} 
+              onPress={handleAtras}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.bottomBarIcon}>⬅️</Text>
+              <Text style={styles.bottomBarLabel}>Atrás</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.bottomBarItem} 
+              onPress={handleInicio}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.bottomBarIcon}>🏠</Text>
+              <Text style={styles.bottomBarLabel}>Inicio</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.bottomBarItem} 
+              onPress={handleAnalisis}
+              activeOpacity={0.7}
+            >
+              <Text style={styles.bottomBarIcon}>📋</Text>
+              <Text style={styles.bottomBarLabel}>Análisis</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </AnimatedBackground>
+    );
+  }
+
+  const actual = FLUJO.find((p) => p.id === paso);
+  if (!actual) return null;
+
+  return (
+    <AnimatedBackground>
       <View style={styles.container}>
-        {/* Barra superior */}
+        {/* Barra superior con información */}
         <View style={styles.topBar}>
           <View style={styles.topBarContent}>
             <Image 
               source={require('@/assets/images/logo-ehs.png')} 
               style={styles.logoImage}
-              resizeMode="contain"
+              resizeMode="cover"
             />
             <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
           </View>
@@ -128,33 +211,43 @@ export default function DiagramaFlujoScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Contenido del resultado */}
+        {/* Contenido principal */}
         <View style={styles.content}>
-          <View style={styles.resultadoBox}>
-            <View style={styles.resultadoIcon}>
-              <Text style={styles.resultadoIconText}>
-                {final === 'NO_DECRETO' ? '📋' : '✅'}
-              </Text>
+          <View style={styles.preguntaBox}>
+            <View style={styles.numeroPreguntaBox}>
+              <Text style={styles.numeroPregunta}>{paso}</Text>
             </View>
-            <Text style={styles.resultadoTitulo}>
-              {final === 'NO_DECRETO' ? 'No Aplica Decreto' : 'Recomendación'}
-            </Text>
-            <Text style={styles.resultado}>{RECOMENDACIONES[final as keyof typeof RECOMENDACIONES]}</Text>
+            <Text style={styles.preguntaTexto}>{actual.texto}</Text>
           </View>
 
-          <TouchableOpacity 
-            style={styles.botonContinuar} 
-            onPress={handleContinuar}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.botonContinuarIcon}>📊</Text>
-            <Text style={styles.botonContinuarTexto}>
-              {final === 'NO_DECRETO' 
-                ? 'Realizar Cuestionario de Ponderación' 
-                : 'Ir al Cuestionario de Ponderación'
-              }
-            </Text>
-          </TouchableOpacity>
+          {/* Botones de respuesta */}
+          <View style={styles.opciones}>
+            <TouchableOpacity 
+              style={[styles.boton, styles.botonSi]} 
+              onPress={() => handleRespuesta('si')} 
+              activeOpacity={0.8}
+            >
+              <Text style={styles.botonIcon}>✅</Text>
+              <Text style={styles.botonTexto}>Sí</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={[styles.boton, styles.botonNo]} 
+              onPress={() => handleRespuesta('no')} 
+              activeOpacity={0.8}
+            >
+              <Text style={styles.botonIcon}>❌</Text>
+              <Text style={styles.botonTexto}>No</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Botón volver */}
+          {historial.length > 0 && (
+            <TouchableOpacity style={styles.botonVolver} onPress={handleVolver}>
+              <Text style={styles.botonVolverIcon}>⬅️</Text>
+              <Text style={styles.botonVolverTexto}>Volver</Text>
+            </TouchableOpacity>
+          )}
         </View>
         {/* Barra inferior */}
         <View style={styles.bottomBar}>
@@ -183,171 +276,83 @@ export default function DiagramaFlujoScreen() {
             <Text style={styles.bottomBarLabel}>Análisis</Text>
           </TouchableOpacity>
         </View>
-      </View>
-    );
-  }
 
-  const actual = FLUJO.find((p) => p.id === paso);
-  if (!actual) return null;
+        {/* Modal de Ayuda */}
+        {showHelpModal && (
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Definiciones</Text>
+                <TouchableOpacity 
+                  style={styles.modalCloseButton} 
+                  onPress={() => setShowHelpModal(false)}
+                >
+                  <Text style={styles.modalCloseText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              
+              <ScrollView style={styles.modalScrollView}>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de pie de las personas trabajadoras.
+                  </Text>
+                </View>
 
-  return (
-    <View style={styles.container}>
-      {/* Barra superior con información */}
-      <View style={styles.topBar}>
-        <View style={styles.topBarContent}>
-          <Image 
-            source={require('@/assets/images/logo-ehs.png')} 
-            style={styles.logoImage}
-            resizeMode="cover"
-          />
-          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
-        </View>
-        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
-          <Text style={styles.topBarButtonText}>?</Text>
-        </TouchableOpacity>
-      </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación estática</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
+                  </Text>
+                </View>
 
-      {/* Contenido principal */}
-      <View style={styles.content}>
-        <View style={styles.preguntaBox}>
-          <View style={styles.numeroPreguntaBox}>
-            <Text style={styles.numeroPregunta}>{paso}</Text>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Disposiciones</Text>
+                  <Text style={styles.definitionText}>
+                    El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Factores de riesgo</Text>
+                  <Text style={styles.definitionText}>
+                    Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Posición sedente</Text>
+                  <Text style={styles.definitionText}>
+                    Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
+                  </Text>
+                </View>
+              </ScrollView>
+            </View>
           </View>
-          <Text style={styles.preguntaTexto}>{actual.texto}</Text>
-        </View>
-
-        {/* Botones de respuesta */}
-        <View style={styles.opciones}>
-          <TouchableOpacity 
-            style={[styles.boton, styles.botonSi]} 
-            onPress={() => handleRespuesta('si')} 
-            activeOpacity={0.8}
-          >
-            <Text style={styles.botonIcon}>✅</Text>
-            <Text style={styles.botonTexto}>Sí</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={[styles.boton, styles.botonNo]} 
-            onPress={() => handleRespuesta('no')} 
-            activeOpacity={0.8}
-          >
-            <Text style={styles.botonIcon}>❌</Text>
-            <Text style={styles.botonTexto}>No</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Botón volver */}
-        {historial.length > 0 && (
-          <TouchableOpacity style={styles.botonVolver} onPress={handleVolver}>
-            <Text style={styles.botonVolverIcon}>⬅️</Text>
-            <Text style={styles.botonVolverTexto}>Volver</Text>
-          </TouchableOpacity>
         )}
       </View>
-      {/* Barra inferior */}
-      <View style={styles.bottomBar}>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAtras}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>⬅️</Text>
-          <Text style={styles.bottomBarLabel}>Atrás</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleInicio}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>🏠</Text>
-          <Text style={styles.bottomBarLabel}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAnalisis}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>📋</Text>
-          <Text style={styles.bottomBarLabel}>Análisis</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Modal de Ayuda */}
-      {showHelpModal && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Definiciones</Text>
-              <TouchableOpacity 
-                style={styles.modalCloseButton} 
-                onPress={() => setShowHelpModal(false)}
-              >
-                <Text style={styles.modalCloseText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            
-            <ScrollView style={styles.modalScrollView}>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación</Text>
-                <Text style={styles.definitionText}>
-                  La postura de pie de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Disposiciones</Text>
-                <Text style={styles.definitionText}>
-                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
-                <Text style={styles.definitionText}>
-                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Posición sedente</Text>
-                <Text style={styles.definitionText}>
-                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
-                </Text>
-              </View>
-            </ScrollView>
-          </View>
-        </View>
-      )}
-    </View>
+    </AnimatedBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'transparent',
   },
   // Barra superior
   topBar: {

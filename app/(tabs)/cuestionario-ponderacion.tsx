@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import { RespuestasPonderacion, ResultadoNivelRiesgo, PreguntaPonderacion } from '@/types';
 import { safeJsonParse, validatePonderacionResponses } from '@/utils/errorHandler';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const PONDERACION = [
   {
@@ -151,183 +152,185 @@ export default function CuestionarioPonderacionScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Barra superior con información */}
-      <View style={styles.topBar}>
-        <View style={styles.topBarContent}>
-          <Image 
-            source={require('@/assets/images/logo-ehs.png')} 
-            style={styles.logoImage}
-            resizeMode="cover"
-          />
-          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+    <AnimatedBackground>
+      <View style={styles.container}>
+        {/* Barra superior con información */}
+        <View style={styles.topBar}>
+          <View style={styles.topBarContent}>
+            <Image 
+              source={require('@/assets/images/logo-ehs.png')} 
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
+            <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+          </View>
+          <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
+            <Text style={styles.topBarButtonText}>?</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
-          <Text style={styles.topBarButtonText}>?</Text>
-        </TouchableOpacity>
-      </View>
 
-      {/* Contenido principal */}
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-        {PONDERACION.map((pregunta) => (
-          <View key={pregunta.id} style={styles.preguntaBox}>
-            <View style={styles.numeroPreguntaBox}>
-              <Text style={styles.numeroPregunta}>{pregunta.id}</Text>
+        {/* Contenido principal */}
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+          {PONDERACION.map((pregunta) => (
+            <View key={pregunta.id} style={styles.preguntaBox}>
+              <View style={styles.numeroPreguntaBox}>
+                <Text style={styles.numeroPregunta}>{pregunta.id}</Text>
+              </View>
+              <Text style={styles.preguntaTexto}>{pregunta.texto}</Text>
+              
+              <View style={styles.opcionesContainer}>
+                {pregunta.opciones.map((op, idx) => (
+                  <TouchableOpacity
+                    key={idx}
+                    style={[
+                      styles.opcion, 
+                      respuestasPonderacion[pregunta.id] === op.puntos && styles.opcionSeleccionada
+                    ]}
+                    onPress={() => handleRespuesta(pregunta.id, op.puntos)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={styles.opcionContent}>
+                      <Text style={styles.opcionPuntos}>{op.puntos} pt</Text>
+                      <Text style={styles.opcionTexto}>{op.texto}</Text>
+                    </View>
+                    {respuestasPonderacion[pregunta.id] === op.puntos && (
+                      <Text style={styles.opcionCheck}>✅</Text>
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-            <Text style={styles.preguntaTexto}>{pregunta.texto}</Text>
-            
-            <View style={styles.opcionesContainer}>
-              {pregunta.opciones.map((op, idx) => (
-                <TouchableOpacity
-                  key={idx}
-                  style={[
-                    styles.opcion, 
-                    respuestasPonderacion[pregunta.id] === op.puntos && styles.opcionSeleccionada
-                  ]}
-                  onPress={() => handleRespuesta(pregunta.id, op.puntos)}
-                  activeOpacity={0.8}
+          ))}
+
+          {/* Resultado actual */}
+          <View style={styles.resultadoBox}>
+            <View style={styles.resultadoHeader}>
+              <Text style={styles.resultadoTitulo}>Resultado Actual</Text>
+              <View style={[styles.nivelRiesgo, { backgroundColor: nivel.color }]}>
+                <Text style={styles.nivelRiesgoTexto}>{nivel.nivel}</Text>
+              </View>
+            </View>
+            <Text style={styles.puntajeTexto}>Puntaje: {puntajeTotal}/21</Text>
+          </View>
+
+          {/* Botón finalizar */}
+          <TouchableOpacity 
+            style={[
+              styles.botonFinalizar, 
+              Object.values(respuestasPonderacion).filter(val => val !== null).length !== 7 && styles.botonFinalizarDeshabilitado
+            ]} 
+            onPress={handleFinalizar}
+            disabled={Object.values(respuestasPonderacion).filter(val => val !== null).length !== 7}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.botonFinalizarIcon}>📊</Text>
+            <Text style={styles.botonFinalizarTexto}>Ver Resultados Finales</Text>
+          </TouchableOpacity>
+        </ScrollView>
+        {/* Barra inferior */}
+        <View style={styles.bottomBar}>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleAtras}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>⬅️</Text>
+            <Text style={styles.bottomBarLabel}>Atrás</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleInicio}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>🏠</Text>
+            <Text style={styles.bottomBarLabel}>Inicio</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.bottomBarItem} 
+            onPress={handleAnalisis}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.bottomBarIcon}>📋</Text>
+            <Text style={styles.bottomBarLabel}>Análisis</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Modal de Ayuda */}
+        {showHelpModal && (
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Definiciones</Text>
+                <TouchableOpacity 
+                  style={styles.modalCloseButton} 
+                  onPress={() => setShowHelpModal(false)}
                 >
-                  <View style={styles.opcionContent}>
-                    <Text style={styles.opcionPuntos}>{op.puntos} pt</Text>
-                    <Text style={styles.opcionTexto}>{op.texto}</Text>
-                  </View>
-                  {respuestasPonderacion[pregunta.id] === op.puntos && (
-                    <Text style={styles.opcionCheck}>✅</Text>
-                  )}
+                  <Text style={styles.modalCloseText}>✕</Text>
                 </TouchableOpacity>
-              ))}
+              </View>
+              
+              <ScrollView style={styles.modalScrollView}>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de pie de las personas trabajadoras.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación estática</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Disposiciones</Text>
+                  <Text style={styles.definitionText}>
+                    El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Factores de riesgo</Text>
+                  <Text style={styles.definitionText}>
+                    Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
+                  </Text>
+                </View>
+
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Posición sedente</Text>
+                  <Text style={styles.definitionText}>
+                    Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
+                  </Text>
+                </View>
+              </ScrollView>
             </View>
           </View>
-        ))}
-
-        {/* Resultado actual */}
-        <View style={styles.resultadoBox}>
-          <View style={styles.resultadoHeader}>
-            <Text style={styles.resultadoTitulo}>Resultado Actual</Text>
-            <View style={[styles.nivelRiesgo, { backgroundColor: nivel.color }]}>
-              <Text style={styles.nivelRiesgoTexto}>{nivel.nivel}</Text>
-            </View>
-          </View>
-          <Text style={styles.puntajeTexto}>Puntaje: {puntajeTotal}/21</Text>
-        </View>
-
-        {/* Botón finalizar */}
-        <TouchableOpacity 
-          style={[
-            styles.botonFinalizar, 
-            Object.values(respuestasPonderacion).filter(val => val !== null).length !== 7 && styles.botonFinalizarDeshabilitado
-          ]} 
-          onPress={handleFinalizar}
-          disabled={Object.values(respuestasPonderacion).filter(val => val !== null).length !== 7}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.botonFinalizarIcon}>📊</Text>
-          <Text style={styles.botonFinalizarTexto}>Ver Resultados Finales</Text>
-        </TouchableOpacity>
-      </ScrollView>
-      {/* Barra inferior */}
-      <View style={styles.bottomBar}>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAtras}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>⬅️</Text>
-          <Text style={styles.bottomBarLabel}>Atrás</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleInicio}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>🏠</Text>
-          <Text style={styles.bottomBarLabel}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAnalisis}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>📋</Text>
-          <Text style={styles.bottomBarLabel}>Análisis</Text>
-        </TouchableOpacity>
+        )}
       </View>
-
-      {/* Modal de Ayuda */}
-      {showHelpModal && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Definiciones</Text>
-              <TouchableOpacity 
-                style={styles.modalCloseButton} 
-                onPress={() => setShowHelpModal(false)}
-              >
-                <Text style={styles.modalCloseText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            
-            <ScrollView style={styles.modalScrollView}>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación</Text>
-                <Text style={styles.definitionText}>
-                  La postura de pie de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Disposiciones</Text>
-                <Text style={styles.definitionText}>
-                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
-                <Text style={styles.definitionText}>
-                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Posición sedente</Text>
-                <Text style={styles.definitionText}>
-                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
-                </Text>
-              </View>
-            </ScrollView>
-          </View>
-        </View>
-      )}
-    </View>
+    </AnimatedBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'transparent',
   },
   // Barra superior
   topBar: {

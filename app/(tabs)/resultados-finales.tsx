@@ -9,6 +9,7 @@ import * as Sharing from 'expo-sharing';
 import { AppColors } from '@/constants/Colors';
 import { HistorialAnalisis, NivelRiesgo } from '@/types';
 import { safeJsonParse, handleStorageError, showErrorToUser } from '@/utils/errorHandler';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const RECOMENDACIONES = {
   NO_DECRETO: 'No aplica el Decreto. Según las respuestas, la situación del trabajador no está contemplada por el decreto sobre bipedestación.',
@@ -307,278 +308,280 @@ export default function ResultadosFinalesScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Barra superior con información */}
-      <View style={styles.topBar}>
-        <View style={styles.topBarContent}>
-          <Image 
-            source={require('@/assets/images/logo-ehs.png')} 
-            style={styles.logoImage}
-            resizeMode="cover"
-          />
-          <View style={styles.topBarInfo}>
-            <Text style={styles.topBarTitle}>Resultados Finales</Text>
-            <Text style={styles.topBarSubtitle}>{unidad} • {puesto}</Text>
-          </View>
-        </View>
-        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
-          <Text style={styles.topBarButtonText}>?</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Contenido principal */}
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
-        {/* Resumen del análisis actual */}
-        <View style={styles.resumenBox}>
-          <View style={styles.resumenHeader}>
-            <Text style={styles.resumenTitulo}>Resumen del Análisis</Text>
-            <View style={styles.resumenIcon}>
-              <Text style={styles.resumenIconText}>📊</Text>
+    <AnimatedBackground>
+      <View style={styles.container}>
+        {/* Barra superior con información */}
+        <View style={styles.topBar}>
+          <View style={styles.topBarContent}>
+            <Image 
+              source={require('@/assets/images/logo-ehs.png')} 
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
+            <View style={styles.topBarInfo}>
+              <Text style={styles.topBarTitle}>Resultados Finales</Text>
+              <Text style={styles.topBarSubtitle}>{unidad} • {puesto}</Text>
             </View>
           </View>
-          
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Unidad:</Text>
-            <Text style={styles.infoValue}>{unidad}</Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Puesto:</Text>
-            <Text style={styles.infoValue}>{puesto}</Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Subpuesto:</Text>
-            <Text style={styles.infoValue}>{subpuesto}</Text>
-          </View>
+          <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
+            <Text style={styles.topBarButtonText}>?</Text>
+          </TouchableOpacity>
         </View>
 
-        {/* Resultado del diagrama de flujo */}
-        <View style={styles.resultadoFlujoBox}>
-          <View style={styles.resultadoFlujoHeader}>
-            <Text style={styles.resultadoFlujoTitulo}>Resultado del Diagrama de Flujo</Text>
-            <TouchableOpacity 
-              style={styles.botonGlosario} 
-              onPress={() => setShowGlosario((v) => !v)}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.botonGlosarioTexto}>ℹ️</Text>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.resultadoFlujoTexto}>{flujo}</Text>
-          
-          {showGlosario && (
-            <View style={styles.glosarioBox}>
-              {Object.entries(RECOMENDACIONES).map(([clave, texto]) => (
-                <View key={clave} style={styles.glosarioItem}>
-                  <Text style={styles.glosarioClave}>{clave}:</Text>
-                  <Text style={styles.glosarioTexto}>{texto}</Text>
-                </View>
-              ))}
-            </View>
-          )}
-        </View>
-
-        {/* Puntaje y nivel de riesgo */}
-        <View style={styles.riesgoBox}>
-          <View style={styles.riesgoHeader}>
-            <Text style={styles.riesgoTitulo}>Evaluación de Riesgo</Text>
-            <View style={styles.riesgoIcon}>
-              <Text style={styles.riesgoIconText}>⚠️</Text>
-            </View>
-          </View>
-          
-          <View style={styles.riesgoInfo}>
-            <View style={styles.riesgoItem}>
-              <Text style={styles.riesgoLabel}>Puntaje Total:</Text>
-              <Text style={styles.riesgoValue}>{puntaje}/21</Text>
-            </View>
-            <View style={styles.riesgoItem}>
-              <Text style={styles.riesgoLabel}>Nivel de Riesgo:</Text>
-              <View style={[styles.nivelRiesgo, { backgroundColor: getNivelRiesgoColor(Array.isArray(nivel) ? nivel[0] : String(nivel || 'Desconocido')) }]}>
-                <Text style={styles.nivelRiesgoTexto}>{Array.isArray(nivel) ? nivel[0] : nivel}</Text>
+        {/* Contenido principal */}
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
+          {/* Resumen del análisis actual */}
+          <View style={styles.resumenBox}>
+            <View style={styles.resumenHeader}>
+              <Text style={styles.resumenTitulo}>Resumen del Análisis</Text>
+              <View style={styles.resumenIcon}>
+                <Text style={styles.resumenIconText}>📊</Text>
               </View>
             </View>
-          </View>
-        </View>
-
-        {/* Historial de análisis */}
-        <View style={styles.historialBox}>
-          <View style={styles.historialHeader}>
-            <Text style={styles.historialTitulo}>Historial de Análisis</Text>
-            <Text style={styles.historialCount}>({historial.length} registros)</Text>
-          </View>
-          
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.tablaContainer}>
-              <View style={styles.tablaHeader}>
-                <Text style={styles.tablaHeaderText}>Fecha</Text>
-                <Text style={styles.tablaHeaderText}>Unidad</Text>
-                <Text style={styles.tablaHeaderText}>Puesto</Text>
-                <Text style={styles.tablaHeaderText}>Flujo</Text>
-                <Text style={styles.tablaHeaderText}>Puntaje</Text>
-                <Text style={styles.tablaHeaderText}>Riesgo</Text>
-              </View>
-              {historial.slice(-5).map((row, idx) => (
-                <View key={idx} style={styles.tablaRow}>
-                  <Text style={styles.tablaCell}>{row.fecha.split(' ')[0]}</Text>
-                  <Text style={styles.tablaCell}>{row.unidad}</Text>
-                  <Text style={styles.tablaCell}>{row.puesto}</Text>
-                  <Text style={styles.tablaCell}>{row.flujo}</Text>
-                  <Text style={styles.tablaCell}>{row.puntaje}</Text>
-                  <Text style={styles.tablaCell}>{row.nivel}</Text>
-                </View>
-              ))}
+            
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Unidad:</Text>
+              <Text style={styles.infoValue}>{unidad}</Text>
             </View>
-          </ScrollView>
-        </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Puesto:</Text>
+              <Text style={styles.infoValue}>{puesto}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Subpuesto:</Text>
+              <Text style={styles.infoValue}>{subpuesto}</Text>
+            </View>
+          </View>
 
-        {/* Botones de acción */}
-        <View style={styles.botonesContainer}>
-          <TouchableOpacity 
-            style={styles.botonExportar} 
-            onPress={exportarExcel}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.botonIcon}>📊</Text>
-            <Text style={styles.botonExportarTexto}>Exportar a Excel</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={styles.botonBorrar} 
-            onPress={() => setShowBorrarModal(true)}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.botonIcon}>🗑️</Text>
-            <Text style={styles.botonBorrarTexto}>Borrar Historial</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={styles.botonNuevoAnalisis} 
-            onPress={() => {
-              if (typeof window !== 'undefined') {
-                window.location.href = '/';
-              } else {
-                const { useRouter } = require('expo-router');
-                const router = useRouter();
-                router.replace('/');
-              }
-            }}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.botonIcon}>🔄</Text>
-            <Text style={styles.botonNuevoAnalisisTexto}>Nuevo Análisis</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-       
-       {/* Modal de confirmación para borrar historial */}
-       {showBorrarModal && (
-         <View style={styles.modalOverlay}>
-           <View style={styles.modalContent}>
-             <Text style={styles.modalTitle}>Confirmar Borrado</Text>
-             <Text style={styles.modalText}>
-               Esta acción eliminará permanentemente todos los datos del historial.
-             </Text>
-             <Text style={styles.modalText}>
-               Ingresa el código de confirmación: <Text style={styles.codigoText}>123</Text>
-             </Text>
-             <TextInput
-               style={styles.inputCodigo}
-               value={codigoConfirmacion}
-               onChangeText={setCodigoConfirmacion}
-               placeholder="Ingresa el código"
-               keyboardType="numeric"
-               secureTextEntry={false}
-               maxLength={3}
-             />
-             <View style={styles.modalButtons}>
-               <TouchableOpacity 
-                 style={[styles.modalButton, styles.modalButtonCancelar]} 
-                 onPress={() => {
-                   setShowBorrarModal(false);
-                   setCodigoConfirmacion('');
-                 }}
-               >
-                 <Text style={styles.modalButtonTexto}>Cancelar</Text>
-               </TouchableOpacity>
-               <TouchableOpacity 
-                 style={[styles.modalButton, styles.modalButtonConfirmar]} 
-                 onPress={borrarHistorial}
-               >
-                 <Text style={styles.modalButtonTexto}>Borrar</Text>
-               </TouchableOpacity>
-             </View>
-           </View>
-         </View>
-       )}
-
-      {/* Modal de Ayuda */}
-      {showHelpModal && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Definiciones</Text>
+          {/* Resultado del diagrama de flujo */}
+          <View style={styles.resultadoFlujoBox}>
+            <View style={styles.resultadoFlujoHeader}>
+              <Text style={styles.resultadoFlujoTitulo}>Resultado del Diagrama de Flujo</Text>
               <TouchableOpacity 
-                style={styles.modalCloseButton} 
-                onPress={() => setShowHelpModal(false)}
+                style={styles.botonGlosario} 
+                onPress={() => setShowGlosario((v) => !v)}
+                activeOpacity={0.8}
               >
-                <Text style={styles.modalCloseText}>✕</Text>
+                <Text style={styles.botonGlosarioTexto}>ℹ️</Text>
               </TouchableOpacity>
             </View>
-            <ScrollView style={styles.modalScrollView}>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación</Text>
-                <Text style={styles.definitionText}>
-                  La postura de pie de las personas trabajadoras.
-                </Text>
+            <Text style={styles.resultadoFlujoTexto}>{flujo}</Text>
+            
+            {showGlosario && (
+              <View style={styles.glosarioBox}>
+                {Object.entries(RECOMENDACIONES).map(([clave, texto]) => (
+                  <View key={clave} style={styles.glosarioItem}>
+                    <Text style={styles.glosarioClave}>{clave}:</Text>
+                    <Text style={styles.glosarioTexto}>{texto}</Text>
+                  </View>
+                ))}
               </View>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
-                </Text>
+            )}
+          </View>
+
+          {/* Puntaje y nivel de riesgo */}
+          <View style={styles.riesgoBox}>
+            <View style={styles.riesgoHeader}>
+              <Text style={styles.riesgoTitulo}>Evaluación de Riesgo</Text>
+              <View style={styles.riesgoIcon}>
+                <Text style={styles.riesgoIconText}>⚠️</Text>
               </View>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
-                </Text>
+            </View>
+            
+            <View style={styles.riesgoInfo}>
+              <View style={styles.riesgoItem}>
+                <Text style={styles.riesgoLabel}>Puntaje Total:</Text>
+                <Text style={styles.riesgoValue}>{puntaje}/21</Text>
               </View>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
-                </Text>
+              <View style={styles.riesgoItem}>
+                <Text style={styles.riesgoLabel}>Nivel de Riesgo:</Text>
+                <View style={[styles.nivelRiesgo, { backgroundColor: getNivelRiesgoColor(Array.isArray(nivel) ? nivel[0] : String(nivel || 'Desconocido')) }]}>
+                  <Text style={styles.nivelRiesgoTexto}>{Array.isArray(nivel) ? nivel[0] : nivel}</Text>
+                </View>
               </View>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Disposiciones</Text>
-                <Text style={styles.definitionText}>
-                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
-                </Text>
-              </View>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
-                <Text style={styles.definitionText}>
-                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
-                </Text>
-              </View>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Posición sedente</Text>
-                <Text style={styles.definitionText}>
-                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
-                </Text>
+            </View>
+          </View>
+
+          {/* Historial de análisis */}
+          <View style={styles.historialBox}>
+            <View style={styles.historialHeader}>
+              <Text style={styles.historialTitulo}>Historial de Análisis</Text>
+              <Text style={styles.historialCount}>({historial.length} registros)</Text>
+            </View>
+            
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={styles.tablaContainer}>
+                <View style={styles.tablaHeader}>
+                  <Text style={styles.tablaHeaderText}>Fecha</Text>
+                  <Text style={styles.tablaHeaderText}>Unidad</Text>
+                  <Text style={styles.tablaHeaderText}>Puesto</Text>
+                  <Text style={styles.tablaHeaderText}>Flujo</Text>
+                  <Text style={styles.tablaHeaderText}>Puntaje</Text>
+                  <Text style={styles.tablaHeaderText}>Riesgo</Text>
+                </View>
+                {historial.slice(-5).map((row, idx) => (
+                  <View key={idx} style={styles.tablaRow}>
+                    <Text style={styles.tablaCell}>{row.fecha.split(' ')[0]}</Text>
+                    <Text style={styles.tablaCell}>{row.unidad}</Text>
+                    <Text style={styles.tablaCell}>{row.puesto}</Text>
+                    <Text style={styles.tablaCell}>{row.flujo}</Text>
+                    <Text style={styles.tablaCell}>{row.puntaje}</Text>
+                    <Text style={styles.tablaCell}>{row.nivel}</Text>
+                  </View>
+                ))}
               </View>
             </ScrollView>
           </View>
-        </View>
-      )}
-    </View>
+
+          {/* Botones de acción */}
+          <View style={styles.botonesContainer}>
+            <TouchableOpacity 
+              style={styles.botonExportar} 
+              onPress={exportarExcel}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.botonIcon}>📊</Text>
+              <Text style={styles.botonExportarTexto}>Exportar a Excel</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.botonBorrar} 
+              onPress={() => setShowBorrarModal(true)}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.botonIcon}>🗑️</Text>
+              <Text style={styles.botonBorrarTexto}>Borrar Historial</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity 
+              style={styles.botonNuevoAnalisis} 
+              onPress={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.href = '/';
+                } else {
+                  const { useRouter } = require('expo-router');
+                  const router = useRouter();
+                  router.replace('/');
+                }
+              }}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.botonIcon}>🔄</Text>
+              <Text style={styles.botonNuevoAnalisisTexto}>Nuevo Análisis</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+         
+         {/* Modal de confirmación para borrar historial */}
+         {showBorrarModal && (
+           <View style={styles.modalOverlay}>
+             <View style={styles.modalContent}>
+               <Text style={styles.modalTitle}>Confirmar Borrado</Text>
+               <Text style={styles.modalText}>
+                 Esta acción eliminará permanentemente todos los datos del historial.
+               </Text>
+               <Text style={styles.modalText}>
+                 Ingresa el código de confirmación: <Text style={styles.codigoText}>123</Text>
+               </Text>
+               <TextInput
+                 style={styles.inputCodigo}
+                 value={codigoConfirmacion}
+                 onChangeText={setCodigoConfirmacion}
+                 placeholder="Ingresa el código"
+                 keyboardType="numeric"
+                 secureTextEntry={false}
+                 maxLength={3}
+               />
+               <View style={styles.modalButtons}>
+                 <TouchableOpacity 
+                   style={[styles.modalButton, styles.modalButtonCancelar]} 
+                   onPress={() => {
+                     setShowBorrarModal(false);
+                     setCodigoConfirmacion('');
+                   }}
+                 >
+                   <Text style={styles.modalButtonTexto}>Cancelar</Text>
+                 </TouchableOpacity>
+                 <TouchableOpacity 
+                   style={[styles.modalButton, styles.modalButtonConfirmar]} 
+                   onPress={borrarHistorial}
+                 >
+                   <Text style={styles.modalButtonTexto}>Borrar</Text>
+                 </TouchableOpacity>
+               </View>
+             </View>
+           </View>
+         )}
+
+        {/* Modal de Ayuda */}
+        {showHelpModal && (
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Definiciones</Text>
+                <TouchableOpacity 
+                  style={styles.modalCloseButton} 
+                  onPress={() => setShowHelpModal(false)}
+                >
+                  <Text style={styles.modalCloseText}>✕</Text>
+                </TouchableOpacity>
+              </View>
+              <ScrollView style={styles.modalScrollView}>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de pie de las personas trabajadoras.
+                  </Text>
+                </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación estática</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
+                  </Text>
+                </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
+                  </Text>
+                </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
+                  <Text style={styles.definitionText}>
+                    La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
+                  </Text>
+                </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Disposiciones</Text>
+                  <Text style={styles.definitionText}>
+                    El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
+                  </Text>
+                </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Factores de riesgo</Text>
+                  <Text style={styles.definitionText}>
+                    Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
+                  </Text>
+                </View>
+                <View style={styles.definitionItem}>
+                  <Text style={styles.definitionTitle}>Posición sedente</Text>
+                  <Text style={styles.definitionText}>
+                    Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
+                  </Text>
+                </View>
+              </ScrollView>
+            </View>
+          </View>
+        )}
+      </View>
+    </AnimatedBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'transparent',
   },
   // Barra superior
   topBar: {
