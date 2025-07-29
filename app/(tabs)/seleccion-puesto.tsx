@@ -4,6 +4,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { AppColors } from '@/constants/Colors';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const DATA: Record<string, { puesto: string; subpuesto: string }[]> = {
   "DD ENSAMBLE MODULOS.CELDAS": [
@@ -144,7 +145,7 @@ export default function SeleccionPuestoScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: AppColors.background }}>
+    <AnimatedBackground>
       {/* Barra superior */}
       <View style={styles.topBar}>
         <View style={styles.topBarContent}>
@@ -284,7 +285,7 @@ export default function SeleccionPuestoScreen() {
           </View>
         </View>
       )}
-    </View>
+    </AnimatedBackground>
   );
 }
 

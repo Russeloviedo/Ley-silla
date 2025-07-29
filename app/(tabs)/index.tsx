@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import { UnidadNegocio } from '@/types';
 import { validateNavigationParams } from '@/utils/errorHandler';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const UNIDADES_NEGOCIO: UnidadNegocio[] = [
   'IRR ENSAMBLE',
@@ -48,15 +49,11 @@ export default function SeleccionUnidadNegocioScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: AppColors.background }}>
+    <AnimatedBackground>
       {/* Barra superior */}
       <View style={styles.topBar}>
         <View style={styles.topBarContent}>
-          <Image 
-            source={require('@/assets/images/logo-ehs.png')} 
-            style={styles.logoImage}
-            resizeMode="cover"
-          />
+          <Text style={styles.logoText}>EHS</Text>
           <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
         </View>
         <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
@@ -167,7 +164,7 @@ export default function SeleccionUnidadNegocioScreen() {
           </View>
         </View>
       )}
-    </View>
+    </AnimatedBackground>
   );
 }
 
@@ -265,6 +262,16 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 35,
     height: 35,
+    marginRight: 10,
+  },
+  logoText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: AppColors.textWhite,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
     marginRight: 10,
   },
   topBarTitle: {

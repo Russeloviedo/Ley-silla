@@ -4,6 +4,7 @@ import { Text, View } from '@/components/Themed';
 import { useLocalSearchParams } from 'expo-router';
 import { useRouter } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const PREGUNTAS = [
   {
@@ -64,7 +65,7 @@ export default function PreguntasInicialesScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: AppColors.background }}>
+    <AnimatedBackground>
       {/* Barra superior */}
       <View style={styles.topBar}>
         <View style={styles.topBarContent}>
@@ -195,7 +196,7 @@ export default function PreguntasInicialesScreen() {
           </View>
         </View>
       )}
-    </View>
+    </AnimatedBackground>
   );
 }
 
