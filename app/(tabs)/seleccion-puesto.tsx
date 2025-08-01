@@ -1,12 +1,69 @@
-import { StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Text, View } from '@/components/Themed';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
-import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
+import { Text } from '@/components/Themed';
+import { useState, useEffect } from 'react';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
+import { UnidadNegocio } from '@/types';
+import { validateNavigationParams } from '@/utils/errorHandler';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { Picker } from '@react-native-picker/picker';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const DATA: Record<string, { puesto: string; subpuesto: string }[]> = {
+  "IRRIGACIÓN MATERIALES": [
+    { puesto: "Almacenista", subpuesto: "II" },
+    { puesto: "Almacenista", subpuesto: "III" },
+    { puesto: "Auxiliar Control de Materiales", subpuesto: "General" },
+    { puesto: "Auxiliar de Conteo Cíclico", subpuesto: "General" },
+    { puesto: "Coordinador de Almacén", subpuesto: "General" },
+    { puesto: "Materialista", subpuesto: "General" },
+    { puesto: "Auxiliar de Tool-crib", subpuesto: "General" },
+  ],
+  "IRRIGACIÓN CALIDAD": [
+    { puesto: "Asistente de Supervisor de Calidad FX", subpuesto: "General" },
+    { puesto: "Asistente de Supervisor de Calidad IR", subpuesto: "General" },
+    { puesto: "Inspector de Calidad", subpuesto: "I" },
+    { puesto: "Inspector de Calidad", subpuesto: "II" },
+    { puesto: "Inspector de Calidad", subpuesto: "III" },
+    { puesto: "Técnico de Calidad (IR)", subpuesto: "General" },
+  ],
+  "IRRIGACIÓN ENSAMBLE": [
+    { puesto: "Asistente de Supervisor de Ensamble (IR)", subpuesto: "General" },
+    { puesto: "Inspector de Calidad", subpuesto: "I" },
+    { puesto: "Inspector de Calidad", subpuesto: "II" },
+    { puesto: "Inspector de Calidad", subpuesto: "III" },
+    { puesto: "Asistente de Supervisor Sr IR", subpuesto: "General" },
+    { puesto: "Control de Producción (IR)", subpuesto: "General" },
+    { puesto: "Ensamblador", subpuesto: "General" },
+    { puesto: "Operador Universal", subpuesto: "General" },
+    { puesto: "Supervisor Sr de Producción IR", subpuesto: "General" },
+    { puesto: "Operador de Máquina", subpuesto: "General" },
+  ],
+  "IRRIGACIÓN MOLDEO": [
+    { puesto: "Principal Supervisor de Moldeo", subpuesto: "General" },
+    { puesto: "Separador de Partes", subpuesto: "General" },
+    { puesto: "Supervisor de Moldeo Jr. (IR)", subpuesto: "General" },
+    { puesto: "Supervisor Sr de Moldeo", subpuesto: "General" },
+    { puesto: "Técnico de Moldeo", subpuesto: "I" },
+    { puesto: "Técnico de Moldeo", subpuesto: "II" },
+    { puesto: "Técnico de Moldeo", subpuesto: "III" },
+    { puesto: "Técnico de Procesos", subpuesto: "General" },
+    { puesto: "Técnico de Set Up", subpuesto: "I" },
+    { puesto: "Técnico de Set Up", subpuesto: "III" },
+    { puesto: "Mezclador de Resinas", subpuesto: "General" },
+    { puesto: "Mezclador de Resinas", subpuesto: "Sr." },
+    { puesto: "Coordinador Técnico de Moldeo (IR)", subpuesto: "General" },
+    { puesto: "Limpiador de Moldes (IRR)", subpuesto: "General" },
+  ],
+  "IRRIGACIÓN MANTENIMIENTO": [
+    { puesto: "Auxiliar de Mantenimiento", subpuesto: "General" },
+    { puesto: "Mecánico de Ensamble", subpuesto: "I" },
+    { puesto: "Mecánico de Ensamble", subpuesto: "II" },
+    { puesto: "Mecánico de Ensamble", subpuesto: "III" },
+    { puesto: "Mecánico de Facilities", subpuesto: "III" },
+    { puesto: "Mecánico de Moldeo", subpuesto: "II" },
+    { puesto: "Mecánico de Moldeo", subpuesto: "III" },
+  ],
   "DD ENSAMBLE MODULOS.CELDAS": [
     { puesto: "Supervisor", subpuesto: "General" },
     { puesto: "Supervisor Junior", subpuesto: "General" },
@@ -96,6 +153,58 @@ const DATA: Record<string, { puesto: string; subpuesto: string }[]> = {
     { puesto: "Materialista", subpuesto: "III" },
     { puesto: "Gerente de almacén", subpuesto: "General" },
   ],
+  "ADMINISTRATIVO": [
+    { puesto: "Agente de Compras", subpuesto: "I" },
+    { puesto: "Agente de Compras", subpuesto: "II" },
+    { puesto: "Analista Adquisición Talento", subpuesto: "General" },
+    { puesto: "Analista Cambios de Ingeniería", subpuesto: "General" },
+    { puesto: "Analista Control de Materiales", subpuesto: "General" },
+    { puesto: "Analista Cumplimiento Aduanero", subpuesto: "General" },
+    { puesto: "Analista de Logística", subpuesto: "General" },
+    { puesto: "Analista de Nómina", subpuesto: "General" },
+    { puesto: "Analista de Sistemas", subpuesto: "I" },
+    { puesto: "Analista de Sistemas", subpuesto: "II" },
+    { puesto: "Analista Desarrollo Organizacional", subpuesto: "General" },
+    { puesto: "Analista Engagement Organizacional", subpuesto: "General" },
+    { puesto: "Analista Financiero", subpuesto: "General" },
+    { puesto: "Analista Operaciones y Compensaciones", subpuesto: "General" },
+    { puesto: "Asesor de Salud y Bienestar", subpuesto: "General" },
+    { puesto: "Asistente de Cumplimiento Aduanero", subpuesto: "General" },
+    { puesto: "Asistente de Administración (HCM)", subpuesto: "General" },
+    { puesto: "Asistente Adquisición Talento", subpuesto: "General" },
+    { puesto: "Asistente de Administración", subpuesto: "General" },
+    { puesto: "Asistente de Control de Doctos", subpuesto: "General" },
+    { puesto: "Asistente de Recursos Humanos", subpuesto: "General" },
+    { puesto: "Asistente Desarrollo Organizacional", subpuesto: "General" },
+    { puesto: "Asistente Engagement Organizacional", subpuesto: "General" },
+    { puesto: "Asistente Relaciones Laborales", subpuesto: "General" },
+    { puesto: "Auxiliar Contable", subpuesto: "General" },
+    { puesto: "Auxiliar Cumplimiento Aduanero", subpuesto: "General" },
+    { puesto: "Auxiliar de Cuentas por Pagar", subpuesto: "General" },
+    { puesto: "Comprador Jr.", subpuesto: "FX" },
+    { puesto: "Comprador Jr.", subpuesto: "IR" },
+    { puesto: "Contador de Cuentas por Pagar", subpuesto: "Jr" },
+    { puesto: "Contador de Cuentas por Pagar", subpuesto: "Sr" },
+    { puesto: "Contador Jr.", subpuesto: "General" },
+    { puesto: "Control de Producción", subpuesto: "DD" },
+    { puesto: "Control de Producción", subpuesto: "HCM" },
+    { puesto: "Control de Producción", subpuesto: "IR" },
+    { puesto: "Coordinador de Cumplimiento Aduanero", subpuesto: "General" },
+    { puesto: "Coordinador de Fiscal y Comercio Exterior", subpuesto: "General" },
+    { puesto: "Coordinador Regional de Operaciones", subpuesto: "General" },
+    { puesto: "Coordinador Gestión Herramientas Mfg", subpuesto: "General" },
+    { puesto: "Coordinador Control de Doctos", subpuesto: "General" },
+    { puesto: "Coordinador Control de Materiales", subpuesto: "General" },
+    { puesto: "Coordinador Control de Materiales NPI", subpuesto: "General" },
+    { puesto: "Coordinador Control Documentos", subpuesto: "General" },
+    { puesto: "Coordinador de Compras MRO", subpuesto: "General" },
+    { puesto: "Coordinador de Enfermería", subpuesto: "General" },
+    { puesto: "Coordinador de Logística", subpuesto: "General" },
+    { puesto: "Coordinador Programa Soporte", subpuesto: "General" },
+    { puesto: "Desarrollador de Sistemas Jr.", subpuesto: "General" },
+    { puesto: "Enfermero(a)", subpuesto: "General" },
+    { puesto: "Gerente Programa Jr.", subpuesto: "General" },
+  ],
 };
 
 export default function SeleccionPuestoScreen() {
@@ -147,7 +256,12 @@ export default function SeleccionPuestoScreen() {
   return (
     <AnimatedBackground>
       {/* Barra superior */}
-      <View style={styles.topBar}>
+      <LinearGradient
+        colors={['#00BCD4', '#00796B']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.topBar}
+      >
         <View style={styles.topBarContent}>
           <Text style={styles.logoText}>EHS</Text>
           <Text style={styles.topBarTitle} numberOfLines={2} ellipsizeMode="tail">Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
@@ -155,7 +269,7 @@ export default function SeleccionPuestoScreen() {
         <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
           <Text style={styles.topBarButtonText}>?</Text>
         </TouchableOpacity>
-      </View>
+      </LinearGradient>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Selección de Puesto y Subpuesto</Text>
         <Text style={styles.subtitle}>Unidad de Negocio Seleccionada:</Text>
@@ -315,10 +429,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 12,
     marginBottom: 24,
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   selectedUnidad: {
@@ -337,14 +448,13 @@ const styles = StyleSheet.create({
   info: {
     marginTop: 30,
     fontSize: 14,
-    color: AppColors.textMuted,
+    color: '#fff',
     textAlign: 'center',
   },
   topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -400,10 +510,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     paddingVertical: 10,
     elevation: 8,
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
   },
   bottomBarItem: {
     alignItems: 'center',
@@ -425,10 +532,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     width: '100%',
     maxWidth: 420,
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     alignItems: 'center',
     alignSelf: 'center',
@@ -447,10 +551,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: AppColors.secondary,
     minHeight: 50,
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   pickerDisabled: {
@@ -465,10 +566,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     alignItems: 'center',
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   botonContinuarDeshabilitado: {
@@ -499,10 +597,7 @@ const styles = StyleSheet.create({
     width: '90%',
     maxWidth: 400,
     maxHeight: '80%',
-    shadowColor: 'rgba(0, 188, 212, 0.4)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
+    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
     elevation: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.4)',

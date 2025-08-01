@@ -1,10 +1,10 @@
-import { StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Text, View } from '@/components/Themed';
-import { useLocalSearchParams } from 'expo-router';
-import { useRouter } from 'expo-router';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
+import { Text } from '@/components/Themed';
 import { useState } from 'react';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const SUBPUESTOS_GENERICOS = [
   { key: 'Operador de Excavadora', icon: '🚜' },
@@ -33,11 +33,21 @@ export default function SeleccionSubpuestoScreen() {
     router.push({ pathname: '/resultados-finales' });
   };
 
+  const handleHelp = () => {
+    // Implementar lógica de ayuda si es necesario
+    console.log('Ayuda solicitada');
+  };
+
   return (
     <AnimatedBackground>
       <View style={{ flex: 1, backgroundColor: 'transparent' }}>
         {/* Barra superior */}
-        <View style={styles.topBar}>
+        <LinearGradient
+          colors={['#00BCD4', '#00796B']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.topBar}
+        >
           <View style={styles.topBarContent}>
             <Image 
               source={require('@/assets/images/logo-ehs.png')} 
@@ -46,10 +56,10 @@ export default function SeleccionSubpuestoScreen() {
             />
             <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
           </View>
-          <TouchableOpacity style={styles.topBarButton}>
+          <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
             <Text style={styles.topBarButtonText}>?</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
         <ScrollView contentContainerStyle={styles.container}>
           <Text style={styles.title}>Selección de Subpuesto de Trabajo</Text>
           <Text style={styles.subtitle}>Unidad de Negocio Seleccionada:</Text>
@@ -129,10 +139,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 12,
     marginBottom: 16,
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   selectedText: {
@@ -151,7 +158,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -200,10 +206,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     paddingVertical: 10,
     elevation: 8,
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
   },
   bottomBarItem: {
     alignItems: 'center',
@@ -219,16 +222,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   boxUnidades: {
-    backgroundColor: AppColors.surface,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     borderRadius: 16,
     padding: 24,
     marginBottom: 32,
     width: '100%',
     maxWidth: 420,
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
+    boxShadow: '0px 4px 12px rgba(0, 188, 212, 0.12)',
     elevation: 4,
     alignItems: 'center',
     alignSelf: 'center',
@@ -245,10 +245,7 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     marginHorizontal: 4,
     width: '100%',
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 188, 212, 0.18)',
     elevation: 3,
   },
   opcionUnidadSeleccionada: {
@@ -264,10 +261,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   iconoText: {
@@ -305,10 +299,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     alignItems: 'center',
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   botonContinuarDeshabilitado: {

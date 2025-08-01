@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, View, Alert, Image } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useLocalSearchParams } from 'expo-router';
-import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
-import { RespuestasPonderacion, ResultadoNivelRiesgo, PreguntaPonderacion } from '@/types';
+import { RespuestasPonderacion, ResultadoNivelRiesgo } from '@/types';
 import { safeJsonParse, validatePonderacionResponses } from '@/utils/errorHandler';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const PONDERACION = [
   {
@@ -155,7 +155,12 @@ export default function CuestionarioPonderacionScreen() {
     <AnimatedBackground>
       <View style={styles.container}>
         {/* Barra superior con información */}
-        <View style={styles.topBar}>
+        <LinearGradient
+          colors={['#00BCD4', '#00796B']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.topBar}
+        >
           <View style={styles.topBarContent}>
             <Image 
               source={require('@/assets/images/logo-ehs.png')} 
@@ -167,7 +172,7 @@ export default function CuestionarioPonderacionScreen() {
           <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
             <Text style={styles.topBarButtonText}>?</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
 
         {/* Contenido principal */}
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
@@ -337,7 +342,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -378,10 +382,7 @@ const styles = StyleSheet.create({
     padding: 25,
     marginBottom: 25,
     width: '100%',
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -396,10 +397,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 15,
     alignSelf: 'center',
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.3)',
     elevation: 4,
   },
   numeroPregunta: {
@@ -430,10 +428,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
     elevation: 2,
   },
   opcionSeleccionada: {
@@ -468,10 +463,7 @@ const styles = StyleSheet.create({
     padding: 25,
     marginBottom: 25,
     width: '100%',
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.12)',
     elevation: 8,
     alignItems: 'center',
   },
@@ -511,10 +503,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 16,
     alignItems: 'center',
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.2)',
     elevation: 4,
     flexDirection: 'row',
     width: '100%',
@@ -544,10 +533,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     paddingVertical: 10,
     elevation: 8,
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
   },
   bottomBarItem: {
     alignItems: 'center',

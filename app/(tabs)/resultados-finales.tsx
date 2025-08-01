@@ -1,15 +1,16 @@
-import { StyleSheet, ScrollView, View, TouchableOpacity, FlatList, Platform, Alert, TextInput, Image } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image, Alert, Platform, TextInput } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useLocalSearchParams } from 'expo-router';
 import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as XLSX from 'xlsx';
+import { useRouter, useLocalSearchParams } from 'expo-router';
+import { AppColors } from '@/constants/Colors';
+import AnimatedBackground from '@/components/AnimatedBackground';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import { AppColors } from '@/constants/Colors';
+import * as XLSX from 'xlsx';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
 import { HistorialAnalisis, NivelRiesgo } from '@/types';
 import { safeJsonParse, handleStorageError, showErrorToUser } from '@/utils/errorHandler';
-import AnimatedBackground from '@/components/AnimatedBackground';
 
 const RECOMENDACIONES = {
   NO_DECRETO: 'No aplica el Decreto. Según las respuestas, la situación del trabajador no está contemplada por el decreto sobre bipedestación.',
@@ -29,6 +30,8 @@ function getNivelRiesgoColor(nivel: string): string {
       return '#ffeb3b';
     case 'alto':
       return '#f44336';
+    case 'no aplica':
+      return '#9e9e9e';
     default:
       return '#ccc';
   }
@@ -245,7 +248,7 @@ export default function ResultadosFinalesScreen() {
       'UNIDAD DE NEGOCIO': item.unidad || '',
       'PUESTO DE TRABAJO': item.puesto || '',
       'SUBPUESTO DE TRABAJO': item.subpuesto || '',
-      'PREGUNTA 1': item.pregunta1 === '8 horas' || item.pregunta1 === '10 horas' || item.pregunta1 === '12 horas' ? item.pregunta1 : '',
+      'PREGUNTA 1': item.pregunta1 || '',
       'PREGUNTA 2': item.pregunta2 === 'Sí' ? 'Sí' : item.pregunta2 === 'No' ? 'No' : '',
       'PREGUNTA 3': getRespuestaConNA(item.pregunta3, 3, item.flujo), // ¿Hay personas trabajadoras en bipedestación?
       'PREGUNTA 4': getRespuestaConNA(item.pregunta4, 4, item.flujo), // ¿La bipedestación es prolongada?
@@ -254,28 +257,23 @@ export default function ResultadosFinalesScreen() {
       'PREGUNTA 7': getRespuestaConNA(item.pregunta7, 7, item.flujo), // ¿Requiere estar cerca del trabajo?
       'PREGUNTA 8': getRespuestaConNA(item.pregunta8, 8, item.flujo), // Vacío - pero puede ser N/A
       'PREGUNTA 9': getRespuestaConNA(item.pregunta9, 9, item.flujo), // Vacío - pero puede ser N/A
-      'REQUIERE ANALISIS': (item.flujo ? (item.flujo.toLowerCase().includes('no aplica') ? 'No' : 'Sí') : ''),
+      'REQUIERE ANALISIS': (item.flujo === 'NO_DECRETO' ? 'No' : 'Sí'),
     }));
 
-    // Filtrar y mapear historial a formato de la hoja 2 (matriz de riesgo)
-    const dataRiesgo = historial
-      .filter((item) => {
-        // Solo incluir elementos que no sean "No aplica"
-        return item.flujo && !item.flujo.toLowerCase().includes('no aplica');
-      })
-      .map((item) => ({
-        'UNIDAD DE NEGOCIO': item.unidad || '',
-        'PUESTO DE TRABAJO': item.puesto || '',
-        'SUBPUESTO DE TRABAJO': item.subpuesto || '',
-        'PONDERACION 1': item.ponderacion1 || '',
-        'PONDERACION 2': item.ponderacion2 || '',
-        'PONDERACION 3': item.ponderacion3 || '',
-        'PONDERACION 4': item.ponderacion4 || '',
-        'PONDERACION 5': item.ponderacion5 || '',
-        'PONDERACION 6': item.ponderacion6 || '',
-        'PONDERACION 7': item.ponderacion7 || '',
-        'NIVEL DE RIESGO': item.nivel || '',
-      }));
+    // Mapear historial a formato de la hoja 2 (matriz de riesgo) - incluir todos los casos
+    const dataRiesgo = historial.map((item) => ({
+      'UNIDAD DE NEGOCIO': item.unidad || '',
+      'PUESTO DE TRABAJO': item.puesto || '',
+      'SUBPUESTO DE TRABAJO': item.subpuesto || '',
+      'PONDERACION 1': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion1 || ''),
+      'PONDERACION 2': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion2 || ''),
+      'PONDERACION 3': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion3 || ''),
+      'PONDERACION 4': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion4 || ''),
+      'PONDERACION 5': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion5 || ''),
+      'PONDERACION 6': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion6 || ''),
+      'PONDERACION 7': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.ponderacion7 || ''),
+      'NIVEL DE RIESGO': item.flujo === 'NO_DECRETO' ? 'N/A' : (item.nivel || ''),
+    }));
 
     // Crear hojas
     const wsIdent = XLSX.utils.json_to_sheet(dataIdent, { header: headersIdent });
@@ -311,7 +309,12 @@ export default function ResultadosFinalesScreen() {
     <AnimatedBackground>
       <View style={styles.container}>
         {/* Barra superior con información */}
-        <View style={styles.topBar}>
+        <LinearGradient
+          colors={['#00BCD4', '#00796B']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.topBar}
+        >
           <View style={styles.topBarContent}>
             <Image 
               source={require('@/assets/images/logo-ehs.png')} 
@@ -326,7 +329,7 @@ export default function ResultadosFinalesScreen() {
           <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
             <Text style={styles.topBarButtonText}>?</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
 
         {/* Contenido principal */}
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
@@ -588,16 +591,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
-    paddingTop: 50,
+    paddingTop: 36,
     paddingBottom: 20,
     paddingHorizontal: 20,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.15)',
     elevation: 8,
   },
   topBarContent: {
@@ -643,10 +642,7 @@ const styles = StyleSheet.create({
     padding: 25,
     marginBottom: 20,
     width: '100%',
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -670,10 +666,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.3)',
     elevation: 4,
   },
   resumenIconText: {
@@ -704,10 +697,7 @@ const styles = StyleSheet.create({
     padding: 25,
     marginBottom: 20,
     width: '100%',
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -732,10 +722,7 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 196, 204, 0.3)',
     elevation: 3,
   },
   botonGlosarioTexto: {
@@ -850,10 +837,7 @@ const styles = StyleSheet.create({
     padding: 25,
     marginBottom: 20,
     width: '100%',
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -921,10 +905,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 16,
     alignItems: 'center',
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.2)',
     elevation: 4,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -944,10 +925,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 16,
     alignItems: 'center',
-    shadowColor: '#f44336',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(244, 67, 54, 0.2)',
     elevation: 4,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -963,10 +941,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 16,
     alignItems: 'center',
-    shadowColor: '#4caf50',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(76, 175, 80, 0.2)',
     elevation: 4,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -995,10 +970,7 @@ const styles = StyleSheet.create({
     margin: 20,
     width: '90%',
     maxWidth: 400,
-    shadowColor: 'rgba(0, 188, 212, 0.4)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
+    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
     elevation: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.4)',

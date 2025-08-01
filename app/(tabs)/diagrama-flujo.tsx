@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useState } from 'react';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const FLUJO = [
   {
@@ -82,17 +83,35 @@ export default function DiagramaFlujoScreen() {
   };
 
   const handleContinuar = () => {
-    router.push({ 
-      pathname: '/cuestionario-ponderacion', 
-      params: { 
-        unidad, 
-        puesto, 
-        subpuesto, 
-        flujo: final, 
-        respuestas,
-        respuestasFlujo: JSON.stringify(respuestasFlujo)
-      } 
-    });
+    if (final === 'NO_DECRETO') {
+      // Si no aplica decreto, ir directamente a resultados finales
+      router.push({ 
+        pathname: '/resultados-finales', 
+        params: { 
+          unidad, 
+          puesto, 
+          subpuesto, 
+          flujo: final, 
+          respuestas,
+          respuestasFlujo: JSON.stringify(respuestasFlujo),
+          puntaje: '0',
+          nivel: 'No aplica'
+        } 
+      });
+    } else {
+      // Si aplica decreto, ir al cuestionario de ponderación
+      router.push({ 
+        pathname: '/cuestionario-ponderacion', 
+        params: { 
+          unidad, 
+          puesto, 
+          subpuesto, 
+          flujo: final, 
+          respuestas,
+          respuestasFlujo: JSON.stringify(respuestasFlujo)
+        } 
+      });
+    }
   };
 
   const handleInicio = () => {
@@ -116,7 +135,12 @@ export default function DiagramaFlujoScreen() {
       <AnimatedBackground>
         <View style={styles.container}>
           {/* Barra superior */}
-          <View style={styles.topBar}>
+          <LinearGradient
+            colors={['#00BCD4', '#00796B']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.topBar}
+          >
             <View style={styles.topBarContent}>
               <Image 
                 source={require('@/assets/images/logo-ehs.png')} 
@@ -128,7 +152,7 @@ export default function DiagramaFlujoScreen() {
             <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
               <Text style={styles.topBarButtonText}>?</Text>
             </TouchableOpacity>
-          </View>
+          </LinearGradient>
 
           {/* Contenido del resultado */}
           <View style={styles.content}>
@@ -149,10 +173,12 @@ export default function DiagramaFlujoScreen() {
               onPress={handleContinuar}
               activeOpacity={0.8}
             >
-              <Text style={styles.botonContinuarIcon}>📊</Text>
+              <Text style={styles.botonContinuarIcon}>
+                {final === 'NO_DECRETO' ? '📋' : '📊'}
+              </Text>
               <Text style={styles.botonContinuarTexto}>
                 {final === 'NO_DECRETO' 
-                  ? 'Realizar Cuestionario de Ponderación' 
+                  ? 'Ver Resultados Finales' 
                   : 'Ir al Cuestionario de Ponderación'
                 }
               </Text>
@@ -197,7 +223,12 @@ export default function DiagramaFlujoScreen() {
     <AnimatedBackground>
       <View style={styles.container}>
         {/* Barra superior con información */}
-        <View style={styles.topBar}>
+        <LinearGradient
+          colors={['#00BCD4', '#00796B']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.topBar}
+        >
           <View style={styles.topBarContent}>
             <Image 
               source={require('@/assets/images/logo-ehs.png')} 
@@ -209,7 +240,7 @@ export default function DiagramaFlujoScreen() {
           <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
             <Text style={styles.topBarButtonText}>?</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
 
         {/* Contenido principal */}
         <View style={styles.content}>
@@ -359,7 +390,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -402,10 +432,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     width: '100%',
     maxWidth: 400,
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     alignItems: 'center',
     borderWidth: 1,
@@ -420,10 +447,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.3)',
     elevation: 4,
   },
   numeroPregunta: {
@@ -453,10 +477,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 16,
     alignItems: 'center',
-    shadowColor: '#003b4c',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
+    boxShadow: '0px 4px 8px rgba(0, 59, 76, 0.1)',
     elevation: 4,
     borderWidth: 2,
     borderColor: 'transparent',
@@ -487,10 +508,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     elevation: 2,
   },
   botonVolverIcon: {
@@ -580,10 +598,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     paddingVertical: 10,
     elevation: 8,
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
   },
   bottomBarItem: {
     alignItems: 'center',
@@ -633,10 +648,7 @@ const styles = StyleSheet.create({
     width: '90%',
     maxWidth: 400,
     maxHeight: '80%',
-    shadowColor: 'rgba(0, 188, 212, 0.4)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
+    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
     elevation: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.4)',

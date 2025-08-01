@@ -1,7 +1,10 @@
 // Tipos para las unidades de negocio
 export type UnidadNegocio = 
-  | 'IRR ENSAMBLE'
-  | 'IRR MOLDEO'
+  | 'IRRIGACIÓN MANTENIMIENTO'
+  | 'IRRIGACIÓN MOLDEO'
+  | 'IRRIGACIÓN ENSAMBLE'
+  | 'IRRIGACIÓN CALIDAD'
+  | 'IRRIGACIÓN MATERIALES'
   | 'FX'
   | 'DD ENSAMBLE MODULOS.CELDAS'
   | 'DD MOLDEO'
@@ -16,7 +19,7 @@ export type UnidadNegocio =
   | 'ADMINISTRATIVO';
 
 // Tipos para niveles de riesgo
-export type NivelRiesgo = 'Bajo' | 'Medio' | 'Alto' | 'Desconocido';
+export type NivelRiesgo = 'Bajo' | 'Medio' | 'Alto' | 'Desconocido' | 'No aplica';
 
 // Tipos para respuestas de preguntas iniciales
 export interface RespuestasIniciales {

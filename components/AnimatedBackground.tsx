@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated, Dimensions, Text } from 'react-native';
+import { View, StyleSheet, Animated, Dimensions, Text, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const { width, height } = Dimensions.get('window');
+
+// Configuración global para animaciones
+const animationConfig = {
+  useNativeDriver: false,
+};
 
 interface AnimatedBackgroundProps {
   children: React.ReactNode;
@@ -29,12 +34,12 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
           Animated.timing(silla1Anim, {
             toValue: 1,
             duration: 12000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
           Animated.timing(silla1Anim, {
             toValue: 0,
             duration: 12000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
         ])
       ).start();
@@ -45,12 +50,12 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
           Animated.timing(silla2Anim, {
             toValue: 1,
             duration: 15000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
           Animated.timing(silla2Anim, {
             toValue: 0,
             duration: 15000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
         ])
       ).start();
@@ -61,12 +66,12 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
           Animated.timing(silla3Anim, {
             toValue: 1,
             duration: 18000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
           Animated.timing(silla3Anim, {
             toValue: 0,
             duration: 18000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
         ])
       ).start();
@@ -77,12 +82,12 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
           Animated.timing(silla4Anim, {
             toValue: 1,
             duration: 20000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
           Animated.timing(silla4Anim, {
             toValue: 0,
             duration: 20000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
         ])
       ).start();
@@ -93,12 +98,12 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
           Animated.timing(floatAnim, {
             toValue: 1,
             duration: 3000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
           Animated.timing(floatAnim, {
             toValue: 0,
             duration: 3000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
         ])
       ).start();
@@ -108,7 +113,7 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
         Animated.timing(rotateAnim, {
           toValue: 1,
           duration: 25000,
-          useNativeDriver: true,
+          ...animationConfig,
         })
       ).start();
 
@@ -118,12 +123,12 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
           Animated.timing(scaleAnim, {
             toValue: 1.2,
             duration: 4000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
           Animated.timing(scaleAnim, {
             toValue: 1,
             duration: 4000,
-            useNativeDriver: true,
+            ...animationConfig,
           }),
         ])
       ).start();
@@ -133,7 +138,7 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
         Animated.timing(particleAnim, {
           toValue: 1,
           duration: 8000,
-          useNativeDriver: true,
+          ...animationConfig,
         })
       ).start();
     };

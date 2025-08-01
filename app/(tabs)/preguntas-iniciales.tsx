@@ -1,10 +1,10 @@
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
+import { Text } from '@/components/Themed';
 import { useState } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Text, View } from '@/components/Themed';
-import { useLocalSearchParams } from 'expo-router';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const PREGUNTAS = [
   {
@@ -67,17 +67,26 @@ export default function PreguntasInicialesScreen() {
   return (
     <AnimatedBackground>
       {/* Barra superior */}
-      <View style={styles.topBar}>
+      <LinearGradient
+        colors={['#00BCD4', '#00796B']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.topBar}
+      >
         <View style={styles.topBarContent}>
-          <Text style={styles.logoText}>EHS</Text>
-          <Text style={styles.topBarTitle} numberOfLines={2} ellipsizeMode="tail">Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+          <Image 
+            source={require('@/assets/images/logo-ehs.png')} 
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
+          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
         </View>
         <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
           <Text style={styles.topBarButtonText}>?</Text>
         </TouchableOpacity>
-      </View>
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Evaluación Inicial</Text>
+      </LinearGradient>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.title}>Evaluación Inicial</Text>
         <Text style={styles.subtitle}>Por favor responda las siguientes preguntas para determinar si se continúa con la identificación de posible riesgo de bipedestación.</Text>
       {PREGUNTAS.map((pregunta) => (
         <View key={pregunta.id} style={styles.preguntaBox}>
@@ -135,12 +144,12 @@ export default function PreguntasInicialesScreen() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Definiciones</Text>
-      <TouchableOpacity
+              <TouchableOpacity 
                 style={styles.modalCloseButton} 
                 onPress={() => setShowHelpModal(false)}
-      >
+              >
                 <Text style={styles.modalCloseText}>✕</Text>
-      </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             
             <ScrollView style={styles.modalScrollView}>
@@ -206,7 +215,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: 'transparent',
+    backgroundColor: AppColors.background,
   },
   title: {
     fontSize: 22,
@@ -221,22 +230,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   preguntaBox: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: 20,
+    backgroundColor: '#fff',
+    borderRadius: 16,
     padding: 24,
     marginBottom: 32,
     width: '100%',
     maxWidth: 420,
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
-    elevation: 8,
+    boxShadow: '0px 4px 12px rgba(0, 196, 204, 0.12)',
+    elevation: 4,
     alignItems: 'center',
     alignSelf: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    backdropFilter: 'blur(10px)',
   },
   numeroPreguntaBox: {
     backgroundColor: '#00c4cc',
@@ -267,41 +270,29 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   opcion: {
-    backgroundColor: 'rgba(0, 196, 204, 0.8)',
+    backgroundColor: '#00c4cc',
     paddingVertical: 14,
     paddingHorizontal: 18,
     borderRadius: 14,
     marginHorizontal: 4,
     marginVertical: 4,
     alignItems: 'center',
-    shadowColor: 'rgba(0, 196, 204, 0.3)',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 196, 204, 0.18)',
     elevation: 3,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
   opcionSeleccionada: {
-    backgroundColor: 'rgba(182, 230, 0, 0.9)',
-    borderColor: 'rgba(255, 255, 255, 0.5)',
-    shadowColor: 'rgba(182, 230, 0, 0.4)',
-    shadowOpacity: 0.3,
+    backgroundColor: '#b6e600',
   },
   opcionTexto: {
     fontSize: 18,
-    color: '#fff',
+    color: '#222',
     fontWeight: '700',
     letterSpacing: 1.1,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
   },
   topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -312,27 +303,20 @@ const styles = StyleSheet.create({
   topBarContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 0,
+    flex: 1,
   },
-  logoText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
+  logoImage: {
+    width: 35,
+    height: 35,
     marginRight: 10,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
   },
   topBarTitle: {
     color: AppColors.textWhite,
     fontWeight: 'bold',
     fontSize: 16,
     letterSpacing: 1.1,
-    lineHeight: 22,
-    flexShrink: 1,
-    backgroundColor: 'transparent',
-    maxWidth: 280,
+    flex: 1,
+    lineHeight: 20,
   },
   topBarButton: {
     backgroundColor: AppColors.secondary,
@@ -357,10 +341,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     paddingVertical: 10,
     elevation: 8,
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
   },
   bottomBarItem: {
     alignItems: 'center',
@@ -394,21 +375,15 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   modalContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: '#fff',
     borderRadius: 20,
     padding: 20,
     margin: 20,
     width: '90%',
     maxWidth: 400,
     maxHeight: '80%',
-    shadowColor: 'rgba(0, 188, 212, 0.4)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(15px)',
+    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.25)',
+    elevation: 8,
   },
   modalHeader: {
     flexDirection: 'row',

@@ -6,10 +6,14 @@ import { AppColors } from '@/constants/Colors';
 import { UnidadNegocio } from '@/types';
 import { validateNavigationParams } from '@/utils/errorHandler';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const UNIDADES_NEGOCIO: UnidadNegocio[] = [
-  'IRR ENSAMBLE',
-  'IRR MOLDEO',
+  'IRRIGACIÓN MANTENIMIENTO',
+  'IRRIGACIÓN MOLDEO',
+  'IRRIGACIÓN ENSAMBLE',
+  'IRRIGACIÓN CALIDAD',
+  'IRRIGACIÓN MATERIALES',
   'FX',
   'DD ENSAMBLE MODULOS.CELDAS',
   'DD MOLDEO',
@@ -51,7 +55,12 @@ export default function SeleccionUnidadNegocioScreen() {
   return (
     <AnimatedBackground>
       {/* Barra superior */}
-      <View style={styles.topBar}>
+      <LinearGradient
+        colors={['#00BCD4', '#00796B']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.topBar}
+      >
         <View style={styles.topBarContent}>
           <Text style={styles.logoText}>EHS</Text>
           <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
@@ -59,7 +68,7 @@ export default function SeleccionUnidadNegocioScreen() {
         <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
           <Text style={styles.topBarButtonText}>?</Text>
         </TouchableOpacity>
-      </View>
+      </LinearGradient>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Selección de Unidad de Negocio</Text>
         <Text style={styles.subtitle}>Seleccione la unidad de negocio que desea analizar:</Text>
@@ -169,32 +178,28 @@ export default function SeleccionUnidadNegocioScreen() {
 }
 
 function getEmojiForUnidad(unidad: string): string {
-  const unidadLower = unidad.toLowerCase();
-  
-  // Mapeo de unidades a emojis
+  // Mapeo específico de unidades a emojis
   const emojiMap: Record<string, string> = {
-    'hcm': '👥',
-    'fx': '💸',
-    'moldeo': '🏭',
-    'ensamble': '🔩',
-    'almacén': '📦',
-    'almacen': '📦',
-    'mantenimiento': '🛠️',
-    'tool room': '🧰',
-    'administrativo': '📑',
-    'soporte': '🖥️',
-    'áreas': '🌱',
-    'calidad': '✅',
+    'IRRIGACIÓN MANTENIMIENTO': '🌱💧🔧',
+    'IRRIGACIÓN MOLDEO': '🌱💧🏭',
+    'IRRIGACIÓN ENSAMBLE': '🌱💧🧩',
+    'IRRIGACIÓN CALIDAD': '🌱💧🔍',
+    'IRRIGACIÓN MATERIALES': '🌱💧📦',
+    'FX': '💡⚙️',
+    'DD ENSAMBLE MODULOS.CELDAS': '🧻🧩',
+    'DD MOLDEO': '🧻🏭',
+    'DD CALIDAD': '🧻🔍',
+    'DD ALMACEN': '🧻📦',
+    'HCM PRODUCCIÓN': '🏭⚙️',
+    'HCM CALIDAD': '🏭🔍',
+    'HCM ALMACÉN': '🏭📦',
+    'ALMACÉN': '🏬📦',
+    'MANTENIMIENTO': '🛠️🔧',
+    'TOOL ROOM': '🧰🛠️',
+    'ADMINISTRATIVO': '🧑‍💼🗂️',
   };
   
-  // Buscar coincidencias en el mapeo
-  for (const [key, emoji] of Object.entries(emojiMap)) {
-    if (unidadLower.includes(key)) {
-      return emoji;
-    }
-  }
-  
-  return '🏢'; // Emoji por defecto
+  return emojiMap[unidad] || '🏢'; // Emoji por defecto si no encuentra la unidad
 }
 
 const styles = StyleSheet.create({
@@ -225,10 +230,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     width: '100%',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     elevation: 2,
   },
   buttonText: {
@@ -239,14 +241,13 @@ const styles = StyleSheet.create({
   info: {
     marginTop: 30,
     fontSize: 14,
-    color: AppColors.textMuted,
+    color: '#fff',
     textAlign: 'center',
   },
   topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#00BCD4',
     paddingTop: 36,
     paddingBottom: 16,
     paddingHorizontal: 18,
@@ -303,10 +304,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     width: '100%',
     maxWidth: 420,
-    shadowColor: 'rgba(0, 188, 212, 0.3)',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
     elevation: 8,
     alignItems: 'center',
     alignSelf: 'center',
@@ -319,17 +317,13 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.secondary,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 14,
-    paddingHorizontal: 18,
-    borderRadius: 14,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 12,
     marginVertical: 6,
     marginHorizontal: 4,
     width: '100%',
-    shadowColor: AppColors.shadowColor,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
+    boxShadow: '0px 2px 8px rgba(0, 188, 212, 0.18)',
     elevation: 3,
   },
   opcionUnidadSeleccionada: {
@@ -373,10 +367,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     alignItems: 'center',
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
     elevation: 2,
   },
   botonContinuarTexto: {
@@ -396,10 +387,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 18,
     paddingVertical: 10,
     elevation: 8,
-    shadowColor: AppColors.shadowColorDark,
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
+    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
   },
   bottomBarItem: {
     alignItems: 'center',
@@ -434,10 +422,7 @@ const styles = StyleSheet.create({
     width: '90%',
     maxWidth: 400,
     maxHeight: '80%',
-    shadowColor: 'rgba(0, 188, 212, 0.4)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
+    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
     elevation: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.4)',
