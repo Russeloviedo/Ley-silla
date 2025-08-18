@@ -1,6 +1,6 @@
 import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import AnimatedBackground from '@/components/AnimatedBackground';
@@ -9,8 +9,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 const PREGUNTAS = [
   {
     id: 1,
-    texto: '¿Cuál es el horario del puesto a analizar?',
-    opciones: ['8 horas', '10 horas', '12 horas'],
+    texto: '¿Cuántas son las horas del puesto a analizar?',
+    opciones: ['8 horas', '9 horas', '10 horas', '12 horas'],
   },
   {
     id: 2,
@@ -24,6 +24,12 @@ export default function PreguntasInicialesScreen() {
   const [respuestas, setRespuestas] = useState<{ [key: number]: string | null }>({ 1: null, 2: null });
   const router = useRouter();
   const [showHelpModal, setShowHelpModal] = useState(false);
+
+  // Limpiar respuestas al montar el componente para asegurar un nuevo análisis
+  useEffect(() => {
+    console.log('🧹 Limpiando respuestas previas para nuevo análisis...');
+    setRespuestas({ 1: null, 2: null });
+  }, []);
 
   const handleRespuesta = (id: number, valor: string) => {
     const nuevasRespuestas = { ...respuestas, [id]: valor };
@@ -56,6 +62,10 @@ export default function PreguntasInicialesScreen() {
     router.push({ pathname: '/resultados-finales' });
   };
 
+  const handleBaseDatos = () => {
+            router.push({ pathname: '/nueva-base-datos' });
+  };
+
   const handleAtras = () => {
     router.push({ pathname: '/seleccion-puesto', params: { unidad, puesto, subpuesto } });
   };
@@ -65,78 +75,53 @@ export default function PreguntasInicialesScreen() {
   };
 
   return (
-    <AnimatedBackground>
-      {/* Barra superior */}
-      <LinearGradient
-        colors={['#00BCD4', '#00796B']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.topBar}
-      >
-        <View style={styles.topBarContent}>
-          <Image 
-            source={require('@/assets/images/logo-ehs.png')} 
-            style={styles.logoImage}
-            resizeMode="contain"
-          />
-          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
-        </View>
-        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
-          <Text style={styles.topBarButtonText}>?</Text>
-        </TouchableOpacity>
-      </LinearGradient>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Evaluación Inicial</Text>
-        <Text style={styles.subtitle}>Por favor responda las siguientes preguntas para determinar si se continúa con la identificación de posible riesgo de bipedestación.</Text>
-      {PREGUNTAS.map((pregunta) => (
-        <View key={pregunta.id} style={styles.preguntaBox}>
-          <View style={styles.numeroPreguntaBox}>
-            <Text style={styles.numeroPregunta}>{`Pregunta ${pregunta.id}`}</Text>
+    <>
+      <AnimatedBackground>
+        {/* Barra superior */}
+        <LinearGradient
+          colors={['#00BCD4', '#00796B']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.topBar}
+        >
+          <View style={styles.topBarContent}>
+            <Image 
+              source={require('@/assets/images/logo-ehs.png')} 
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
+            <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
           </View>
-          <Text style={styles.preguntaTexto}>{pregunta.texto}</Text>
-          <View style={styles.opciones}>
-            {pregunta.opciones.map((opcion) => (
-              <TouchableOpacity
-                key={opcion}
-                style={[styles.opcion, respuestas[pregunta.id] === opcion && styles.opcionSeleccionada]}
-                onPress={() => handleRespuesta(pregunta.id, opcion)}
-                activeOpacity={0.85}
-              >
-                <Text style={styles.opcionTexto}>{opcion}</Text>
-              </TouchableOpacity>
-            ))}
+          <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
+            <Text style={styles.topBarButtonText}>?</Text>
+          </TouchableOpacity>
+        </LinearGradient>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.title}>Evaluación Inicial</Text>
+          <Text style={styles.subtitle}>Por favor responda las siguientes preguntas para determinar si se continúa con la identificación de posible riesgo de bipedestación.</Text>
+        {PREGUNTAS.map((pregunta) => (
+          <View key={pregunta.id} style={styles.preguntaBox}>
+            <View style={styles.numeroPreguntaBox}>
+              <Text style={styles.numeroPregunta}>{`Pregunta ${pregunta.id}`}</Text>
+            </View>
+            <Text style={styles.preguntaTexto}>{pregunta.texto}</Text>
+            <View style={styles.opciones}>
+              {pregunta.opciones.map((opcion) => (
+                <TouchableOpacity
+                  key={opcion}
+                  style={[styles.opcion, respuestas[pregunta.id] === opcion && styles.opcionSeleccionada]}
+                  onPress={() => handleRespuesta(pregunta.id, opcion)}
+                  activeOpacity={0.85}
+                >
+                  <Text style={styles.opcionTexto}>{opcion}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
-        </View>
-      ))}
-      <Text style={styles.info}>Responda ambas preguntas para continuar automáticamente</Text>
-      </ScrollView>
-      {/* Barra inferior */}
-      <View style={styles.bottomBar}>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAtras}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>⬅️</Text>
-          <Text style={styles.bottomBarLabel}>Atrás</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleInicio}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>🏠</Text>
-          <Text style={styles.bottomBarLabel}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAnalisis}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>📋</Text>
-          <Text style={styles.bottomBarLabel}>Análisis</Text>
-        </TouchableOpacity>
-      </View>
+        ))}
+        <Text style={styles.info}>Responda ambas preguntas para continuar automáticamente</Text>
+        </ScrollView>
+      </AnimatedBackground>
 
       {/* Modal de Ayuda */}
       {showHelpModal && (
@@ -205,7 +190,7 @@ export default function PreguntasInicialesScreen() {
           </View>
         </View>
       )}
-    </AnimatedBackground>
+    </>
   );
 }
 
@@ -331,30 +316,6 @@ const styles = StyleSheet.create({
     color: AppColors.textWhite,
     fontWeight: 'bold',
     fontSize: 20,
-  },
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: AppColors.background,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
-    paddingVertical: 10,
-    elevation: 8,
-    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
-  },
-  bottomBarItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  bottomBarIcon: {
-    fontSize: 22,
-    marginBottom: 2,
-  },
-  bottomBarLabel: {
-    fontSize: 13,
-    color: AppColors.primary,
-    fontWeight: '600',
   },
   info: {
     marginTop: 30,

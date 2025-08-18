@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { View, StyleSheet, Animated, Dimensions, Text, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useFocusEffect } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -26,125 +27,185 @@ export default function AnimatedBackground({ children }: AnimatedBackgroundProps
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const particleAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    const animateSillas = () => {
-      // Silla 1 - Movimiento horizontal con flotación
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(silla1Anim, {
-            toValue: 1,
-            duration: 12000,
-            ...animationConfig,
-          }),
-          Animated.timing(silla1Anim, {
-            toValue: 0,
-            duration: 12000,
-            ...animationConfig,
-          }),
-        ])
-      ).start();
+  // Referencias para las animaciones activas
+  const activeAnimations = useRef<Animated.CompositeAnimation[]>([]);
 
-      // Silla 2 - Movimiento diagonal con rotación
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(silla2Anim, {
-            toValue: 1,
-            duration: 15000,
-            ...animationConfig,
-          }),
-          Animated.timing(silla2Anim, {
-            toValue: 0,
-            duration: 15000,
-            ...animationConfig,
-          }),
-        ])
-      ).start();
+  // Función para resetear todas las animaciones
+  const resetAnimations = useCallback(() => {
+    // Detener todas las animaciones activas
+    activeAnimations.current.forEach(animation => {
+      if (animation) {
+        animation.stop();
+      }
+    });
+    activeAnimations.current = [];
 
-      // Silla 3 - Movimiento vertical con escalado
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(silla3Anim, {
-            toValue: 1,
-            duration: 18000,
-            ...animationConfig,
-          }),
-          Animated.timing(silla3Anim, {
-            toValue: 0,
-            duration: 18000,
-            ...animationConfig,
-          }),
-        ])
-      ).start();
-
-      // Silla 4 - Movimiento circular
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(silla4Anim, {
-            toValue: 1,
-            duration: 20000,
-            ...animationConfig,
-          }),
-          Animated.timing(silla4Anim, {
-            toValue: 0,
-            duration: 20000,
-            ...animationConfig,
-          }),
-        ])
-      ).start();
-
-      // Efecto de flotación global
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(floatAnim, {
-            toValue: 1,
-            duration: 3000,
-            ...animationConfig,
-          }),
-          Animated.timing(floatAnim, {
-            toValue: 0,
-            duration: 3000,
-            ...animationConfig,
-          }),
-        ])
-      ).start();
-
-      // Efecto de rotación
-      Animated.loop(
-        Animated.timing(rotateAnim, {
-          toValue: 1,
-          duration: 25000,
-          ...animationConfig,
-        })
-      ).start();
-
-      // Efecto de escalado
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(scaleAnim, {
-            toValue: 1.2,
-            duration: 4000,
-            ...animationConfig,
-          }),
-          Animated.timing(scaleAnim, {
-            toValue: 1,
-            duration: 4000,
-            ...animationConfig,
-          }),
-        ])
-      ).start();
-
-      // Efecto de partículas
-      Animated.loop(
-        Animated.timing(particleAnim, {
-          toValue: 1,
-          duration: 8000,
-          ...animationConfig,
-        })
-      ).start();
-    };
-
-    animateSillas();
+    // Resetear valores de animación
+    silla1Anim.setValue(0);
+    silla2Anim.setValue(0);
+    silla3Anim.setValue(0);
+    silla4Anim.setValue(0);
+    floatAnim.setValue(0);
+    rotateAnim.setValue(0);
+    scaleAnim.setValue(1);
+    particleAnim.setValue(0);
   }, [silla1Anim, silla2Anim, silla3Anim, silla4Anim, floatAnim, rotateAnim, scaleAnim, particleAnim]);
+
+  // Función para iniciar animaciones
+  const startAnimations = useCallback(() => {
+    // Limpiar animaciones previas
+    resetAnimations();
+
+    // Silla 1 - Movimiento horizontal con flotación
+    const silla1Animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(silla1Anim, {
+          toValue: 1,
+          duration: 12000,
+          ...animationConfig,
+        }),
+        Animated.timing(silla1Anim, {
+          toValue: 0,
+          duration: 12000,
+          ...animationConfig,
+        }),
+      ])
+    );
+    silla1Animation.start();
+    activeAnimations.current.push(silla1Animation);
+
+    // Silla 2 - Movimiento diagonal con rotación
+    const silla2Animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(silla2Anim, {
+          toValue: 1,
+          duration: 15000,
+          ...animationConfig,
+        }),
+        Animated.timing(silla2Anim, {
+          toValue: 0,
+          duration: 15000,
+          ...animationConfig,
+        }),
+      ])
+    );
+    silla2Animation.start();
+    activeAnimations.current.push(silla2Animation);
+
+    // Silla 3 - Movimiento vertical con escalado
+    const silla3Animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(silla3Anim, {
+          toValue: 1,
+          duration: 18000,
+          ...animationConfig,
+        }),
+        Animated.timing(silla3Anim, {
+          toValue: 0,
+          duration: 18000,
+          ...animationConfig,
+        }),
+      ])
+    );
+    silla3Animation.start();
+    activeAnimations.current.push(silla3Animation);
+
+    // Silla 4 - Movimiento circular
+    const silla4Animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(silla4Anim, {
+          toValue: 1,
+          duration: 20000,
+          ...animationConfig,
+        }),
+        Animated.timing(silla4Anim, {
+          toValue: 0,
+          duration: 20000,
+          ...animationConfig,
+        }),
+      ])
+    );
+    silla4Animation.start();
+    activeAnimations.current.push(silla4Animation);
+
+    // Efecto de flotación global
+    const floatAnimation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(floatAnim, {
+          toValue: 1,
+          duration: 3000,
+          ...animationConfig,
+        }),
+        Animated.timing(floatAnim, {
+          toValue: 0,
+          duration: 3000,
+          ...animationConfig,
+        }),
+      ])
+    );
+    floatAnimation.start();
+    activeAnimations.current.push(floatAnimation);
+
+    // Efecto de rotación
+    const rotateAnimation = Animated.loop(
+      Animated.timing(rotateAnim, {
+        toValue: 1,
+        duration: 25000,
+        ...animationConfig,
+      })
+    );
+    rotateAnimation.start();
+    activeAnimations.current.push(rotateAnimation);
+
+    // Efecto de escalado
+    const scaleAnimation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 1.2,
+          duration: 4000,
+          ...animationConfig,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 4000,
+          ...animationConfig,
+        }),
+      ])
+    );
+    scaleAnimation.start();
+    activeAnimations.current.push(scaleAnimation);
+
+    // Efecto de partículas
+    const particleAnimation = Animated.loop(
+      Animated.timing(particleAnim, {
+        toValue: 1,
+        duration: 8000,
+        ...animationConfig,
+      })
+    );
+    particleAnimation.start();
+    activeAnimations.current.push(particleAnimation);
+  }, [silla1Anim, silla2Anim, silla3Anim, silla4Anim, floatAnim, rotateAnim, scaleAnim, particleAnim, resetAnimations]);
+
+  // Usar useFocusEffect para reiniciar animaciones cuando la página recibe foco
+  useFocusEffect(
+    useCallback(() => {
+      // Iniciar animaciones cuando la página recibe foco
+      startAnimations();
+
+      // Cleanup cuando la página pierde foco
+      return () => {
+        resetAnimations();
+      };
+    }, [startAnimations, resetAnimations])
+  );
+
+  // Cleanup adicional cuando el componente se desmonta
+  useEffect(() => {
+    return () => {
+      resetAnimations();
+    };
+  }, [resetAnimations]);
 
   return (
     <View style={styles.container}>

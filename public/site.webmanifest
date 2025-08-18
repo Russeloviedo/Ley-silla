@@ -1,0 +1,23 @@
+{
+  "name": "Aplicación Ley Silla",
+  "short_name": "Ley Silla",
+  "description": "Sistema integral para la identificación y evaluación de riesgos de bipedestación",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#003333",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

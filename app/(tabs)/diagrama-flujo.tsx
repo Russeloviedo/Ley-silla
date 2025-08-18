@@ -1,6 +1,6 @@
 import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import AnimatedBackground from '@/components/AnimatedBackground';
@@ -55,6 +55,15 @@ export default function DiagramaFlujoScreen() {
   const router = useRouter();
   const [showHelpModal, setShowHelpModal] = useState(false);
 
+  // Limpiar estado del flujo al montar el componente para asegurar un nuevo análisis
+  useEffect(() => {
+    console.log('🧹 Limpiando estado del flujo para nuevo análisis...');
+    setPaso(1);
+    setFinal(null);
+    setHistorial([]);
+    setRespuestasFlujo({});
+  }, []);
+
   const handleRespuesta = (valor: 'si' | 'no') => {
     const actual = FLUJO.find((p) => p.id === paso);
     if (!actual) return;
@@ -83,8 +92,18 @@ export default function DiagramaFlujoScreen() {
   };
 
   const handleContinuar = () => {
+    // DEBUG AUTOMÁTICO - Diagrama de Flujo
+    console.log('🚨 DEBUG DIAGRAMA FLUJO:', {
+      final,
+      tipoFinal: typeof final,
+      esNoDecreto: final === 'NO_DECRETO',
+      comparacionExacta: final === 'NO_DECRETO',
+      rutaDestino: final === 'NO_DECRETO' ? 'resultados-finales' : 'cuestionario-ponderacion'
+    });
+    
     if (final === 'NO_DECRETO') {
       // Si no aplica decreto, ir directamente a resultados finales
+      console.log('🚨 Navegando a resultados finales (NO APLICA DECRETO)');
       router.push({ 
         pathname: '/resultados-finales', 
         params: { 
@@ -100,6 +119,7 @@ export default function DiagramaFlujoScreen() {
       });
     } else {
       // Si aplica decreto, ir al cuestionario de ponderación
+      console.log('🚨 Navegando a cuestionario ponderación (SÍ APLICA DECRETO)');
       router.push({ 
         pathname: '/cuestionario-ponderacion', 
         params: { 
@@ -120,6 +140,10 @@ export default function DiagramaFlujoScreen() {
 
   const handleAnalisis = () => {
     router.push({ pathname: '/resultados-finales' });
+  };
+
+  const handleBaseDatos = () => {
+            router.push({ pathname: '/nueva-base-datos' });
   };
 
   const handleAtras = () => {
@@ -173,42 +197,22 @@ export default function DiagramaFlujoScreen() {
               onPress={handleContinuar}
               activeOpacity={0.8}
             >
-              <Text style={styles.botonContinuarIcon}>
-                {final === 'NO_DECRETO' ? '📋' : '📊'}
-              </Text>
-              <Text style={styles.botonContinuarTexto}>
-                {final === 'NO_DECRETO' 
-                  ? 'Ver Resultados Finales' 
-                  : 'Ir al Cuestionario de Ponderación'
-                }
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/* Barra inferior */}
-          <View style={styles.bottomBar}>
-            <TouchableOpacity 
-              style={styles.bottomBarItem} 
-              onPress={handleAtras}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.bottomBarIcon}>⬅️</Text>
-              <Text style={styles.bottomBarLabel}>Atrás</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.bottomBarItem} 
-              onPress={handleInicio}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.bottomBarIcon}>🏠</Text>
-              <Text style={styles.bottomBarLabel}>Inicio</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.bottomBarItem} 
-              onPress={handleAnalisis}
-              activeOpacity={0.7}
-            >
-              <Text style={styles.bottomBarIcon}>📋</Text>
-              <Text style={styles.bottomBarLabel}>Análisis</Text>
+              <LinearGradient
+                colors={['#b80404', '#ff4444']}
+                style={styles.gradientButton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text style={styles.botonContinuarIcon}>
+                  {final === 'NO_DECRETO' ? '📋' : '📊'}
+                </Text>
+                <Text style={styles.botonContinuarTexto}>
+                  {final === 'NO_DECRETO' 
+                    ? 'Ver Resultados Finales' 
+                    : 'Ir al Cuestionario de Ponderación'
+                  }
+                </Text>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
         </View>
@@ -258,8 +262,15 @@ export default function DiagramaFlujoScreen() {
               onPress={() => handleRespuesta('si')} 
               activeOpacity={0.8}
             >
-              <Text style={styles.botonIcon}>✅</Text>
-              <Text style={styles.botonTexto}>Sí</Text>
+              <LinearGradient
+                colors={['#4caf50', '#66bb6a']}
+                style={styles.gradientButton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text style={styles.botonIcon}>✅</Text>
+                <Text style={styles.botonTexto}>Sí</Text>
+              </LinearGradient>
             </TouchableOpacity>
             
             <TouchableOpacity 
@@ -267,47 +278,33 @@ export default function DiagramaFlujoScreen() {
               onPress={() => handleRespuesta('no')} 
               activeOpacity={0.8}
             >
-              <Text style={styles.botonIcon}>❌</Text>
-              <Text style={styles.botonTexto}>No</Text>
+              <LinearGradient
+                colors={['#f44336', '#ef5350']}
+                style={styles.gradientButton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text style={styles.botonIcon}>❌</Text>
+                <Text style={styles.botonTexto}>No</Text>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
 
           {/* Botón volver */}
           {historial.length > 0 && (
             <TouchableOpacity style={styles.botonVolver} onPress={handleVolver}>
-              <Text style={styles.botonVolverIcon}>⬅️</Text>
-              <Text style={styles.botonVolverTexto}>Volver</Text>
+              <LinearGradient
+                colors={['#6c757d', '#868e96']}
+                style={styles.gradientButtonVolver}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text style={styles.botonVolverIcon}>⬅️</Text>
+                <Text style={styles.botonVolverTexto}>Volver</Text>
+              </LinearGradient>
             </TouchableOpacity>
           )}
         </View>
-        {/* Barra inferior */}
-        <View style={styles.bottomBar}>
-          <TouchableOpacity 
-            style={styles.bottomBarItem} 
-            onPress={handleAtras}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.bottomBarIcon}>⬅️</Text>
-            <Text style={styles.bottomBarLabel}>Atrás</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.bottomBarItem} 
-            onPress={handleInicio}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.bottomBarIcon}>🏠</Text>
-            <Text style={styles.bottomBarLabel}>Inicio</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.bottomBarItem} 
-            onPress={handleAnalisis}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.bottomBarIcon}>📋</Text>
-            <Text style={styles.bottomBarLabel}>Análisis</Text>
-          </TouchableOpacity>
-        </View>
-
         {/* Modal de Ayuda */}
         {showHelpModal && (
           <View style={styles.modalOverlay}>
@@ -483,12 +480,19 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   botonSi: {
-    backgroundColor: '#4caf50',
     borderColor: '#4caf50',
   },
   botonNo: {
-    backgroundColor: '#f44336',
     borderColor: '#f44336',
+  },
+  gradientButton: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 30,
   },
   botonIcon: {
     fontSize: 24,
@@ -504,12 +508,21 @@ const styles = StyleSheet.create({
   botonVolver: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#6c757d',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 12,
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     elevation: 2,
+  },
+  gradientButtonVolver: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
   },
   botonVolverIcon: {
     fontSize: 16,
@@ -567,7 +580,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   botonContinuar: {
-    backgroundColor: '#00c4cc',
     paddingVertical: 18,
     paddingHorizontal: 30,
     borderRadius: 16,
@@ -579,6 +591,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     flexDirection: 'row',
   },
+
   botonContinuarIcon: {
     fontSize: 20,
     marginRight: 10,
@@ -588,31 +601,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  // Barra inferior
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: AppColors.background,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
-    paddingVertical: 10,
-    elevation: 8,
-    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
-  },
-  bottomBarItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  bottomBarIcon: {
-    fontSize: 22,
-    marginBottom: 2,
-  },
-  bottomBarLabel: {
-    fontSize: 13,
-    color: AppColors.primary,
-    fontWeight: '600',
-  },
+
   // Botón de ayuda
   topBarButton: {
     backgroundColor: AppColors.secondary,

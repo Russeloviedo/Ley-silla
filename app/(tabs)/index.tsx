@@ -1,205 +1,136 @@
-import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image, StatusBar, Animated } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { AppColors } from '@/constants/Colors';
-import { UnidadNegocio } from '@/types';
-import { validateNavigationParams } from '@/utils/errorHandler';
-import AnimatedBackground from '@/components/AnimatedBackground';
 import { LinearGradient } from 'expo-linear-gradient';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import { clearAnswersOnly } from '@/utils/storageUtils';
 
-const UNIDADES_NEGOCIO: UnidadNegocio[] = [
-  'IRRIGACIÓN MANTENIMIENTO',
-  'IRRIGACIÓN MOLDEO',
-  'IRRIGACIÓN ENSAMBLE',
-  'IRRIGACIÓN CALIDAD',
-  'IRRIGACIÓN MATERIALES',
-  'FX',
-  'DD ENSAMBLE MODULOS.CELDAS',
-  'DD MOLDEO',
-  'DD CALIDAD',
-  'DD ALMACEN',
-  'HCM PRODUCCIÓN',
-  'HCM CALIDAD',
-  'HCM ALMACÉN',
-  'ALMACÉN',
-  'MANTENIMIENTO',
-  'TOOL ROOM',
-  'ADMINISTRATIVO',
-];
-
-export default function SeleccionUnidadNegocioScreen() {
+export default function IndexScreen() {
   const router = useRouter();
-  const [seleccion, setSeleccion] = useState<UnidadNegocio | null>(null);
-  const [showHelpModal, setShowHelpModal] = useState(false);
 
-  const handleSeleccion = (unidad: UnidadNegocio) => {
-    setSeleccion(unidad);
-    // Navegar automáticamente a la siguiente pantalla
-    const params = { unidad: unidad };
-      if (validateNavigationParams(params)) {
-        router.push({ pathname: '/seleccion-puesto', params });
+  const handleIniciarAnalisis = async () => {
+    try {
+      // Limpiar respuestas y datos de análisis, preservando unidad de negocio
+      await clearAnswersOnly();
+      console.log('✅ Respuestas y datos de análisis limpiados, unidad de negocio preservada');
+      
+      // Navegar a la selección de unidad de negocio
+      router.push('/seleccion-business-unit');
+    } catch (error) {
+      console.error('❌ Error al limpiar datos:', error);
+      // Continuar con la navegación incluso si hay error
+      router.push('/seleccion-business-unit');
     }
   };
 
-
-
   const handleAnalisis = () => {
-    router.push({ pathname: '/resultados-finales' });
+    router.push('/(tabs)/analisis');
   };
 
-  const handleHelp = () => {
-    setShowHelpModal(true);
-  };
+
+
+  // Animación de latido para el logo
+  const pulseAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const pulseAnimation = () => {
+      Animated.sequence([
+        Animated.timing(pulseAnim, {
+          toValue: 1.1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulseAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+      ]).start(() => pulseAnimation());
+    };
+
+    pulseAnimation();
+  }, [pulseAnim]);
 
   return (
-    <AnimatedBackground>
-      {/* Barra superior */}
-      <LinearGradient
-        colors={['#00BCD4', '#00796B']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.topBar}
-      >
-        <View style={styles.topBarContent}>
-          <Text style={styles.logoText}>EHS</Text>
-          <Text style={styles.topBarTitle}>Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
+                    <>
+                  <AnimatedBackground>
+        {/* Logo Bipe360 en la parte superior */}
+        <View style={styles.logoTopContainer}>
+          <Animated.Image 
+            source={require('../../logo-bipe360.png')} 
+            style={[
+              styles.logoTop,
+              {
+                transform: [{ scale: pulseAnim }]
+              }
+            ]}
+            resizeMode="contain"
+          />
         </View>
-        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
-          <Text style={styles.topBarButtonText}>?</Text>
-        </TouchableOpacity>
-      </LinearGradient>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Selección de Unidad de Negocio</Text>
-        <Text style={styles.subtitle}>Seleccione la unidad de negocio que desea analizar:</Text>
-        <View style={styles.boxUnidades}>
-          {UNIDADES_NEGOCIO.map((unidad, idx) => (
+
+        <ScrollView contentContainerStyle={styles.container}>
+          {/* Contenido principal */}
+          <View style={styles.contentContainer}>
+            <Text style={styles.title}>Bienvenido al Sistema de Análisis</Text>
+            <Text style={styles.subtitle}>
+              Sistema integral para la identificación y evaluación de riesgos de bipedestación 
+              según la normativa vigente. Realiza análisis completos y obtén reportes detallados.
+            </Text>
+
+            {/* Botón principal */}
             <TouchableOpacity
-              key={unidad}
-              style={[styles.opcionUnidad, seleccion === unidad && styles.opcionUnidadSeleccionada]}
-              onPress={() => handleSeleccion(unidad)}
-              activeOpacity={0.85}
+              style={styles.mainButton}
+              onPress={handleIniciarAnalisis}
+              activeOpacity={0.8}
             >
-              <Text style={styles.iconoUnidad}>{getEmojiForUnidad(unidad)}</Text>
-              <Text style={styles.opcionUnidadTexto}>{unidad}</Text>
-              <View style={styles.radioOuter}>
-                {seleccion === unidad && <View style={styles.radioInner} />}
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
-        <Text style={styles.info}>Toque una unidad de negocio para continuar automáticamente</Text>
-      </ScrollView>
-      {/* Barra inferior */}
-      <View style={styles.bottomBar}>
-        <View style={styles.bottomBarItem}>
-          <Text style={styles.bottomBarIcon}>🏠</Text>
-          <Text style={styles.bottomBarLabel}>Inicio</Text>
-        </View>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAnalisis}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>📋</Text>
-          <Text style={styles.bottomBarLabel}>Análisis</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Modal de Ayuda */}
-      {showHelpModal && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Definiciones</Text>
-              <TouchableOpacity 
-                style={styles.modalCloseButton} 
-                onPress={() => setShowHelpModal(false)}
+              <LinearGradient
+                colors={['#003333', '#006666']}
+                style={styles.gradientMainButton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
               >
-                <Text style={styles.modalCloseText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            
-            <ScrollView style={styles.modalScrollView}>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación</Text>
-                <Text style={styles.definitionText}>
-                  La postura de pie de las personas trabajadoras.
-                </Text>
-              </View>
+                <View style={styles.buttonContent}>
+                  <Text style={styles.buttonEmoji}>🚀</Text>
+                  <Text style={styles.buttonText}>Iniciar Nuevo Análisis</Text>
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
 
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
-                </Text>
-              </View>
+            {/* Botón Análisis */}
+            <TouchableOpacity
+              style={styles.secondaryButton}
+              onPress={handleAnalisis}
+              activeOpacity={0.8}
+            >
+              <LinearGradient
+                colors={['#4A90E2', '#7BB3F0']}
+                style={styles.gradientSecondaryButton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <View style={styles.buttonContent}>
+                  <Text style={styles.buttonEmoji}>📊</Text>
+                  <Text style={styles.buttonText}>Análisis</Text>
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
 
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
-                </Text>
-              </View>
+          </View>
 
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
-                </Text>
-              </View>
+          {/* Instrucción inferior */}
+          <Text style={styles.instruction}>
+            Selecciona "Iniciar Nuevo Análisis" para comenzar tu evaluación
+          </Text>
 
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Disposiciones</Text>
-                <Text style={styles.definitionText}>
-                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
-                <Text style={styles.definitionText}>
-                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Posición sedente</Text>
-                <Text style={styles.definitionText}>
-                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
-                </Text>
-              </View>
-            </ScrollView>
-      </View>
-    </View>
-      )}
-    </AnimatedBackground>
+          {/* Footer */}
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>© Desarrollado por el Equipo de EHS México</Text>
+          </View>
+        </ScrollView>
+      </AnimatedBackground>
+    </>
   );
-}
-
-function getEmojiForUnidad(unidad: string): string {
-  // Mapeo específico de unidades a emojis
-  const emojiMap: Record<string, string> = {
-    'IRRIGACIÓN MANTENIMIENTO': '🌱💧🔧',
-    'IRRIGACIÓN MOLDEO': '🌱💧🏭',
-    'IRRIGACIÓN ENSAMBLE': '🌱💧🧩',
-    'IRRIGACIÓN CALIDAD': '🌱💧🔍',
-    'IRRIGACIÓN MATERIALES': '🌱💧📦',
-    'FX': '💡⚙️',
-    'DD ENSAMBLE MODULOS.CELDAS': '🧻🧩',
-    'DD MOLDEO': '🧻🏭',
-    'DD CALIDAD': '🧻🔍',
-    'DD ALMACEN': '🧻📦',
-    'HCM PRODUCCIÓN': '🏭⚙️',
-    'HCM CALIDAD': '🏭🔍',
-    'HCM ALMACÉN': '🏭📦',
-    'ALMACÉN': '🏬📦',
-    'MANTENIMIENTO': '🛠️🔧',
-    'TOOL ROOM': '🧰🛠️',
-    'ADMINISTRATIVO': '🧑‍💼🗂️',
-  };
-  
-  return emojiMap[unidad] || '🏢'; // Emoji por defecto si no encuentra la unidad
 }
 
 const styles = StyleSheet.create({
@@ -210,270 +141,91 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'transparent',
   },
+  logoTopContainer: {
+    alignItems: 'center',
+    paddingTop: 40,
+    paddingBottom: 20,
+  },
+  logoTop: {
+    width: 350,
+    height: 140,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
   title: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 10,
-    color: AppColors.textPrimary,
+    color: '#2C3E50',
+    textAlign: 'center',
+    marginBottom: 15,
   },
   subtitle: {
     fontSize: 16,
-    marginBottom: 20,
-    color: AppColors.textSecondary,
+    color: '#000000',
+    textAlign: 'center',
+    marginBottom: 40,
+    paddingHorizontal: 20,
+    lineHeight: 24,
+  },
+  instruction: {
+    fontSize: 14,
+    color: '#000000',
+    textAlign: 'center',
+    marginBottom: 30,
+    fontStyle: 'italic',
+  },
+  footer: {
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  footerText: {
+    fontSize: 14,
+    color: '#FFFFFF',
     textAlign: 'center',
   },
-  button: {
-    backgroundColor: '#00c4cc',
-    paddingVertical: 16,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginVertical: 8,
-    width: '100%',
+  mainButton: {
+    borderRadius: 25,
+    paddingVertical: 20,
+    paddingHorizontal: 40,
+    overflow: 'hidden',
+  },
+  secondaryButton: {
+    borderRadius: 25,
+    paddingVertical: 18,
+    paddingHorizontal: 40,
+    marginTop: 15,
+    overflow: 'hidden',
+  },
+  gradientMainButton: {
+    flex: 1,
+    borderRadius: 25,
+    paddingVertical: 20,
+    paddingHorizontal: 40,
     alignItems: 'center',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-    elevation: 2,
+    justifyContent: 'center',
+  },
+  gradientSecondaryButton: {
+    flex: 1,
+    borderRadius: 25,
+    paddingVertical: 18,
+    paddingHorizontal: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonEmoji: {
+    fontSize: 24,
+    marginRight: 15,
   },
   buttonText: {
-    fontSize: 18,
-    color: '#222',
-    fontWeight: '600',
-  },
-  info: {
-    marginTop: 30,
-    fontSize: 14,
-    color: '#fff',
-    textAlign: 'center',
-  },
-  topBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 36,
-    paddingBottom: 16,
-    paddingHorizontal: 18,
-    borderBottomLeftRadius: 18,
-    borderBottomRightRadius: 18,
-    elevation: 4,
-  },
-  topBarContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  logoImage: {
-    width: 35,
-    height: 35,
-    marginRight: 10,
-  },
-  logoText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: AppColors.textWhite,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 8,
-    marginRight: 10,
-  },
-  topBarTitle: {
-    color: AppColors.textWhite,
-    fontWeight: 'bold',
-    fontSize: 16,
-    letterSpacing: 1.1,
-    flex: 1,
-    lineHeight: 20,
-  },
-  topBarButton: {
-    backgroundColor: AppColors.secondary,
-    borderRadius: 16,
-    width: 32,
-    height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 12,
-  },
-  topBarButtonText: {
-    color: AppColors.textWhite,
-    fontWeight: 'bold',
     fontSize: 20,
-  },
-  boxUnidades: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 32,
-    width: '100%',
-    maxWidth: 420,
-    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
-    elevation: 8,
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    backdropFilter: 'blur(10px)',
-  },
-  opcionUnidad: {
-    backgroundColor: AppColors.secondary,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    marginVertical: 6,
-    marginHorizontal: 4,
-    width: '100%',
-    boxShadow: '0px 2px 8px rgba(0, 188, 212, 0.18)',
-    elevation: 3,
-  },
-  opcionUnidadSeleccionada: {
-    borderWidth: 2,
-    borderColor: AppColors.border,
-    backgroundColor: AppColors.accent,
-  },
-  iconoUnidad: {
-    fontSize: 28,
-    marginRight: 12,
-  },
-  opcionUnidadTexto: {
-    fontSize: 18,
-    color: AppColors.textPrimary,
-    fontWeight: '700',
-    letterSpacing: 1.1,
-    flex: 1,
-  },
-  radioOuter: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    borderWidth: 2,
-    borderColor: AppColors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: AppColors.surface,
-    marginLeft: 10,
-  },
-  radioInner: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: AppColors.border,
-  },
-  botonContinuar: {
-    backgroundColor: AppColors.primary,
-    paddingVertical: 16,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginTop: 10,
-    width: '100%',
-    alignItems: 'center',
-    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
-    elevation: 2,
-  },
-  botonContinuarTexto: {
-    fontSize: 18,
-    color: AppColors.textWhite,
-    fontWeight: '600',
-  },
-  botonContinuarDeshabilitado: {
-    backgroundColor: AppColors.disabled,
-  },
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: AppColors.background,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
-    paddingVertical: 10,
-    elevation: 8,
-    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
-  },
-  bottomBarItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  bottomBarIcon: {
-    fontSize: 22,
-    marginBottom: 2,
-  },
-  bottomBarLabel: {
-    fontSize: 13,
-    color: AppColors.primary,
-    fontWeight: '600',
-  },
-  // Estilos del modal de ayuda
-  modalOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1000,
-  },
-  modalContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 20,
-    padding: 20,
-    margin: 20,
-    width: '90%',
-    maxWidth: 400,
-    maxHeight: '80%',
-    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
-    elevation: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(15px)',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  modalTitle: {
-    fontSize: 22,
     fontWeight: 'bold',
-    color: AppColors.primary,
-  },
-  modalCloseButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#f0f0f0',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalCloseText: {
-    fontSize: 18,
-    color: '#666',
-    fontWeight: 'bold',
-  },
-  modalScrollView: {
-    flex: 1,
-  },
-  definitionItem: {
-    marginBottom: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  definitionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: AppColors.primary,
-    marginBottom: 8,
-  },
-  definitionText: {
-    fontSize: 14,
-    color: '#333',
-    lineHeight: 20,
-    textAlign: 'justify',
+    color: '#FFFFFF',
   },
 });

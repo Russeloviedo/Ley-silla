@@ -1,405 +1,155 @@
-import { StyleSheet, ScrollView, TouchableOpacity, View, Image } from 'react-native';
-import { Text } from '@/components/Themed';
-import { useState, useEffect } from 'react';
+import React from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { AppColors } from '@/constants/Colors';
-import { UnidadNegocio } from '@/types';
-import { validateNavigationParams } from '@/utils/errorHandler';
-import AnimatedBackground from '@/components/AnimatedBackground';
-import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DATA: Record<string, { puesto: string; subpuesto: string }[]> = {
-  "IRRIGACIÓN MATERIALES": [
-    { puesto: "Almacenista", subpuesto: "II" },
-    { puesto: "Almacenista", subpuesto: "III" },
-    { puesto: "Auxiliar Control de Materiales", subpuesto: "General" },
-    { puesto: "Auxiliar de Conteo Cíclico", subpuesto: "General" },
-    { puesto: "Coordinador de Almacén", subpuesto: "General" },
-    { puesto: "Materialista", subpuesto: "General" },
-    { puesto: "Auxiliar de Tool-crib", subpuesto: "General" },
-  ],
-  "IRRIGACIÓN CALIDAD": [
-    { puesto: "Asistente de Supervisor de Calidad FX", subpuesto: "General" },
-    { puesto: "Asistente de Supervisor de Calidad IR", subpuesto: "General" },
-    { puesto: "Inspector de Calidad", subpuesto: "I" },
-    { puesto: "Inspector de Calidad", subpuesto: "II" },
-    { puesto: "Inspector de Calidad", subpuesto: "III" },
-    { puesto: "Técnico de Calidad (IR)", subpuesto: "General" },
-  ],
-  "IRRIGACIÓN ENSAMBLE": [
-    { puesto: "Asistente de Supervisor de Ensamble (IR)", subpuesto: "General" },
-    { puesto: "Inspector de Calidad", subpuesto: "I" },
-    { puesto: "Inspector de Calidad", subpuesto: "II" },
-    { puesto: "Inspector de Calidad", subpuesto: "III" },
-    { puesto: "Asistente de Supervisor Sr IR", subpuesto: "General" },
-    { puesto: "Control de Producción (IR)", subpuesto: "General" },
-    { puesto: "Ensamblador", subpuesto: "General" },
-    { puesto: "Operador Universal", subpuesto: "General" },
-    { puesto: "Supervisor Sr de Producción IR", subpuesto: "General" },
-    { puesto: "Operador de Máquina", subpuesto: "General" },
-  ],
-  "IRRIGACIÓN MOLDEO": [
-    { puesto: "Principal Supervisor de Moldeo", subpuesto: "General" },
-    { puesto: "Separador de Partes", subpuesto: "General" },
-    { puesto: "Supervisor de Moldeo Jr. (IR)", subpuesto: "General" },
-    { puesto: "Supervisor Sr de Moldeo", subpuesto: "General" },
-    { puesto: "Técnico de Moldeo", subpuesto: "I" },
-    { puesto: "Técnico de Moldeo", subpuesto: "II" },
-    { puesto: "Técnico de Moldeo", subpuesto: "III" },
-    { puesto: "Técnico de Procesos", subpuesto: "General" },
-    { puesto: "Técnico de Set Up", subpuesto: "I" },
-    { puesto: "Técnico de Set Up", subpuesto: "III" },
-    { puesto: "Mezclador de Resinas", subpuesto: "General" },
-    { puesto: "Mezclador de Resinas", subpuesto: "Sr." },
-    { puesto: "Coordinador Técnico de Moldeo (IR)", subpuesto: "General" },
-    { puesto: "Limpiador de Moldes (IRR)", subpuesto: "General" },
-  ],
-  "IRRIGACIÓN MANTENIMIENTO": [
-    { puesto: "Auxiliar de Mantenimiento", subpuesto: "General" },
-    { puesto: "Mecánico de Ensamble", subpuesto: "I" },
-    { puesto: "Mecánico de Ensamble", subpuesto: "II" },
-    { puesto: "Mecánico de Ensamble", subpuesto: "III" },
-    { puesto: "Mecánico de Facilities", subpuesto: "III" },
-    { puesto: "Mecánico de Moldeo", subpuesto: "II" },
-    { puesto: "Mecánico de Moldeo", subpuesto: "III" },
-  ],
-  "DD ENSAMBLE MODULOS.CELDAS": [
-    { puesto: "Supervisor", subpuesto: "General" },
-    { puesto: "Supervisor Junior", subpuesto: "General" },
-    { puesto: "Asistente de Supervisor", subpuesto: "General" },
-    { puesto: "Asistente de control de producción", subpuesto: "General" },
-    { puesto: "Operador Universal", subpuesto: "General" },
-    { puesto: "Ensamblador", subpuesto: "General" },
-    { puesto: "Surtidor de materiales", subpuesto: "General" },
-    { puesto: "Separador de partes", subpuesto: "General" },
-  ],
-  "DD MOLDEO": [
-    { puesto: "Supervisor", subpuesto: "General" },
-    { puesto: "Supervisor Junior", subpuesto: "General" },
-    { puesto: "Operador universal", subpuesto: "General" },
-    { puesto: "Separador de partes", subpuesto: "General" },
-    { puesto: "Coordinador de técnico de moldeo", subpuesto: "General" },
-    { puesto: "Técnico de setup", subpuesto: "General" },
-    { puesto: "Técnico de moldeo", subpuesto: "General" },
-    { puesto: "Mezclador de resinas", subpuesto: "General" },
-    { puesto: "Surtidor de materiales", subpuesto: "General" },
-    { puesto: "Auxiliar de mantenimiento", subpuesto: "General" },
-  ],
-  "DD CALIDAD": [
-    { puesto: "Inspector de calidad", subpuesto: "General" },
-  ],
-  "DD ALMACEN": [
-    { puesto: "Supervisor de almacén", subpuesto: "General" },
-    { puesto: "Supervisor Junior de almacén", subpuesto: "General" },
-    { puesto: "Coordinador de almacén", subpuesto: "General" },
-    { puesto: "Almacenista", subpuesto: "General" },
-    { puesto: "Materialista", subpuesto: "General" },
-    { puesto: "Choferes", subpuesto: "General" },
-    { puesto: "Coordinador de conteo cíclico", subpuesto: "General" },
-    { puesto: "Auxiliar de conteo cíclico", subpuesto: "General" },
-  ],
-  "HCM PRODUCCIÓN": [
-    { puesto: "Separador de partes", subpuesto: "General" },
-    { puesto: "Técnico de Set Up", subpuesto: "I" },
-    { puesto: "Técnico de Set Up", subpuesto: "II" },
-    { puesto: "Técnico de Set Up", subpuesto: "III" },
-    { puesto: "Supervisor de ingeniería", subpuesto: "General" },
-    { puesto: "Operador operaciones secundarias", subpuesto: "General" },
-    { puesto: "Técnico de Moldeo", subpuesto: "I" },
-    { puesto: "Técnico de Moldeo", subpuesto: "II" },
-    { puesto: "Técnico de Moldeo", subpuesto: "III" },
-    { puesto: "Coordinador técnico de moldeo", subpuesto: "General" },
-    { puesto: "Ingeniero de Moldeo", subpuesto: "I" },
-    { puesto: "Ingeniero de Moldeo", subpuesto: "II" },
-    { puesto: "Ingeniero de Moldeo", subpuesto: "III" },
-    { puesto: "Mezclador de Resinas", subpuesto: "General" },
-    { puesto: "Operador Universal", subpuesto: "General" },
-    { puesto: "Surtidor de Material", subpuesto: "General" },
-    { puesto: "Supervisor de Moldeo", subpuesto: "General" },
-    { puesto: "Ensamblador", subpuesto: "General" },
-    { puesto: "Ing. de Manufactura", subpuesto: "I" },
-    { puesto: "Ing. de Manufactura", subpuesto: "II" },
-    { puesto: "Ing. de Manufactura", subpuesto: "III" },
-    { puesto: "Ingeniero Jr.", subpuesto: "General" },
-    { puesto: "Practicante", subpuesto: "General" },
-    { puesto: "Supervisor de producción", subpuesto: "I" },
-    { puesto: "Supervisor de producción", subpuesto: "II" },
-    { puesto: "Supervisor de producción", subpuesto: "III" },
-  ],
-  "HCM CALIDAD": [
-    { puesto: "Técnico de calidad", subpuesto: "I" },
-    { puesto: "Técnico de calidad", subpuesto: "II" },
-    { puesto: "Técnico de calidad", subpuesto: "III" },
-    { puesto: "Supervisor de calidad", subpuesto: "I" },
-    { puesto: "Supervisor de calidad", subpuesto: "II" },
-    { puesto: "Supervisor de calidad", subpuesto: "III" },
-    { puesto: "Inspector de calidad", subpuesto: "I" },
-    { puesto: "Inspector de calidad", subpuesto: "II" },
-    { puesto: "Inspector de calidad", subpuesto: "III" },
-    { puesto: "Asistente de supervisor", subpuesto: "General" },
-    { puesto: "Gerente de Calidad", subpuesto: "General" },
-  ],
-  "HCM ALMACÉN": [
-    { puesto: "Coordinador de almacén", subpuesto: "General" },
-    { puesto: "Almacenista", subpuesto: "I" },
-    { puesto: "Almacenista", subpuesto: "II" },
-    { puesto: "Almacenista", subpuesto: "III" },
-    { puesto: "Supervisor de almacén", subpuesto: "I" },
-    { puesto: "Supervisor de almacén", subpuesto: "II" },
-    { puesto: "Supervisor de almacén", subpuesto: "III" },
-    { puesto: "Materialista", subpuesto: "I" },
-    { puesto: "Materialista", subpuesto: "II" },
-    { puesto: "Materialista", subpuesto: "III" },
-    { puesto: "Gerente de almacén", subpuesto: "General" },
-  ],
-  "ADMINISTRATIVO": [
-    { puesto: "Agente de Compras", subpuesto: "I" },
-    { puesto: "Agente de Compras", subpuesto: "II" },
-    { puesto: "Analista Adquisición Talento", subpuesto: "General" },
-    { puesto: "Analista Cambios de Ingeniería", subpuesto: "General" },
-    { puesto: "Analista Control de Materiales", subpuesto: "General" },
-    { puesto: "Analista Cumplimiento Aduanero", subpuesto: "General" },
-    { puesto: "Analista de Logística", subpuesto: "General" },
-    { puesto: "Analista de Nómina", subpuesto: "General" },
-    { puesto: "Analista de Sistemas", subpuesto: "I" },
-    { puesto: "Analista de Sistemas", subpuesto: "II" },
-    { puesto: "Analista Desarrollo Organizacional", subpuesto: "General" },
-    { puesto: "Analista Engagement Organizacional", subpuesto: "General" },
-    { puesto: "Analista Financiero", subpuesto: "General" },
-    { puesto: "Analista Operaciones y Compensaciones", subpuesto: "General" },
-    { puesto: "Asesor de Salud y Bienestar", subpuesto: "General" },
-    { puesto: "Asistente de Cumplimiento Aduanero", subpuesto: "General" },
-    { puesto: "Asistente de Administración (HCM)", subpuesto: "General" },
-    { puesto: "Asistente Adquisición Talento", subpuesto: "General" },
-    { puesto: "Asistente de Administración", subpuesto: "General" },
-    { puesto: "Asistente de Control de Doctos", subpuesto: "General" },
-    { puesto: "Asistente de Recursos Humanos", subpuesto: "General" },
-    { puesto: "Asistente Desarrollo Organizacional", subpuesto: "General" },
-    { puesto: "Asistente Engagement Organizacional", subpuesto: "General" },
-    { puesto: "Asistente Relaciones Laborales", subpuesto: "General" },
-    { puesto: "Auxiliar Contable", subpuesto: "General" },
-    { puesto: "Auxiliar Cumplimiento Aduanero", subpuesto: "General" },
-    { puesto: "Auxiliar de Cuentas por Pagar", subpuesto: "General" },
-    { puesto: "Comprador Jr.", subpuesto: "FX" },
-    { puesto: "Comprador Jr.", subpuesto: "IR" },
-    { puesto: "Contador de Cuentas por Pagar", subpuesto: "Jr" },
-    { puesto: "Contador de Cuentas por Pagar", subpuesto: "Sr" },
-    { puesto: "Contador Jr.", subpuesto: "General" },
-    { puesto: "Control de Producción", subpuesto: "DD" },
-    { puesto: "Control de Producción", subpuesto: "HCM" },
-    { puesto: "Control de Producción", subpuesto: "IR" },
-    { puesto: "Coordinador de Cumplimiento Aduanero", subpuesto: "General" },
-    { puesto: "Coordinador de Fiscal y Comercio Exterior", subpuesto: "General" },
-    { puesto: "Coordinador Regional de Operaciones", subpuesto: "General" },
-    { puesto: "Coordinador Gestión Herramientas Mfg", subpuesto: "General" },
-    { puesto: "Coordinador Control de Doctos", subpuesto: "General" },
-    { puesto: "Coordinador Control de Materiales", subpuesto: "General" },
-    { puesto: "Coordinador Control de Materiales NPI", subpuesto: "General" },
-    { puesto: "Coordinador Control Documentos", subpuesto: "General" },
-    { puesto: "Coordinador de Compras MRO", subpuesto: "General" },
-    { puesto: "Coordinador de Enfermería", subpuesto: "General" },
-    { puesto: "Coordinador de Logística", subpuesto: "General" },
-    { puesto: "Coordinador Programa Soporte", subpuesto: "General" },
-    { puesto: "Desarrollador de Sistemas Jr.", subpuesto: "General" },
-    { puesto: "Enfermero(a)", subpuesto: "General" },
-    { puesto: "Gerente Programa Jr.", subpuesto: "General" },
-  ],
-};
-
-export default function SeleccionPuestoScreen() {
-  const { unidad } = useLocalSearchParams();
+export default function SeleccionPuesto() {
   const router = useRouter();
-  const [puesto, setPuesto] = useState('');
-  const [subpuesto, setSubpuesto] = useState('');
-  const [showHelpModal, setShowHelpModal] = useState(false);
+  const { businessUnit, planta, turno, area } = useLocalSearchParams<{ businessUnit: string; planta: string; turno: string; area: string }>();
 
-  const puestos = unidad && DATA[unidad as string]
-    ? [...new Set(DATA[unidad as string].map((item: { puesto: string }) => item.puesto))]
-    : [];
-  const subpuestos = unidad && puesto && DATA[unidad as string]
-    ? [...new Set(DATA[unidad as string].filter((item: { puesto: string }) => item.puesto === puesto).map((item: { subpuesto: string }) => item.subpuesto))]
-    : [];
-
-
-
-  // Navegar automáticamente cuando se seleccione puesto y subpuesto
-  const handlePuestoChange = (value: string) => {
-    setPuesto(value);
-    setSubpuesto('');
-  };
-
-  const handleSubpuestoChange = (value: string) => {
-    setSubpuesto(value);
-    // Navegar automáticamente cuando se complete la selección
-    if (puesto && value) {
-      router.push({ pathname: '/preguntas-iniciales', params: { unidad, puesto, subpuesto: value } });
+  // Determinar qué puestos mostrar según la unidad de negocio
+  const getPuestos = () => {
+    if (businessUnit === 'FX') {
+      return [
+        { id: 'Operador universal', name: 'Operador universal', emoji: '🎮', colors: ['#4ECDC4', '#45B7D1'] },
+        { id: 'Ensamblador', name: 'Ensamblador', emoji: '🔧', colors: ['#45B7D1', '#96CEB4'] },
+        { id: 'Asistente de Supervisor', name: 'Asistente de Supervisor', emoji: '👔', colors: ['#FFB3B3', '#FFD6D6'] },
+        { id: 'Tecnico CNC', name: 'Técnico CNC', emoji: '⚙️', colors: ['#9370DB', '#8A2BE2'] },
+        { id: 'Coordinador CNC', name: 'Coordinador CNC', emoji: '🔧', colors: ['#20B2AA', '#008B8B'] },
+      ];
+    } else if (businessUnit === 'HCM') {
+      return [
+        { id: 'TECNICO DE MOLDEO', name: 'TÉCNICO DE MOLDEO', emoji: '🔧', colors: ['#FF6B6B', '#FF8E8E'] },
+        { id: 'SEPARADOR DE PARTES', name: 'SEPARADOR DE PARTES', emoji: '📋', colors: ['#FF8E8E', '#FFB3B3'] },
+        { id: 'TECNICO DE MOLDEO I', name: 'TÉCNICO DE MOLDEO I', emoji: '🔧', colors: ['#FFB3B3', '#FFD6D6'] },
+        { id: 'COORDINADOR TECNICO DE MOLDEO', name: 'COORDINADOR TÉCNICO DE MOLDEO', emoji: '👔', colors: ['#FFD6D6', '#FFE6E6'] },
+        { id: 'ENSAMBLADOR', name: 'ENSAMBLADOR', emoji: '🔧', colors: ['#FFE6E6', '#4ECDC4'] },
+        { id: 'MEZCLADOR DE RESINAS', name: 'MEZCLADOR DE RESINAS', emoji: '🧪', colors: ['#4ECDC4', '#45B7D1'] },
+        { id: 'SURTIDOR DE MATERIAL', name: 'SURTIDOR DE MATERIAL', emoji: '📦', colors: ['#45B7D1', '#96CEB4'] },
+        { id: 'TECNICO DE SET UP I', name: 'TÉCNICO DE SET UP I', emoji: '🔧', colors: ['#96CEB4', '#FFEAA7'] },
+        { id: 'OPERADOR UNIVERSAL', name: 'OPERADOR UNIVERSAL', emoji: '🎮', colors: ['#FFEAA7', '#DDA0DD'] },
+        { id: 'SUPERVISOR DE MOLDEO', name: 'SUPERVISOR DE MOLDEO', emoji: '👨‍💼', colors: ['#DDA0DD', '#FFB6C1'] },
+        { id: 'OPERADOR OPS SECUNDARIA', name: 'OPERADOR OPS SECUNDARIA', emoji: '⚙️', colors: ['#FFB6C1', '#FF6B6B'] },
+      ];
+    } else {
+      // Puestos por defecto para otras unidades
+      return [
+        { id: 'Supervisor de producción Sr.', name: 'Supervisor de producción Sr.', emoji: '👨‍💼', colors: ['#FF6B6B', '#FF8E8E'] },
+        { id: 'Supervisor de producción ll', name: 'Supervisor de producción ll', emoji: '👨‍💼', colors: ['#FF8E8E', '#FFB3B3'] },
+        { id: 'Asistente de supervisor de ensamble DD', name: 'Asistente de supervisor de ensamble DD', emoji: '👔', colors: ['#FFB3B3', '#FFD6D6'] },
+        { id: 'Asistente de control de producción', name: 'Asistente de control de producción', emoji: '👔', colors: ['#FFD6D6', '#FFE6E6'] },
+        { id: 'Practicante', name: 'Practicante', emoji: '🎓', colors: ['#FFE6E6', '#4ECDC4'] },
+        { id: 'Operador universal', name: 'Operador universal', emoji: '🎮', colors: ['#4ECDC4', '#45B7D1'] },
+        { id: 'Ensamblador', name: 'Ensamblador', emoji: '🔧', colors: ['#45B7D1', '#96CEB4'] },
+        { id: 'Surtidor de materiales', name: 'Surtidor de materiales', emoji: '📦', colors: ['#96CEB4', '#FFEAA7'] },
+        { id: 'Supervisor de producción lll', name: 'Supervisor de producción lll', emoji: '👨‍💼', colors: ['#FFEAA7', '#DDA0DD'] },
+        { id: 'Principal supervisor de Moldeo', name: 'Principal supervisor de Moldeo', emoji: '👨‍💼', colors: ['#DDA0DD', '#FFB6C1'] },
+        { id: 'Supervisor de Moldeo lll', name: 'Supervisor de Moldeo lll', emoji: '👨‍💼', colors: ['#FFB6C1', '#98FB98'] },
+        { id: 'Supervisor de Moldeo Jr.', name: 'Supervisor de Moldeo Jr.', emoji: '👨‍💼', colors: ['#98FB98', '#F0E68C'] },
+        { id: 'Separador de partes', name: 'Separador de partes', emoji: '📋', colors: ['#F0E68C', '#E6E6FA'] },
+        { id: 'Coordinador gestion herramientas mfg', name: 'Coordinador gestión herramientas mfg', emoji: '🔧', colors: ['#E6E6FA', '#FFA07A'] },
+        { id: 'Coordinador tecnicos de moldeo', name: 'Coordinador técnicos de moldeo', emoji: '🔧', colors: ['#FFA07A', '#20B2AA'] },
+        { id: 'Limpiador de moldes', name: 'Limpiador de moldes', emoji: '🧹', colors: ['#20B2AA', '#9370DB'] },
+        { id: 'Mezclador de resinas', name: 'Mezclador de resinas', emoji: '🧪', colors: ['#9370DB', '#32CD32'] },
+        { id: 'Mezclador de resinas sr.', name: 'Mezclador de resinas sr.', emoji: '🧪', colors: ['#32CD32', '#FF6347'] },
+        { id: 'Tecnico de moldeo l', name: 'Técnico de moldeo l', emoji: '🔧', colors: ['#FF6347', '#40E0D0'] },
+        { id: 'Tecnico de moldeo ll', name: 'Técnico de moldeo ll', emoji: '🔧', colors: ['#40E0D0', '#FFD700'] },
+        { id: 'Tecnico de moldeo lll', name: 'Técnico de moldeo lll', emoji: '🔧', colors: ['#FFD700', '#FF69B4'] },
+        { id: 'Tecnico de set up l', name: 'Técnico de set up l', emoji: '🔧', colors: ['#FF69B4', '#8A2BE2'] },
+        { id: 'Tecnico de set up lll', name: 'Técnico de set up lll', emoji: '🔧', colors: ['#8A2BE2', '#DC143C'] },
+        { id: 'Auxiliar de mantenimiento', name: 'Auxiliar de mantenimiento', emoji: '🔧', colors: ['#DC143C', '#FF6B6B'] },
+      ];
     }
   };
 
-  const handleInicio = () => {
-    router.replace('/');
+  const puestos = getPuestos();
+
+  const handlePuestoSelection = async (puesto: string) => {
+    try {
+      // Guardar el puesto seleccionado
+              await AsyncStorage.setItem('nav:selectedPosition', puesto);
+      
+      // Navegar al cuestionario de evaluación inicial
+      router.push('/preguntas-iniciales');
+    } catch (error) {
+      console.error('Error al guardar el puesto seleccionado:', error);
+    }
   };
 
-  const handleAnalisis = () => {
-    router.push({ pathname: '/resultados-finales' });
+  const handleBack = () => {
+    router.back();
   };
 
-  const handleAtras = () => {
-    router.replace('/');
-  };
-
-  const handleHelp = () => {
-    setShowHelpModal(true);
+  const getBusinessUnitName = (id: string) => {
+    const businessUnits: { [key: string]: string } = {
+      'FX': 'FX',
+      'Irrigación': 'Irrigación',
+      'HCM': 'HCM',
+      'DD': 'DD',
+      'SOPORTE': 'Soporte'
+    };
+    return businessUnits[id] || id;
   };
 
   return (
-    <AnimatedBackground>
-      {/* Barra superior */}
-      <LinearGradient
+    <>
+      <StatusBar hidden={true} backgroundColor="#00BCD4" barStyle="light-content" />
+      <AnimatedBackground>
+        {/* Barra superior */}
+        <LinearGradient
         colors={['#00BCD4', '#00796B']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.topBar}
       >
         <View style={styles.topBarContent}>
-          <Text style={styles.logoText}>EHS</Text>
-          <Text style={styles.topBarTitle} numberOfLines={2} ellipsizeMode="tail">Identificación de Posible{`\n`}Riesgo de Bipedestación</Text>
-        </View>
-        <TouchableOpacity style={styles.topBarButton} onPress={handleHelp}>
-          <Text style={styles.topBarButtonText}>?</Text>
+            <TouchableOpacity onPress={handleBack} style={styles.backButton}>
+              <Text style={styles.backButtonText}>←</Text>
         </TouchableOpacity>
-      </LinearGradient>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Selección de Puesto y Subpuesto</Text>
-        <Text style={styles.subtitle}>Unidad de Negocio Seleccionada:</Text>
-        <View style={styles.selectedUnidadContainer}>
-          <Text style={styles.selectedUnidad}>{unidad}</Text>
-        </View>
-        <View style={styles.boxUnidades}>
-          <Text style={styles.sectionTitle}>Seleccione el puesto de trabajo:</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={puesto}
-              onValueChange={handlePuestoChange}
-              style={styles.picker}
-            >
-              <Picker.Item label="Seleccione un puesto..." value="" />
-              {puestos.map((p: string) => <Picker.Item key={p} label={p} value={p} />)}
-            </Picker>
+            <Text style={styles.topBarTitle}>
+              Selección de Puesto - {getBusinessUnitName(businessUnit || '')} - Planta {planta} - Turno {turno} - Área {area}
+            </Text>
           </View>
-          
-          <Text style={styles.sectionTitle}>Seleccione el subpuesto de trabajo:</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={subpuesto}
-              onValueChange={handleSubpuestoChange}
-              enabled={!!puesto}
-              style={[styles.picker, !puesto && styles.pickerDisabled]}
-            >
-              <Picker.Item label={puesto ? "Seleccione un subpuesto..." : "Primero seleccione un puesto"} value="" />
-              {subpuestos.map((s: string) => <Picker.Item key={s} label={s} value={s} />)}
-            </Picker>
-          </View>
-        </View>
-        <Text style={styles.info}>Seleccione puesto y subpuesto para continuar automáticamente</Text>
-      </ScrollView>
-      {/* Barra inferior */}
-      <View style={styles.bottomBar}>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAtras}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>⬅️</Text>
-          <Text style={styles.bottomBarLabel}>Atrás</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleInicio}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>🏠</Text>
-          <Text style={styles.bottomBarLabel}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.bottomBarItem} 
-          onPress={handleAnalisis}
-          activeOpacity={0.7}
-        >
-          <Text style={styles.bottomBarIcon}>📋</Text>
-          <Text style={styles.bottomBarLabel}>Análisis</Text>
-        </TouchableOpacity>
-      </View>
+        </LinearGradient>
 
-      {/* Modal de Ayuda */}
-      {showHelpModal && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Definiciones</Text>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.title}>Selecciona el Puesto</Text>
+          <Text style={styles.subtitle}>
+            Elige el puesto en el Área {area} del Turno {turno} de la Planta {planta} de {getBusinessUnitName(businessUnit || '')}
+          </Text>
+
+          <View style={styles.buttonGrid}>
+            {puestos.map((puesto) => (
               <TouchableOpacity 
-                style={styles.modalCloseButton} 
-                onPress={() => setShowHelpModal(false)}
+                key={puesto.id}
+                style={styles.puestoButton}
+                onPress={() => handlePuestoSelection(puesto.id)}
+                activeOpacity={0.8}
               >
-                <Text style={styles.modalCloseText}>✕</Text>
+                <LinearGradient
+                  colors={puesto.colors as [string, string]}
+                  style={styles.gradientButton}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                >
+                  <Text style={styles.puestoEmoji}>{puesto.emoji}</Text>
+                  <Text style={styles.puestoName}>{puesto.name}</Text>
+                </LinearGradient>
               </TouchableOpacity>
-            </View>
-            
-            <ScrollView style={styles.modalScrollView}>
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación</Text>
-                <Text style={styles.definitionText}>
-                  La postura de pie de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación estática</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie y prácticamente sin moverse o con desplazamientos mínimos.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación dinámica</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que tienen la posibilidad de realizar desplazamientos más amplios que en la bipedestación estática.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Bipedestación prolongada</Text>
-                <Text style={styles.definitionText}>
-                  La postura de las personas trabajadoras que realizan sus tareas de pie por más de tres horas continuas durante su jornada laboral.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Disposiciones</Text>
-                <Text style={styles.definitionText}>
-                  El presente instrumento sobre los factores de riesgos de trabajo para garantizar el derecho al descanso durante la jornada laboral de las personas trabajadoras en bipedestación en los sectores de servicios, comercio, centros de trabajo análogos y establecimientos industriales.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Factores de riesgo</Text>
-                <Text style={styles.definitionText}>
-                  Aquellos que se determinan en función del tiempo que permanecen en bipedestación, postura, movilidad, periodos de descanso, superficie y puesto de trabajo de las personas trabajadoras.
-                </Text>
-              </View>
-
-              <View style={styles.definitionItem}>
-                <Text style={styles.definitionTitle}>Posición sedente</Text>
-                <Text style={styles.definitionText}>
-                  Posición de descanso sentado; postura anatómica en la que el cuerpo se apoya en la zona posterior de los muslos, los glúteos y la espalda, sin que intervenga la musculatura abdominal.
-                </Text>
-              </View>
-            </ScrollView>
+            ))}
           </View>
-        </View>
-      )}
+        </ScrollView>
     </AnimatedBackground>
+    </>
   );
 }
 
@@ -412,243 +162,87 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   title: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: 'bold',
+    color: '#2C3E50',
+    textAlign: 'center',
     marginBottom: 10,
-    color: AppColors.textPrimary,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   subtitle: {
     fontSize: 16,
-    marginBottom: 12,
-    color: AppColors.textSecondary,
+    color: '#7F8C8D',
     textAlign: 'center',
+    marginBottom: 40,
+    paddingHorizontal: 20,
   },
-  selectedUnidadContainer: {
-    backgroundColor: AppColors.accent,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 12,
-    marginBottom: 24,
-    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
-    elevation: 2,
+  buttonGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 15,
+    paddingHorizontal: 10,
   },
-  selectedUnidad: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: AppColors.textPrimary,
+  puestoButton: {
+    width: 130,
+    height: 130,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    marginBottom: 15,
+  },
+  gradientButton: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  puestoEmoji: {
+    fontSize: 36,
+    marginBottom: 8,
+  },
+  puestoName: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
     textAlign: 'center',
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: AppColors.textPrimary,
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  info: {
-    marginTop: 30,
-    fontSize: 14,
-    color: '#fff',
-    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.3)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    paddingHorizontal: 6,
   },
   topBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 36,
-    paddingBottom: 16,
-    paddingHorizontal: 18,
-    borderBottomLeftRadius: 18,
-    borderBottomRightRadius: 18,
-    elevation: 4,
+    height: 120,
+    justifyContent: 'flex-end',
+    paddingBottom: 20,
   },
   topBarContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 0,
+    paddingHorizontal: 20,
   },
-  logoText: {
-    fontSize: 18,
+  backButton: {
+    marginRight: 15,
+    padding: 8,
+  },
+  backButtonText: {
+    color: '#FFFFFF',
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
-    marginRight: 10,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
   },
   topBarTitle: {
-    color: AppColors.textWhite,
+    color: '#FFFFFF',
+    fontSize: 12,
     fontWeight: 'bold',
-    fontSize: 16,
-    letterSpacing: 1.1,
-    lineHeight: 22,
-    flexShrink: 1,
-    backgroundColor: 'transparent',
-    maxWidth: 280,
-  },
-  topBarButton: {
-    backgroundColor: AppColors.secondary,
-    borderRadius: 16,
-    width: 32,
-    height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 12,
-  },
-  topBarButtonText: {
-    color: AppColors.textWhite,
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: AppColors.background,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
-    paddingVertical: 10,
-    elevation: 8,
-    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
-  },
-  bottomBarItem: {
-    alignItems: 'center',
     flex: 1,
   },
-  bottomBarIcon: {
-    fontSize: 22,
-    marginBottom: 2,
-  },
-  bottomBarLabel: {
-    fontSize: 13,
-    color: AppColors.primary,
-    fontWeight: '600',
-  },
-  boxUnidades: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 32,
-    width: '100%',
-    maxWidth: 420,
-    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
-    elevation: 8,
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    backdropFilter: 'blur(10px)',
-  },
-  pickerContainer: {
-    width: '100%',
-    marginBottom: 20,
-  },
-  picker: {
-    backgroundColor: AppColors.surface,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: AppColors.secondary,
-    minHeight: 50,
-    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
-    elevation: 2,
-  },
-  pickerDisabled: {
-    borderColor: AppColors.disabled,
-    backgroundColor: AppColors.background,
-  },
-  botonContinuar: {
-    backgroundColor: AppColors.primary,
-    paddingVertical: 16,
-    paddingHorizontal: 30,
-    borderRadius: 10,
-    marginTop: 10,
-    width: '100%',
-    alignItems: 'center',
-    boxShadow: '0px 2px 4px rgba(0, 188, 212, 0.1)',
-    elevation: 2,
-  },
-  botonContinuarDeshabilitado: {
-    backgroundColor: AppColors.disabled,
-  },
-  botonContinuarTexto: {
-    fontSize: 18,
-    color: AppColors.textWhite,
-    fontWeight: '600',
-  },
-  // Estilos del modal de ayuda
-  modalOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1000,
-  },
-  modalContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 20,
-    padding: 20,
-    margin: 20,
-    width: '90%',
-    maxWidth: 400,
-    maxHeight: '80%',
-    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
-    elevation: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(15px)',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: AppColors.primary,
-  },
-  modalCloseButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#f0f0f0',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalCloseText: {
-    fontSize: 18,
-    color: '#666',
-    fontWeight: 'bold',
-  },
-  modalScrollView: {
-    flex: 1,
-  },
-  definitionItem: {
-    marginBottom: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  definitionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: AppColors.primary,
-    marginBottom: 8,
-  },
-  definitionText: {
-    fontSize: 14,
-    color: '#333',
-    lineHeight: 20,
-    textAlign: 'justify',
-  },
-}); 
+});

@@ -1,10 +1,11 @@
+// app/CuestionarioPonderacionScreen.tsx
 import { StyleSheet, ScrollView, TouchableOpacity, View, Alert, Image } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import { RespuestasPonderacion, ResultadoNivelRiesgo } from '@/types';
-import { safeJsonParse, validatePonderacionResponses } from '@/utils/errorHandler';
+import { validatePonderacionResponses } from '@/utils/errorHandler';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -75,30 +76,43 @@ const PONDERACION = [
 ];
 
 function getNivelRiesgo(puntaje: number): ResultadoNivelRiesgo {
-  if (puntaje === 7) return { nivel: 'Bajo', color: AppColors.riskLow };
-  if (puntaje >= 8 && puntaje <= 14) return { nivel: 'Medio', color: AppColors.riskMedium };
-  if (puntaje >= 15) return { nivel: 'Alto', color: AppColors.riskHigh };
-  return { nivel: 'Desconocido', color: AppColors.riskUnknown };
+  const fecha = new Date().toLocaleDateString('es-ES');
+  if (puntaje === 7) return { nivel: 'Bajo', puntuacion: puntaje, fecha, color: AppColors.riskLow };
+  if (puntaje >= 8 && puntaje <= 14) return { nivel: 'Medio', puntuacion: puntaje, fecha, color: AppColors.riskMedium };
+  if (puntaje >= 15) return { nivel: 'Alto', puntuacion: puntaje, fecha, color: AppColors.riskHigh };
+  return { nivel: 'Bajo', puntuacion: puntaje, fecha, color: AppColors.riskLow };
 }
 
 export default function CuestionarioPonderacionScreen() {
   const { unidad, puesto, subpuesto, flujo, respuestas, respuestasFlujo } = useLocalSearchParams();
-  const [respuestasPonderacion, setRespuestasPonderacion] = useState<RespuestasPonderacion>({ 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null });
+
+  useEffect(() => {
+    console.log('🧹 Limpiando respuestas de ponderación previas para nuevo análisis...');
+  }, []);
+
+  const [respuestasPonderacion, setRespuestasPonderacion] = useState<RespuestasPonderacion>({
+    1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null
+  });
   const router = useRouter();
   const [showHelpModal, setShowHelpModal] = useState(false);
+
+  useEffect(() => {
+    console.log('🧹 Limpiando respuestas de ponderación para nuevo análisis...');
+    setRespuestasPonderacion({ 1: null, 2: null, 3: null, 4: null, 5: null, 6: null, 7: null });
+  }, []);
 
   const handleRespuesta = (id: number, puntos: number) => {
     setRespuestasPonderacion((prev) => ({ ...prev, [id]: puntos }));
   };
 
-  // Calcular puntaje total asegurando que todos los valores sean números
-  const puntajeTotal = Object.values(respuestasPonderacion).reduce((acc: number, val) => acc + (typeof val === 'number' ? val : 0), 0);
+  const puntajeTotal = Object.values(respuestasPonderacion).reduce(
+    (acc: number, val) => acc + (typeof val === 'number' ? val : 0), 0
+  );
   const nivel = getNivelRiesgo(puntajeTotal);
 
   const handleFinalizar = () => {
     console.log('Intentando finalizar con respuestas:', respuestasPonderacion);
-    
-    // Validar que todas las respuestas estén completas
+
     if (!validatePonderacionResponses(respuestasPonderacion)) {
       console.warn('No todas las preguntas han sido respondidas');
       Alert.alert(
@@ -122,7 +136,19 @@ export default function CuestionarioPonderacionScreen() {
     };
 
     console.log('Navegando a resultados con params:', params);
-    
+    console.log('🔍 Flujo recibido en cuestionario:', flujo);
+    console.log('🔍 Tipo de flujo:', typeof flujo);
+    console.log('🔍 Flujo es array?', Array.isArray(flujo));
+    if (Array.isArray(flujo)) console.log('🔍 Elementos del array flujo:', flujo);
+
+    console.log('🚨 DEBUG CUESTIONARIO PONDERACIÓN:', {
+      flujoRecibido: flujo,
+      tipoFlujo: typeof flujo,
+      esArray: Array.isArray(flujo),
+      valorFinal: Array.isArray(flujo) ? flujo[0] : flujo,
+      esNoDecreto: Array.isArray(flujo) ? flujo[0] === 'NO_DECRETO' : flujo === 'NO_DECRETO'
+    });
+
     try {
       router.push({ pathname: '/resultados-finales', params });
     } catch (error) {
@@ -135,21 +161,17 @@ export default function CuestionarioPonderacionScreen() {
     }
   };
 
-  const handleInicio = () => {
-    router.replace('/');
-  };
+  const handleInicio = () => router.replace('/');
 
-  const handleAnalisis = () => {
-    router.push({ pathname: '/resultados-finales' });
+  const handleBaseDatos = () => {
+    router.push({ pathname: '/nueva-base-datos' });
   };
 
   const handleAtras = () => {
     router.push({ pathname: '/diagrama-flujo', params: { unidad, puesto, subpuesto, respuestas } });
   };
 
-  const handleHelp = () => {
-    setShowHelpModal(true);
-  };
+  const handleHelp = () => setShowHelpModal(true);
 
   return (
     <AnimatedBackground>
@@ -162,8 +184,8 @@ export default function CuestionarioPonderacionScreen() {
           style={styles.topBar}
         >
           <View style={styles.topBarContent}>
-            <Image 
-              source={require('@/assets/images/logo-ehs.png')} 
+            <Image
+              source={require('@/assets/images/logo-ehs.png')}
               style={styles.logoImage}
               resizeMode="cover"
             />
@@ -182,13 +204,13 @@ export default function CuestionarioPonderacionScreen() {
                 <Text style={styles.numeroPregunta}>{pregunta.id}</Text>
               </View>
               <Text style={styles.preguntaTexto}>{pregunta.texto}</Text>
-              
+
               <View style={styles.opcionesContainer}>
                 {pregunta.opciones.map((op, idx) => (
                   <TouchableOpacity
                     key={idx}
                     style={[
-                      styles.opcion, 
+                      styles.opcion,
                       respuestasPonderacion[pregunta.id] === op.puntos && styles.opcionSeleccionada
                     ]}
                     onPress={() => handleRespuesta(pregunta.id, op.puntos)}
@@ -219,46 +241,19 @@ export default function CuestionarioPonderacionScreen() {
           </View>
 
           {/* Botón finalizar */}
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[
-              styles.botonFinalizar, 
-              Object.values(respuestasPonderacion).filter(val => val !== null).length !== 7 && styles.botonFinalizarDeshabilitado
-            ]} 
+              styles.botonFinalizar,
+              Object.values(respuestasPonderacion).filter(val => val !== 0).length !== 7 && styles.botonFinalizarDeshabilitado
+            ]}
             onPress={handleFinalizar}
-            disabled={Object.values(respuestasPonderacion).filter(val => val !== null).length !== 7}
+            disabled={Object.values(respuestasPonderacion).filter(val => val !== 0).length !== 7}
             activeOpacity={0.8}
           >
             <Text style={styles.botonFinalizarIcon}>📊</Text>
             <Text style={styles.botonFinalizarTexto}>Ver Resultados Finales</Text>
           </TouchableOpacity>
         </ScrollView>
-        {/* Barra inferior */}
-        <View style={styles.bottomBar}>
-          <TouchableOpacity 
-            style={styles.bottomBarItem} 
-            onPress={handleAtras}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.bottomBarIcon}>⬅️</Text>
-            <Text style={styles.bottomBarLabel}>Atrás</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.bottomBarItem} 
-            onPress={handleInicio}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.bottomBarIcon}>🏠</Text>
-            <Text style={styles.bottomBarLabel}>Inicio</Text>
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.bottomBarItem} 
-            onPress={handleAnalisis}
-            activeOpacity={0.7}
-          >
-            <Text style={styles.bottomBarIcon}>📋</Text>
-            <Text style={styles.bottomBarLabel}>Análisis</Text>
-          </TouchableOpacity>
-        </View>
 
         {/* Modal de Ayuda */}
         {showHelpModal && (
@@ -266,14 +261,14 @@ export default function CuestionarioPonderacionScreen() {
             <View style={styles.modalContent}>
               <View style={styles.modalHeader}>
                 <Text style={styles.modalTitle}>Definiciones</Text>
-                <TouchableOpacity 
-                  style={styles.modalCloseButton} 
+                <TouchableOpacity
+                  style={styles.modalCloseButton}
                   onPress={() => setShowHelpModal(false)}
                 >
                   <Text style={styles.modalCloseText}>✕</Text>
                 </TouchableOpacity>
               </View>
-              
+
               <ScrollView style={styles.modalScrollView}>
                 <View style={styles.definitionItem}>
                   <Text style={styles.definitionTitle}>Bipedestación</Text>
@@ -377,95 +372,107 @@ const styles = StyleSheet.create({
   },
   // Tarjeta de pregunta
   preguntaBox: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 20,
-    padding: 25,
-    marginBottom: 25,
+    padding: 30,
+    marginBottom: 30,
     width: '100%',
-    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
+    shadowColor: '#003b4c',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
     elevation: 8,
+    alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    backdropFilter: 'blur(10px)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   numeroPreguntaBox: {
     backgroundColor: '#00c4cc',
-    borderRadius: 50,
-    width: 50,
-    height: 50,
+    borderRadius: 60,
+    width: 80,
+    height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 15,
-    alignSelf: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.3)',
+    marginBottom: 20,
+    shadowColor: '#00c4cc',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
     elevation: 4,
   },
   numeroPregunta: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 24,
     letterSpacing: 1.2,
   },
   preguntaTexto: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#222',
     textAlign: 'center',
     fontWeight: '600',
-    lineHeight: 26,
-    marginBottom: 20,
+    lineHeight: 28,
+    marginBottom: 25,
   },
-  // Opciones
   opcionesContainer: {
-    gap: 12,
+    width: '100%',
   },
   opcion: {
-    backgroundColor: '#f8f9fa',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    paddingVertical: 18,
+    paddingHorizontal: 24,
+    borderRadius: 16,
     borderWidth: 2,
-    borderColor: '#e9ecef',
+    borderColor: 'rgba(255, 255, 255, 0.3)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
-    elevation: 2,
+    elevation: 4,
+    minWidth: 140,
+    marginBottom: 15, // reemplaza "gap"
   },
   opcionSeleccionada: {
-    backgroundColor: '#e3f2fd',
+    backgroundColor: 'rgba(0, 196, 204, 0.3)',
     borderColor: '#00c4cc',
     shadowColor: '#00c4cc',
     shadowOpacity: 0.2,
+    borderWidth: 3,
   },
   opcionContent: {
     flex: 1,
   },
   opcionPuntos: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#00c4cc',
     fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   opcionTexto: {
-    fontSize: 15,
+    fontSize: 16,
     color: '#333',
     fontWeight: '500',
-    lineHeight: 22,
+    lineHeight: 24,
   },
   opcionCheck: {
-    fontSize: 20,
-    marginLeft: 10,
+    fontSize: 24,
+    marginLeft: 15,
   },
   // Resultado actual
   resultadoBox: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 20,
-    padding: 25,
-    marginBottom: 25,
+    padding: 30,
+    marginBottom: 30,
     width: '100%',
-    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.12)',
+    maxWidth: 400,
+    shadowColor: '#003b4c',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
     elevation: 8,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   resultadoHeader: {
     flexDirection: 'row',
@@ -475,7 +482,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   resultadoTitulo: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#003b4c',
   },
@@ -498,12 +505,15 @@ const styles = StyleSheet.create({
   },
   // Botón finalizar
   botonFinalizar: {
-    backgroundColor: '#00c4cc',
+    backgroundColor: '#b80404',
     paddingVertical: 18,
     paddingHorizontal: 30,
     borderRadius: 16,
     alignItems: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.2)',
+    shadowColor: '#00c4cc',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
     elevation: 4,
     flexDirection: 'row',
     width: '100%',
@@ -523,31 +533,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
     elevation: 0,
   },
-  // Barra inferior
-  bottomBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: AppColors.background,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
-    paddingVertical: 10,
-    elevation: 8,
-    boxShadow: '0px -2px 6px rgba(0, 188, 212, 0.08)',
-  },
-  bottomBarItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  bottomBarIcon: {
-    fontSize: 22,
-    marginBottom: 2,
-  },
-  bottomBarLabel: {
-    fontSize: 13,
-    color: AppColors.primary,
-    fontWeight: '600',
-  },
+
   // Botón de ayuda
   topBarButton: {
     backgroundColor: AppColors.secondary,
@@ -583,14 +569,9 @@ const styles = StyleSheet.create({
     width: '90%',
     maxWidth: 400,
     maxHeight: '80%',
-    shadowColor: 'rgba(0, 188, 212, 0.4)',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
     elevation: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(15px)',
   },
   modalHeader: {
     flexDirection: 'row',
@@ -640,4 +621,4 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     textAlign: 'justify',
   },
-}); 
+});

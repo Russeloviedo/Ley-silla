@@ -18,6 +18,27 @@ export default function Root({ children }: { children: React.ReactNode }) {
         */}
         <ScrollViewStyleReset />
 
+        {/* Favicon y iconos para accesos directos */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        
+        {/* Web App Manifest para PWA */}
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        {/* Meta tags para iOS */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Ley Silla" />
+        
+        {/* Meta tags para Android */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#003333" />
+        
+        {/* Meta tags generales */}
+        <meta name="application-name" content="Aplicación Ley Silla" />
+        <meta name="msapplication-TileColor" content="#003333" />
+
         {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
         {/* Add any additional <head> elements that you want globally available on web... */}
@@ -28,11 +49,58 @@ export default function Root({ children }: { children: React.ReactNode }) {
 }
 
 const responsiveBackground = `
-body {
-  background-color: #fff;
+html, body, #root { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
 }
+
+body { 
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  padding-top: 0;
+  margin-top: 0;
+  background-color: transparent;
+}
+
+/* Eliminar cualquier header o navbar que pueda estar causando espacio */
+header, nav, .header, .navbar, .top-bar, .app-bar {
+  display: none !important;
+}
+
+/* Asegurar que el contenido principal no tenga espacios superiores */
+main, .main, .content, .page {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  background-color: transparent;
+}
+
+/* Eliminar espacios del StatusBar */
+[data-status-bar] {
+  display: none !important;
+}
+
+/* Asegurar que no haya espacios blancos en ningún elemento */
+* {
+  box-sizing: border-box;
+}
+
+/* Forzar el color de fondo en elementos específicos que puedan estar causando el problema */
+div[data-testid="expo-router-view"], 
+div[role="main"], 
+div[class*="container"], 
+div[class*="content"] {
+  background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #000;
+    background-color: transparent;
   }
 }`;
