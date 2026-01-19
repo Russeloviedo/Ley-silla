@@ -123,9 +123,16 @@ export default function SeleccionPersonalizada() {
                 ['temp_puesto', puestoFinal]
             ]);
 
-            console.log('✅ Datos guardados. Navegando al diagrama...');
-            // Ir directo al flujo o confirmación. Normalmente iría a diagrama de flujo
-            router.push('/diagrama-flujo');
+            console.log('✅ Datos guardados. Navegando a preguntas iniciales...');
+            // Ir a preguntas iniciales para asegurar CI 1 y CI 2
+            router.push({
+                pathname: '/preguntas-iniciales',
+                params: {
+                    unidad: selectedBU,
+                    puesto: puestoFinal,
+                    subpuesto: selectedArea
+                }
+            });
 
         } catch (error) {
             console.error('❌ Error al guardar:', error);
