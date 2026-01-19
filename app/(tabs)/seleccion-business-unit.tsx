@@ -41,6 +41,7 @@ export default function SeleccionBusinessUnit() {
     { id: 'HCM', name: 'HCM', emoji: '⚙️', colors: ['#45B7D1', '#96CEB4'] },
     { id: 'DD', name: 'DD', emoji: '🔧', colors: ['#96CEB4', '#FFEAA7'] },
     { id: 'SOPORTE', name: 'Soporte', emoji: '🛠️', colors: ['#FFEAA7', '#FFD700'] },
+    { id: 'PERSONALIZAR', name: 'Personalizar', emoji: '⚙️', colors: ['#bdc3c7', '#2c3e50'] },
   ];
 
   const handleBusinessUnitSelection = async (selectedBU: string) => {
@@ -48,7 +49,7 @@ export default function SeleccionBusinessUnit() {
       // Guardar en la clave correcta con namespace
       await AsyncStorage.setItem('nav:selectedBusinessUnit', selectedBU);
       console.log('✅ Business unit guardado:', selectedBU);
-      
+
       if (selectedBU === 'Irrigación') {
         router.push({
           pathname: '/seleccion-planta',
@@ -74,6 +75,8 @@ export default function SeleccionBusinessUnit() {
           pathname: '/seleccion-planta',
           params: { businessUnit: selectedBU }
         });
+      } else if (selectedBU === 'PERSONALIZAR') {
+        router.push('/seleccion-personalizada');
       } else {
         // TODO: Implementar navegación para otras unidades de negocio
         console.log('Unidad de negocio seleccionada:', selectedBU);
@@ -134,9 +137,9 @@ export default function SeleccionBusinessUnit() {
             ))}
           </View>
         </ScrollView>
-        
+
         {/* Botones de navegación - OCULTOS */}
-        <NavigationButtons 
+        <NavigationButtons
           hideAll={true}
         />
       </AnimatedBackground>

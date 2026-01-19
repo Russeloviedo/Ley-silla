@@ -148,10 +148,26 @@ export default function CuestionarioPonderacionScreen() {
       return;
     }
 
+    // Recuperar datos faltantes de AsyncStorage si es necesario
+    let finalUnidad = unidad;
+    let finalPuesto = puesto;
+    let finalSubpuesto = subpuesto;
+
+    if (!finalUnidad || !finalPuesto) {
+      try {
+        const bu = await AsyncStorage.getItem('nav:selectedBusinessUnit');
+        const pu = await AsyncStorage.getItem('nav:selectedPosition');
+        if (bu) finalUnidad = bu;
+        if (pu) finalPuesto = pu;
+      } catch (e) {
+        console.warn('Error recuperando datos:', e);
+      }
+    }
+
     const params = {
-      unidad,
-      puesto,
-      subpuesto,
+      unidad: finalUnidad,
+      puesto: finalPuesto,
+      subpuesto: finalSubpuesto,
       flujo,
       puntaje: puntajeTotal,
       nivel: nivel.nivel,

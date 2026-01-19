@@ -116,6 +116,22 @@ export default function DiagramaFlujoScreen() {
   };
 
   const handleContinuar = async () => {
+    // Recuperar datos faltantes de AsyncStorage si es necesario (flujo Personalizar)
+    let finalUnidad = unidad;
+    let finalPuesto = puesto;
+    let finalSubpuesto = subpuesto;
+
+    if (!finalUnidad || !finalPuesto) {
+      try {
+        const bu = await AsyncStorage.getItem('nav:selectedBusinessUnit');
+        const pu = await AsyncStorage.getItem('nav:selectedPosition');
+        if (bu) finalUnidad = bu;
+        if (pu) finalPuesto = pu;
+      } catch (e) {
+        console.warn('Error recuperando datos para navegación:', e);
+      }
+    }
+
     // DEBUG AUTOMÁTICO - Diagrama de Flujo
     console.log('🚨 DEBUG DIAGRAMA FLUJO:', {
       final,
@@ -131,9 +147,9 @@ export default function DiagramaFlujoScreen() {
         router.push({
           pathname: '/resultados-finales',
           params: {
-            unidad,
-            puesto,
-            subpuesto,
+            unidad: finalUnidad,
+            puesto: finalPuesto,
+            subpuesto: finalSubpuesto,
             flujo: final,
             respuestas,
             respuestasFlujo: JSON.stringify(respuestasFlujo),
@@ -237,12 +253,12 @@ export default function DiagramaFlujoScreen() {
       router.push({
         pathname: '/cuestionario-ponderacion',
         params: {
-          unidad,
-          planta: unidad, // La unidad de negocio se usa como planta por ahora
+          unidad: finalUnidad,
+          planta: finalUnidad, // La unidad de negocio se usa como planta por ahora (Esto podría mejorarse si tenemos Planta real)
           turno: 'Sin especificar', // Por defecto
           area: 'Sin especificar', // Por defecto
-          puesto,
-          subpuesto,
+          puesto: finalPuesto,
+          subpuesto: finalSubpuesto,
           flujo: final,
           respuestas,
           respuestasFlujo: JSON.stringify(respuestasFlujo)

@@ -482,7 +482,8 @@ export default function ResultadosFinalesScreen() {
       }
 
       // Unidad final (priorizar nueva estructura)
-      const unidadFinal = params.unidad || '';
+      const buStorage = await AsyncStorage.getItem('nav:selectedBusinessUnit');
+      const unidadFinal = params.unidad || buStorage || '';
 
       const nuevoAnalisis: HistorialAnalisis = {
         // Legacy visibles
