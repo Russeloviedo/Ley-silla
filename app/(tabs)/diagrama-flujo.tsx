@@ -175,8 +175,8 @@ export default function DiagramaFlujoScreen() {
             if (respuestas) respIniciales = JSON.parse(Array.isArray(respuestas) ? respuestas[0] : respuestas);
           } catch (e) { console.warn('Error parsing respuestas', e); }
 
-          // Construir objeto para sync
-          const dataToSync = {
+          // Construir objeto para sync Identificacion
+          const dataIdentificacion = {
             businessUnit: bu,
             planta: planta,
             turno: turno,
@@ -194,14 +194,38 @@ export default function DiagramaFlujoScreen() {
             flujo: 'NO_DECRETO'
           };
 
-          console.log('☁️ Enviando a Google Sheets:', dataToSync);
-          const res = await GoogleSheetsService.syncData('identificacion', [dataToSync]);
+          // Construir objeto para sync Matriz de Riesgo (Todo N/A)
+          const dataMatriz = {
+            businessUnit: bu,
+            planta: planta,
+            turno: turno,
+            area: area,
+            puesto: puestoStr,
+            ponderacion1: 'N/A',
+            ponderacion2: 'N/A',
+            ponderacion3: 'N/A',
+            ponderacion4: 'N/A',
+            ponderacion5: 'N/A',
+            ponderacion6: 'N/A',
+            ponderacion7: 'N/A',
+            puntaje: 'N/A',
+            nivel: 'No aplica'
+          };
 
-          if (!res.success) {
+          console.log('☁️ Enviando a Google Sheets (Identificación + Matriz N/A):', { dataIdentificacion, dataMatriz });
+
+          // Enviar a ambas hojas
+          const p1 = GoogleSheetsService.syncData('identificacion', [dataIdentificacion]);
+          const p2 = GoogleSheetsService.syncData('matriz', [dataMatriz]);
+
+          const [r1, r2] = await Promise.all([p1, p2]);
+
+          if (!r1.success || !r2.success) {
+            const msg = 'Advertencia: Algunos datos no se pudieron enviar (Ident: ' + (r1.success ? 'OK' : 'FAIL') + ', Matriz: ' + (r2.success ? 'OK' : 'FAIL') + ')';
             if (Platform.OS === 'web') {
-              window.alert('Advertencia: No se pudieron enviar los datos a Sheets, pero se continuará con el flujo.');
+              window.alert(msg);
             } else {
-              Alert.alert('Advertencia', 'No se pudieron enviar los datos a Sheets, pero se continuará con el flujo.');
+              Alert.alert('Advertencia', msg);
             }
           }
 
