@@ -7,6 +7,7 @@ import {
     StatusBar,
     TouchableOpacity,
     Alert,
+    TextInput, // Importar TextInput
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -27,6 +28,8 @@ export default function SeleccionPersonalizada() {
     const [selectedTurno, setSelectedTurno] = useState<string>('');
     const [selectedArea, setSelectedArea] = useState<string>('');
     const [selectedPuesto, setSelectedPuesto] = useState<string>('');
+    const [customPuesto, setCustomPuesto] = useState<string>(''); // Nuevo estado para puesto personalizado
+    const [isCustomPuesto, setIsCustomPuesto] = useState<boolean>(false); // Bandera para mostrar input
 
     // Listas de opciones completas
     const [allBUs, setAllBUs] = useState<string[]>([]);
@@ -75,18 +78,34 @@ export default function SeleccionPersonalizada() {
         // 5. Puestos (Soporte + SelectionDataService)
         const puestosSoporte = SoporteDataProcessor.getPuestos();
         const puestosGenericos = SelectionDataService.getAllPositions();
-        const puestosFinal = Array.from(new Set([...puestosSoporte, ...puestosGenericos])).sort();
+        const puestosSet = new Set([...puestosSoporte, ...puestosGenericos]);
+        // Ordenar alfabéticamente
+        const puestosOrdenados = Array.from(puestosSet).sort();
+
+        // Agregar opción de personalizar al principio
+        const puestosFinal = ['Personalizar Puesto', ...puestosOrdenados];
         setAllPuestos(puestosFinal);
     };
 
     const handleGuardarContinuar = async () => {
+        // Validar campos básicos
         if (!selectedBU || !selectedPlanta || !selectedTurno || !selectedArea || !selectedPuesto) {
             Alert.alert('Campos incompletos', 'Por favor selecciona todas las opciones para continuar.');
             return;
         }
 
+        // Validar puesto personalizado si aplica
+        let puestoFinal = selectedPuesto;
+        if (selectedPuesto === 'Personalizar Puesto') {
+            if (!customPuesto.trim()) {
+                Alert.alert('Puesto personalizado vacío', 'Por favor escribe el nombre del puesto.');
+                return;
+            }
+            puestoFinal = customPuesto.trim();
+        }
+
         try {
-            console.log('💾 Guardando selección personalizada...');
+            console.log('💾 Guardando selección personalizada:', { puestoFinal });
 
             // Guardar todo en AsyncStorage con las claves ESTÁNDAR que espera resultados-finales.tsx
             await AsyncStorage.multiSet([
@@ -94,14 +113,14 @@ export default function SeleccionPersonalizada() {
                 ['nav:selectedPlant', selectedPlanta],     // CORREGIDO: Plant (no Planta)
                 ['nav:selectedShift', selectedTurno],     // CORREGIDO: Shift (no Turno)
                 ['nav:selectedArea', selectedArea],
-                ['nav:selectedPosition', selectedPuesto], // CORREGIDO: Position (no Puesto)
+                ['nav:selectedPosition', puestoFinal],    // Usar el puesto final resuelto
 
                 // También guardar en temporales por seguridad si el flujo de análisis lo requiere
                 ['temp_business_unit', selectedBU],
                 ['temp_planta', selectedPlanta],
                 ['temp_turno', selectedTurno],
                 ['temp_area', selectedArea],
-                ['temp_puesto', selectedPuesto]
+                ['temp_puesto', puestoFinal]
             ]);
 
             console.log('✅ Datos guardados. Navegando al diagrama...');
@@ -114,12 +133,18 @@ export default function SeleccionPersonalizada() {
         }
     };
 
+    const handlePuestoChange = (val: string) => {
+        setSelectedPuesto(val);
+        setIsCustomPuesto(val === 'Personalizar Puesto');
+    };
+
     const renderPicker = (
         label: string,
         selectedValue: string,
         onValueChange: (val: string) => void,
         items: string[],
-        placeholder: string
+        placeholder: string,
+        isPuesto: boolean = false
     ) => (
         <View style={styles.pickerContainer}>
             <Text style={styles.label}>{label}</Text>
@@ -135,6 +160,22 @@ export default function SeleccionPersonalizada() {
                     ))}
                 </Picker>
             </View>
+
+            {/* Input para puesto personalizado */}
+            {isPuesto && isCustomPuesto && (
+                <View style={styles.customInputContainer}>
+                    <Text style={styles.label}>Escribe el nombre del puesto:</Text>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            style={styles.input}
+                            value={customPuesto}
+                            onChangeText={setCustomPuesto}
+                            placeholder="Ej: Nuevo Puesto Operativo"
+                            placeholderTextColor="#999"
+                        />
+                    </View>
+                </View>
+            )}
         </View>
     );
 
@@ -167,7 +208,7 @@ export default function SeleccionPersonalizada() {
                     {renderPicker("Planta:", selectedPlanta, setSelectedPlanta, allPlantas, "Selecciona planta...")}
                     {renderPicker("Turno:", selectedTurno, setSelectedTurno, allTurnos, "Selecciona turno...")}
                     {renderPicker("Área:", selectedArea, setSelectedArea, allAreas, "Selecciona área...")}
-                    {renderPicker("Puesto:", selectedPuesto, setSelectedPuesto, allPuestos, "Selecciona puesto...")}
+                    {renderPicker("Puesto:", selectedPuesto, handlePuestoChange, allPuestos, "Selecciona puesto...", true)}
 
                     <TouchableOpacity
                         style={styles.confirmButton}
@@ -271,5 +312,26 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    customInputContainer: {
+        marginTop: 15,
+        backgroundColor: '#f8f9fa',
+        padding: 10,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#e0e0e0',
+    },
+    inputWrapper: {
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#bdc3c7',
+        marginTop: 5,
+    },
+    input: {
+        paddingHorizontal: 15,
+        paddingVertical: 12,
+        fontSize: 16,
+        color: '#2c3e50',
     },
 });
