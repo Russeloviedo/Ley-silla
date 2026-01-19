@@ -1,0 +1,655 @@
+Planta,Puesto,Analisis
+1,Mecanico de Moldeo "III" - Nivel 1,Analisis
+1,Mecanico de Moldeo "III" - Nivel 2,Analisis
+1,Mecanico de Moldeo "III" - Nivel 3,Analisis
+1,Mecanico de Moldeo "III" - Nivel 4,Analisis
+1,Mecanico de Moldeo "III" - Nivel 5,Analisis
+1,Mecanico de Ensamble "II" - Nivel 1,Analisis
+1,Mecanico de Ensamble "II" - Nivel 2,Analisis
+1,Mecanico de Ensamble "II" - Nivel 3,Analisis
+1,Mecanico de Ensamble "II" - Nivel 4,Analisis
+1,Mecanico de Ensamble "II" - Nivel 5,Analisis
+1,Guardia de Seguridad III,Analisis
+1,Coordinador Jr Mantenimiento,Analisis
+1,Mecanico de Facilities "III",Analisis
+1,Auxiliar de Mantenimiento,Analisis
+1,Mecanico de Ensamble "I" - Nivel 1,Analisis
+1,Mecanico de Ensamble "I" - Nivel 2,Analisis
+1,Mecanico de Ensamble "I" - Nivel 3,Analisis
+1,Mecanico de Ensamble "I" - Nivel 4,Analisis
+1,Mecanico de Ensamble "I" - Nivel 5,Analisis
+1,Mecanico de Ensamble "III" - Nivel 1,Analisis
+1,Mecanico de Ensamble "III" - Nivel 2,Analisis
+1,Mecanico de Ensamble "III" - Nivel 3,Analisis
+1,Mecanico de Ensamble "III" - Nivel 4,Analisis
+1,Mecanico de Ensamble "III" - Nivel 5,Analisis
+1,Tec Electromecanico Sr.,Analisis
+1,Mecanico de Moldeo "II" - Nivel 1,Analisis
+1,Mecanico de Moldeo "II" - Nivel 2,Analisis
+1,Mecanico de Moldeo "II" - Nivel 3,Analisis
+1,Mecanico de Moldeo "II" - Nivel 4,Analisis
+1,Mecanico de Moldeo "II" - Nivel 5,Analisis
+1,Guardia de Seguridad II,Analisis
+1,Auxiliar de Tool-crib,Analisis
+2,Mecanico de Moldeo "III" - Nivel 1,Analisis
+2,Mecanico de Moldeo "III" - Nivel 2,Analisis
+2,Mecanico de Moldeo "III" - Nivel 3,Analisis
+2,Mecanico de Moldeo "III" - Nivel 4,Analisis
+2,Mecanico de Moldeo "III" - Nivel 5,Analisis
+2,Auxiliar de Tool-crib,Analisis
+2,Coordinador Guardias Seguridad,Analisis
+2,Coordinador Mantenimiento Edificio,Analisis
+2,Coordinador de Limpieza,Analisis
+2,Coordinador Jr Mantenimiento,Analisis
+2,Aux. Mantenimiento Edificio,Analisis
+2,Mecanico de Facilities "II",Analisis
+2,Mecanico de Facilities "III",Analisis
+2,Mecanico de Facilities I,Analisis
+2,Auxiliar de Mantenimiento,Analisis
+2,Mecanico de Ensamble "I" - Nivel 1,Analisis
+2,Mecanico de Ensamble "I" - Nivel 2,Analisis
+2,Mecanico de Ensamble "I" - Nivel 3,Analisis
+2,Mecanico de Ensamble "I" - Nivel 4,Analisis
+2,Mecanico de Ensamble "I" - Nivel 5,Analisis
+2,Mecanico de Ensamble "II" - Nivel 1,Analisis
+2,Mecanico de Ensamble "II" - Nivel 2,Analisis
+2,Mecanico de Ensamble "II" - Nivel 3,Analisis
+2,Mecanico de Ensamble "II" - Nivel 4,Analisis
+2,Mecanico de Ensamble "II" - Nivel 5,Analisis
+2,Mecanico de Ensamble "III" - Nivel 1,Analisis
+2,Mecanico de Ensamble "III" - Nivel 2,Analisis
+2,Mecanico de Ensamble "III" - Nivel 3,Analisis
+2,Mecanico de Ensamble "III" - Nivel 4,Analisis
+2,Mecanico de Ensamble "III" - Nivel 5,Analisis
+2,Guardia de Seguridad II,Analisis
+2,Guardia de Seguridad III,Analisis
+2,Mecanico de Moldeo "II" - Nivel 1,Analisis
+2,Mecanico de Moldeo "II" - Nivel 2,Analisis
+2,Mecanico de Moldeo "II" - Nivel 3,Analisis
+2,Mecanico de Moldeo "II" - Nivel 4,Analisis
+2,Mecanico de Moldeo "II" - Nivel 5,Analisis
+2,Monitorista CCTV,Analisis
+2,Tec Electromecanico Sr.,Analisis
+3,Mecanico de Moldeo "II" - Nivel 1,Analisis
+3,Mecanico de Moldeo "II" - Nivel 2,Analisis
+3,Mecanico de Moldeo "II" - Nivel 3,Analisis
+3,Mecanico de Moldeo "II" - Nivel 4,Analisis
+3,Mecanico de Moldeo "II" - Nivel 5,Analisis
+3,Guardia de Seguridad II,Analisis
+3,Monitorista CCTV,Analisis
+3,Auxiliar de Tool-crib,Analisis
+3,Coordinador de Tool Crib,Analisis
+3,Coordinador Jr Mantenimiento,Analisis
+3,Auxiliar de Mantenimiento,Analisis
+3,Coordinador Guardias Seguridad,Analisis
+3,Mecanico de Moldeo "III" - Nivel 1,Analisis
+3,Mecanico de Moldeo "III" - Nivel 2,Analisis
+3,Mecanico de Moldeo "III" - Nivel 3,Analisis
+3,Mecanico de Moldeo "III" - Nivel 4,Analisis
+3,Mecanico de Moldeo "III" - Nivel 5,Analisis
+1,Almacenista "II",Analisis
+1,Coordinador de Almacen,Analisis
+1,Almacenista "III",Analisis
+1,Materialista,Analisis
+1,Auxiliar de Conteo Ciclico,Analisis
+1,Auxiliar Control de Materiales,Analisis
+2,Almacenista "II",Analisis
+2,Coordinador de Almacen,Analisis
+2,Chofer,Analisis
+2,Almacenista "III",Analisis
+2,Materialista,Analisis
+2,Auxiliar de Conteo Ciclico,Analisis
+2,Coordinador de Conteo Ciclico,Analisis
+3,Almacenista "II",Analisis
+3,Coordinador de Almacen,Analisis
+3,Almacenista "III",Analisis
+3,Materialista,Analisis
+3,Asistente Control Materiales,Analisis
+3,Auxiliar de Conteo Ciclico,Analisis
+3,Chofer,Analisis
+3,Coordinador de Conteo Ciclico,Analisis
+3,Auxiliar Control de Materiales,Analisis
+4,Almacenista "II",Analisis
+4,Materialista,Analisis
+4,Chofer,Analisis
+1,Toolmaker "III",Analisis
+3,Almacenista de Moldes,Analisis
+3,Dibujante,Analisis
+3,Toolmaker "III",Analisis
+3,Toolmaker Sr,Analisis
+3,Toolmaker "I",Analisis
+4,Almacenista de Moldes,Analisis
+4,Toolmaker "II",Analisis
+4,Toolmaker "III",Analisis
+4,Aprendiz Toolmaker,Analisis
+4,Mecanico de Moldes,Analisis
+4,Toolmaker "I",Analisis
+4,Toolmaker Sr,Analisis
+1,Asistente de Sup de Calidad IR,Analisis
+1,Inspector de Calidad II (IR ensamble) - Nivel 1,Analisis
+1,Inspector de Calidad II (IR ensamble) - Nivel 2,Analisis
+1,Inspector de Calidad II (IR ensamble) - Nivel 3,Analisis
+1,Inspector de Calidad II (IR ensamble) - Nivel 4,Analisis
+1,Inspector de Calidad I (IR moldeo) - Nivel 1,Analisis
+1,Inspector de Calidad I (IR moldeo) - Nivel 2,Analisis
+1,Inspector de Calidad I (IR moldeo) - Nivel 3,Analisis
+1,Inspector de Calidad I (IR moldeo) - Nivel 4,Analisis
+1,Inspector de Calidad II (IR moldeo) - Nivel 1,Analisis
+1,Inspector de Calidad II (IR moldeo) - Nivel 2,Analisis
+1,Inspector de Calidad II (IR moldeo) - Nivel 3,Analisis
+1,Inspector de Calidad II (IR moldeo) - Nivel 4,Analisis
+1,Inspector de Calidad III (IR moldeo) - Nivel 1,Analisis
+1,Inspector de Calidad III (IR moldeo) - Nivel 2,Analisis
+1,Inspector de Calidad III (IR moldeo) - Nivel 3,Analisis
+1,Inspector de Calidad III (IR moldeo) - Nivel 4,Analisis
+1,Tecnico de Calidad  (IR),Analisis
+1,Inspector de Calidad III (IR ensamble) - Nivel 1,Analisis
+1,Inspector de Calidad III (IR ensamble) - Nivel 2,Analisis
+1,Inspector de Calidad III (IR ensamble) - Nivel 3,Analisis
+1,Inspector de Calidad III (IR ensamble) - Nivel 4,Analisis
+1,Inspector de Calidad II (FX) - Nivel 1,Analisis
+1,Inspector de Calidad II (FX) - Nivel 2,Analisis
+1,Inspector de Calidad II (FX) - Nivel 3,Analisis
+1,Inspector de Calidad II (FX) - Nivel 4,Analisis
+1,Inspector de Calidad I (IR ensamble) - Nivel 1,Analisis
+1,Inspector de Calidad I (IR ensamble) - Nivel 2,Analisis
+1,Inspector de Calidad I (IR ensamble) - Nivel 3,Analisis
+1,Inspector de Calidad I (IR ensamble) - Nivel 4,Analisis
+1,Asistente de Sup de Calidad FX,Analisis
+2,Inspector de Calidad II (HCM) - Nivel 1,Analisis
+2,Inspector de Calidad II (HCM) - Nivel 2,Analisis
+2,Inspector de Calidad II (HCM) - Nivel 3,Analisis
+2,Inspector de Calidad II (HCM) - Nivel 4,Analisis
+2,Tecnico de Calidad  (HCM),Analisis
+2,Inspector de Calidad I (FX) - Nivel 1,Analisis
+2,Inspector de Calidad I (FX) - Nivel 2,Analisis
+2,Inspector de Calidad I (FX) - Nivel 3,Analisis
+2,Inspector de Calidad I (FX) - Nivel 4,Analisis
+2,Asistente de Sup de Calidad HC,Analisis
+2,Asistente de Sup de Calidad IR,Analisis
+2,Inspector de Calidad I (IR ensamble) - Nivel 1,Analisis
+2,Inspector de Calidad I (IR ensamble) - Nivel 2,Analisis
+2,Inspector de Calidad I (IR ensamble) - Nivel 3,Analisis
+2,Inspector de Calidad I (IR ensamble) - Nivel 4,Analisis
+2,Inspector de Calidad II (IR ensamble) - Nivel 1,Analisis
+2,Inspector de Calidad II (IR ensamble) - Nivel 2,Analisis
+2,Inspector de Calidad II (IR ensamble) - Nivel 3,Analisis
+2,Inspector de Calidad II (IR ensamble) - Nivel 4,Analisis
+2,Inspector de Calidad III (IR ensamble) - Nivel 1,Analisis
+2,Inspector de Calidad III (IR ensamble) - Nivel 2,Analisis
+2,Inspector de Calidad III (IR ensamble) - Nivel 3,Analisis
+2,Inspector de Calidad III (IR ensamble) - Nivel 4,Analisis
+2,Inspector de Calidad I (HCM) - Nivel 1,Analisis
+2,Inspector de Calidad I (HCM) - Nivel 2,Analisis
+2,Inspector de Calidad I (HCM) - Nivel 3,Analisis
+2,Inspector de Calidad I (HCM) - Nivel 4,Analisis
+2,Inspector de Calidad II (IR moldeo) - Nivel 1,Analisis
+2,Inspector de Calidad II (IR moldeo) - Nivel 2,Analisis
+2,Inspector de Calidad II (IR moldeo) - Nivel 3,Analisis
+2,Inspector de Calidad II (IR moldeo) - Nivel 4,Analisis
+2,Asistente de Sup de Calidad FX,Analisis
+2,Inspector de Calidad II (FX) - Nivel 1,Analisis
+2,Inspector de Calidad II (FX) - Nivel 2,Analisis
+2,Inspector de Calidad II (FX) - Nivel 3,Analisis
+2,Inspector de Calidad II (FX) - Nivel 4,Analisis
+2,Inspector de Calidad III (FX) - Nivel 1,Analisis
+2,Inspector de Calidad III (FX) - Nivel 2,Analisis
+2,Inspector de Calidad III (FX) - Nivel 3,Analisis
+2,Inspector de Calidad III (FX) - Nivel 4,Analisis
+3,Inspector de Calidad II (DD) - Nivel 1,Analisis
+3,Inspector de Calidad II (DD) - Nivel 2,Analisis
+3,Inspector de Calidad II (DD) - Nivel 3,Analisis
+3,Inspector de Calidad II (DD) - Nivel 4,Analisis
+3,Inspector de Calidad III (DD) - Nivel 1,Analisis
+3,Inspector de Calidad III (DD) - Nivel 2,Analisis
+3,Inspector de Calidad III (DD) - Nivel 3,Analisis
+3,Inspector de Calidad III (DD) - Nivel 4,Analisis
+3,Tecnico de Calidad (DD),Analisis
+3,Asistente de Sup de Calidad DD,Analisis
+3,Inspector de Calidad I (DD) - Nivel 1,Analisis
+3,Inspector de Calidad I (DD) - Nivel 2,Analisis
+3,Inspector de Calidad I (DD) - Nivel 3,Analisis
+3,Inspector de Calidad I (DD) - Nivel 4,Analisis
+1,Supervisor de Moldeo Jr. (IR) - Nivel 1,Analisis
+1,Supervisor de Moldeo Jr. (IR) - Nivel 2,Analisis
+1,Supervisor de Moldeo Jr. (IR) - Nivel 3,Analisis
+1,Supervisor de Moldeo Jr. (IR) - Nivel 4,Analisis
+1,Limpiador de Moldes (IRR),Analisis
+1,Asistente Ejecutivo,Analisis
+1,Gerente Sr Automatizacion,Analisis
+1,Ingeniero Sistemas Manufactura,Analisis
+1,Ingeniero de Automatizacion Jr,Analisis
+1,Asistente de control de doctos,Analisis
+1,Gerente de Calidad (IRR),Analisis
+1,Ingeniero Calidad Jr. (IR),Analisis
+1,Ingeniero de Calidad III (IR),Analisis
+1,Supervisor de Calidad II (IRR) - Nivel 1,Analisis
+1,Supervisor de Calidad II (IRR) - Nivel 2,Analisis
+1,Supervisor de Calidad II (IRR) - Nivel 3,Analisis
+1,Supervisor de Calidad II (IRR) - Nivel 4,Analisis
+1,Técnico de Calibración,Analisis
+1,Agente de Compras I,Analisis
+1,Coordinador de Compras MRO,Analisis
+1,Analista Cumplimiento Aduanero,Analisis
+1,Analista de Nomina,Analisis
+1,Asist de Cumplimiento Aduanero,Analisis
+1,Auxiliar Contable,Analisis
+1,Auxiliar de Cuentas por Pagar,Analisis
+1,Coord de Fiscal y Comercio Ext,Analisis
+1,Gerente de Comercio Exterior,Analisis
+1,Supervisor de Contabilidad - Nivel 1,Analisis
+1,Supervisor de Contabilidad - Nivel 2,Analisis
+1,Supervisor de Contabilidad - Nivel 3,Analisis
+1,Supervisor de Contabilidad - Nivel 4,Analisis
+1,Gerente de Ingenieria,Analisis
+1,Gerente Manufactura IR,Analisis
+1,Ing Mecanico de Manufactura III,Analisis
+1,Ing. de Manufactura "I" (IR),Analisis
+1,Ing. de Manufactura II (IR),Analisis
+1,Ingeniero de Moldeo "I" (IR),Analisis
+1,Ingeniero Jr. (IR),Analisis
+1,Principal Supervisor de Moldeo - Nivel 1,Analisis
+1,Principal Supervisor de Moldeo - Nivel 2,Analisis
+1,Principal Supervisor de Moldeo - Nivel 3,Analisis
+1,Principal Supervisor de Moldeo - Nivel 4,Analisis
+1,Sup. de  Produccion "I"  (IR),Analisis
+1,Supervisor de Ingenieria (IR) - Nivel 1,Analisis
+1,Supervisor de Ingenieria (IR) - Nivel 2,Analisis
+1,Supervisor de Ingenieria (IR) - Nivel 3,Analisis
+1,Supervisor de Ingenieria (IR) - Nivel 4,Analisis
+1,Ingeniero de Proceso (IR),Analisis
+1,Sup. de Produccion "III" (IR),Analisis
+1,Supervisor Sr de Moldeo - Nivel 1,Analisis
+1,Supervisor Sr de Moldeo - Nivel 2,Analisis
+1,Supervisor Sr de Moldeo - Nivel 3,Analisis
+1,Supervisor Sr de Moldeo - Nivel 4,Analisis
+1,Gerente Materiales Sr,Analisis
+1,Gerente de Materiales (IRR),Analisis
+1,Planner/Buyer (IR),Analisis
+1,Planner/Buyer Sr.(IR),Analisis
+1,Planner/Buyer Jr (DD),Analisis
+1,Director de Recursos Humanos,Analisis
+1,Especialista Desarrollo Organizacional,Analisis
+1,Especialista Operaciones RH,Analisis
+1,Practicas Profesionales,Analisis
+1,Analista Sr Soporte Técnico,Analisis
+1,Soporte Tecnico Jr,Analisis
+1,VicePresidente Operaciones Manufactura,Analisis
+1,Gerente de Calidad Sr,Analisis
+1,Supervisor Sr Seg e Higiene - Nivel 1,Analisis
+1,Supervisor Sr Seg e Higiene - Nivel 2,Analisis
+1,Supervisor Sr Seg e Higiene - Nivel 3,Analisis
+1,Supervisor Sr Seg e Higiene - Nivel 4,Analisis
+1,Auxiliar cumplimiento aduanero,Analisis
+1,Coordinador de Logistica,Analisis
+1,Mensajero,Analisis
+1,Gerente de Operaciones (IR),Analisis
+1,Asistente de Recursos Humanos,Analisis
+1,Talent Management Business Partner,Analisis
+1,Gerente Service Desk,Analisis
+1,Soporte Tecnico II,Analisis
+1,Soporte Tecnico III,Analisis
+1,Ingeniero de Procesos Sr,Analisis
+1,Ingeniero Tooling III (IR),Analisis
+1,Supervisor Cumplim. Aduanero - Nivel 1,Analisis
+1,Supervisor Cumplim. Aduanero - Nivel 2,Analisis
+1,Supervisor Cumplim. Aduanero - Nivel 3,Analisis
+1,Supervisor Cumplim. Aduanero - Nivel 4,Analisis
+1,Gerente Recursos Humanos,Analisis
+1,Contralor,Analisis
+1,Supervisor de Nominas - Nivel 1,Analisis
+1,Supervisor de Nominas - Nivel 2,Analisis
+1,Supervisor de Nominas - Nivel 3,Analisis
+1,Supervisor de Nominas - Nivel 4,Analisis
+1,Supervisor de Mantenimiento - Nivel 1,Analisis
+1,Supervisor de Mantenimiento - Nivel 2,Analisis
+1,Supervisor de Mantenimiento - Nivel 3,Analisis
+1,Supervisor de Mantenimiento - Nivel 4,Analisis
+1,Supervisor de Mantenimiento Sr - Nivel 1,Analisis
+1,Supervisor de Mantenimiento Sr - Nivel 2,Analisis
+1,Supervisor de Mantenimiento Sr - Nivel 3,Analisis
+1,Supervisor de Mantenimiento Sr - Nivel 4,Analisis
+1,Supervisor Sr de Produccion IR - Nivel 1,Analisis
+1,Supervisor Sr de Produccion IR - Nivel 2,Analisis
+1,Supervisor Sr de Produccion IR - Nivel 3,Analisis
+1,Supervisor Sr de Produccion IR - Nivel 4,Analisis
+1,Asistente Relaciones Laborales,Analisis
+1,Enfermero(a),Analisis
+2,Supervisor de Moldeo Jr. (IR) - Nivel 1,Analisis
+2,Supervisor de Moldeo Jr. (IR) - Nivel 2,Analisis
+2,Supervisor de Moldeo Jr. (IR) - Nivel 3,Analisis
+2,Supervisor de Moldeo Jr. (IR) - Nivel 4,Analisis
+2,Gerente de Produccion,Analisis
+2,Ingeniero de Automatizacion Jr,Analisis
+2,Ingeniero Calidad Jr. FX),Analisis
+2,Ingeniero de Calidad "II" (FX),Analisis
+2,Ingeniero de Seg./Medio Amb.,Analisis
+2,Gerente de Ingenieria (FX),Analisis
+2,Ing. de Manufactura II  (FX),Analisis
+2,Ingeniero Jr. (FX),Analisis
+2,Analista Customer Services,Analisis
+2,Gerente de Marketing,Analisis
+2,Gerente de Operaciones (HCM),Analisis
+2,Gerente de Programa,Analisis
+2,Ing de Manufactura III (HCM),Analisis
+2,Ing. de Manufactura II  (HCM),Analisis
+2,Ingeniero de Moldeo "II" HCM,Analisis
+2,Ingeniero Jr. (HCM),Analisis
+2,Sup. de  Produccion "II" (IRR),Analisis
+2,Tec de maquinas y herramientas,Analisis
+2,Supervisor de Moldeo  (IR) - Nivel 1,Analisis
+2,Supervisor de Moldeo  (IR) - Nivel 2,Analisis
+2,Supervisor de Moldeo  (IR) - Nivel 3,Analisis
+2,Supervisor de Moldeo  (IR) - Nivel 4,Analisis
+2,Planner/Buyer Sr. (FX),Analisis
+2,Supervisor de conteos ciclicos - Nivel 1,Analisis
+2,Supervisor de conteos ciclicos - Nivel 2,Analisis
+2,Supervisor de conteos ciclicos - Nivel 3,Analisis
+2,Supervisor de conteos ciclicos - Nivel 4,Analisis
+2,Planner/Buyer (FX),Analisis
+2,Supervisor de Materiales (HCM) - Nivel 1,Analisis
+2,Supervisor de Materiales (HCM) - Nivel 2,Analisis
+2,Supervisor de Materiales (HCM) - Nivel 3,Analisis
+2,Supervisor de Materiales (HCM) - Nivel 4,Analisis
+2,Planner/Buyer (HCM),Analisis
+2,Asistente Engagement Organizacional,Analisis
+2,Practicas Profesionales,Analisis
+2,Supervisor Engagement Organizacional - Nivel 1,Analisis
+2,Supervisor Engagement Organizacional - Nivel 2,Analisis
+2,Supervisor Engagement Organizacional - Nivel 3,Analisis
+2,Supervisor Engagement Organizacional - Nivel 4,Analisis
+2,Supervisor Relaciones Laborales - Nivel 1,Analisis
+2,Supervisor Relaciones Laborales - Nivel 2,Analisis
+2,Supervisor Relaciones Laborales - Nivel 3,Analisis
+2,Supervisor Relaciones Laborales - Nivel 4,Analisis
+2,Ingeniero Proyectos de Tooling,Analisis
+2,Asistente de control de doctos,Analisis
+2,Supervisor de Calidad Sr. (FX) - Nivel 1,Analisis
+2,Supervisor de Calidad Sr. (FX) - Nivel 2,Analisis
+2,Supervisor de Calidad Sr. (FX) - Nivel 3,Analisis
+2,Supervisor de Calidad Sr. (FX) - Nivel 4,Analisis
+2,Ing. de Manufactura "I" (FX),Analisis
+2,Principal Ingeniero Procesos,Analisis
+2,Supervisor de Mantenimiento - Nivel 1,Analisis
+2,Supervisor de Mantenimiento - Nivel 2,Analisis
+2,Supervisor de Mantenimiento - Nivel 3,Analisis
+2,Supervisor de Mantenimiento - Nivel 4,Analisis
+2,Supervisor de Toolcrib - Nivel 1,Analisis
+2,Supervisor de Toolcrib - Nivel 2,Analisis
+2,Supervisor de Toolcrib - Nivel 3,Analisis
+2,Supervisor de Toolcrib - Nivel 4,Analisis
+2,Gerente de Materiales (FX),Analisis
+2,Ingeniero de Proceso (IR),Analisis
+2,Gerente de Calidad (HCM),Analisis
+2,Ingeniero de Calidad "I" (HCM),Analisis
+2,Analista Engagement Organizacional,Analisis
+2,Asesor de Salud y Bienestar,Analisis
+2,Operador de Residuos Peligroso,Analisis
+2,Supervisor de Ingenieria (HCM) - Nivel 1,Analisis
+2,Supervisor de Ingenieria (HCM) - Nivel 2,Analisis
+2,Supervisor de Ingenieria (HCM) - Nivel 3,Analisis
+2,Supervisor de Ingenieria (HCM) - Nivel 4,Analisis
+2,Limpiador de Moldes (IRR),Analisis
+2,Sup. de  Produccion "I"  (FX),Analisis
+2,Sup. de  Produccion "II"(FX),Analisis
+2,Sup. de Produccion "I" (HCM),Analisis
+2,Supervisor de Moldeo Jr. (HCM) - Nivel 1,Analisis
+2,Supervisor de Moldeo Jr. (HCM) - Nivel 2,Analisis
+2,Supervisor de Moldeo Jr. (HCM) - Nivel 3,Analisis
+2,Supervisor de Moldeo Jr. (HCM) - Nivel 4,Analisis
+3,Ing Asociado Sistemas Manufact,Analisis
+3,Coordinador Programa Soporte,Analisis
+3,Coord Regional de Operaciones,Analisis
+3,Gerente de Almacen,Analisis
+3,Supervisor de Almacen Jr - Nivel 1,Analisis
+3,Supervisor de Almacen Jr - Nivel 2,Analisis
+3,Supervisor de Almacen Jr - Nivel 3,Analisis
+3,Supervisor de Almacen Jr - Nivel 4,Analisis
+3,Supervisor de Almacen Sr - Nivel 1,Analisis
+3,Supervisor de Almacen Sr - Nivel 2,Analisis
+3,Supervisor de Almacen Sr - Nivel 3,Analisis
+3,Supervisor de Almacen Sr - Nivel 4,Analisis
+3,Asistente de control de doctos,Analisis
+3,Ingeniero Calidad Jr. (DD),Analisis
+3,Ingeniero de Calidad "I" (DD),Analisis
+3,Supervisor de Calidad Sr - Nivel 1,Analisis
+3,Supervisor de Calidad Sr - Nivel 2,Analisis
+3,Supervisor de Calidad Sr - Nivel 3,Analisis
+3,Supervisor de Calidad Sr - Nivel 4,Analisis
+3,Supervisor de Calidad Sr. (DD) - Nivel 1,Analisis
+3,Supervisor de Calidad Sr. (DD) - Nivel 2,Analisis
+3,Supervisor de Calidad Sr. (DD) - Nivel 3,Analisis
+3,Supervisor de Calidad Sr. (DD) - Nivel 4,Analisis
+3,Analista Cambios de Ingenieria,Analisis
+3,Coord. Gestión Herramientas Mfg,Analisis
+3,Coordinador Manufactura Aditiva,Analisis
+3,Gerente de Manufactura DD,Analisis
+3,Ing. de Manufactura "I" (DD),Analisis
+3,Ing. de Manufactura II (DD),Analisis
+3,Ingeniero Jr. (DD),Analisis
+3,Ingeniero Proyectos III (NPI),Analisis
+3,Principal Supervisor de Moldeo - Nivel 1,Analisis
+3,Principal Supervisor de Moldeo - Nivel 2,Analisis
+3,Principal Supervisor de Moldeo - Nivel 3,Analisis
+3,Principal Supervisor de Moldeo - Nivel 4,Analisis
+3,Supervisor Sr Ingenieria (DD) - Nivel 1,Analisis
+3,Supervisor Sr Ingenieria (DD) - Nivel 2,Analisis
+3,Supervisor Sr Ingenieria (DD) - Nivel 3,Analisis
+3,Supervisor Sr Ingenieria (DD) - Nivel 4,Analisis
+3,Ingeniero de Moldeo "II" DD,Analisis
+3,Asistente de EHS,Analisis
+3,Ingeniero de Seg./Medio Amb.,Analisis
+3,Ingeniero Sustentabilidad y Cumplimiento,Analisis
+3,Sup. Seguridad e Higiene,Analisis
+3,Analista de Logistica,Analisis
+3,Analista Financiero,Analisis
+3,Auxiliar de Cuentas por Pagar,Analisis
+3,Contador Sr,Analisis
+3,Contador Sr Cuentas por Pagar,Analisis
+3,Supervisor de Cash Management - Nivel 1,Analisis
+3,Supervisor de Cash Management - Nivel 2,Analisis
+3,Supervisor de Cash Management - Nivel 3,Analisis
+3,Supervisor de Cash Management - Nivel 4,Analisis
+3,Coordinador Projectos de Diseño,Analisis
+3,Especialista Soporte Especificaciones,Analisis
+3,Asistente de Administracion,Analisis
+3,Gerente de Mantenimiento,Analisis
+3,Analista Control de Materiales,Analisis
+3,Planner/Buyer (DD),Analisis
+3,Supervisor Sr de Materiales (DD) - Nivel 1,Analisis
+3,Supervisor Sr de Materiales (DD) - Nivel 2,Analisis
+3,Supervisor Sr de Materiales (DD) - Nivel 3,Analisis
+3,Supervisor Sr de Materiales (DD) - Nivel 4,Analisis
+3,Asistente Adquisicion Talento,Analisis
+3,Especialista Adquisicion Talento,Analisis
+3,Supervisor Adquisicion Talento - Nivel 1,Analisis
+3,Supervisor Adquisicion Talento - Nivel 2,Analisis
+3,Supervisor Adquisicion Talento - Nivel 3,Analisis
+3,Supervisor Adquisicion Talento - Nivel 4,Analisis
+3,Administrador de Sistemas,Analisis
+3,Analista de IT III,Analisis
+3,Analista de Sistemas "III",Analisis
+3,Analista de Sistemas Sr,Analisis
+3,Analista Sistemas Negocio,Analisis
+3,Especialista ERP,Analisis
+3,Gerente Global Sr Des. Aplicac,Analisis
+3,Ingeniero de Sistemas,Analisis
+3,Ingeniero de Sistemas AWS,Analisis
+3,Ingeniero de Sistemas Sr,Analisis
+3,Ingeniero de Software I,Analisis
+3,Ingeniero de Software II,Analisis
+3,Ingeniero de Software III,Analisis
+3,Ingeniero de Software Jr,Analisis
+3,Supervisor de Tool Room (DD) - Nivel 1,Analisis
+3,Supervisor de Tool Room (DD) - Nivel 2,Analisis
+3,Supervisor de Tool Room (DD) - Nivel 3,Analisis
+3,Supervisor de Tool Room (DD) - Nivel 4,Analisis
+3,Area Manager II,Analisis
+3,Gerente de Area,Analisis
+3,Regional Sales Manager,Analisis
+3,Supervisor de Almacen - Nivel 1,Analisis
+3,Supervisor de Almacen - Nivel 2,Analisis
+3,Supervisor de Almacen - Nivel 3,Analisis
+3,Supervisor de Almacen - Nivel 4,Analisis
+3,Coordinador Control de Materiales NPI,Analisis
+3,Ing de Manufactura III (DD),Analisis
+3,Gerente de Materiales (DD),Analisis
+3,Analista Adquisicion Talento,Analisis
+3,Ingeniero de Desktop,Analisis
+3,Especialista Relaciones Laborales,Analisis
+3,Diseñador Grafico de Empaque,Analisis
+3,Staff Accountant,Analisis
+3,Supervisor de Mantenimiento - Nivel 1,Analisis
+3,Supervisor de Mantenimiento - Nivel 2,Analisis
+3,Supervisor de Mantenimiento - Nivel 3,Analisis
+3,Supervisor de Mantenimiento - Nivel 4,Analisis
+3,Supervisor Sr de Produccion DD - Nivel 1,Analisis
+3,Supervisor Sr de Produccion DD - Nivel 2,Analisis
+3,Supervisor Sr de Produccion DD - Nivel 3,Analisis
+3,Supervisor Sr de Produccion DD - Nivel 4,Analisis
+3,Coordinador de Enfermeria,Analisis
+3,Enfermero(a),Analisis
+3,Supervisor de Moldeo III (DD) - Nivel 1,Analisis
+3,Supervisor de Moldeo III (DD) - Nivel 2,Analisis
+3,Supervisor de Moldeo III (DD) - Nivel 3,Analisis
+3,Supervisor de Moldeo III (DD) - Nivel 4,Analisis
+3,Sup. de  Produccion "II" (DD),Analisis
+3,Supervisor de Moldeo Jr. (DD) - Nivel 1,Analisis
+3,Supervisor de Moldeo Jr. (DD) - Nivel 2,Analisis
+3,Supervisor de Moldeo Jr. (DD) - Nivel 3,Analisis
+3,Supervisor de Moldeo Jr. (DD) - Nivel 4,Analisis
+3,Sup. de Produccion "III" (DD),Analisis
+3,Practicas Profesionales,Analisis
+4,Asistente de Administracion,Analisis
+4,Diseñador de Moldes,Analisis
+4,Ingeniero de Tooling Sr,Analisis
+4,Supervisor de Maquinados - Nivel 1,Analisis
+4,Supervisor de Maquinados - Nivel 2,Analisis
+4,Supervisor de Maquinados - Nivel 3,Analisis
+4,Supervisor de Maquinados - Nivel 4,Analisis
+4,Supervisor Toolmakers Coach - Nivel 1,Analisis
+4,Supervisor Toolmakers Coach - Nivel 2,Analisis
+4,Supervisor Toolmakers Coach - Nivel 3,Analisis
+4,Supervisor Toolmakers Coach - Nivel 4,Analisis
+4,Gerente de Tooling,Analisis
+4,Ingeniero de Tooling Sr (IRR),Analisis
+4,Ingeniero Tooling III (HCM),Analisis
+4,Ingeniero Tooling III (IR),Analisis
+4,Supervisor de Toolmakers - Nivel 1,Analisis
+4,Supervisor de Toolmakers - Nivel 2,Analisis
+4,Supervisor de Toolmakers - Nivel 3,Analisis
+4,Supervisor de Toolmakers - Nivel 4,Analisis
+4,Supervisor de Toolmakers II - Nivel 1,Analisis
+4,Supervisor de Toolmakers II - Nivel 2,Analisis
+4,Supervisor de Toolmakers II - Nivel 3,Analisis
+4,Supervisor de Toolmakers II - Nivel 4,Analisis
+4,Practicas Profesionales,Analisis
+1,Separador de Partes - Nivel 1,Analisis
+1,Separador de Partes - Nivel 2,Analisis
+2,Separador de Partes - Nivel 1,Analisis
+2,Separador de Partes - Nivel 2,Analisis
+1,Coord Tecnico de Moldeo (IR),Analisis
+2,Coord Tecnico de Moldeo (IR),Analisis
+1,Ensamblador - Nivel 1,Analisis
+1,Ensamblador - Nivel 2,Analisis
+1,Ensamblador - Nivel 3,Analisis
+1,Ensamblador - Nivel 4,Analisis
+1,Ensamblador - Nivel 5,Analisis
+2,Ensamblador - Nivel 1,Analisis
+2,Ensamblador - Nivel 2,Analisis
+2,Ensamblador - Nivel 3,Analisis
+2,Ensamblador - Nivel 4,Analisis
+2,Ensamblador - Nivel 5,Analisis
+1,Mezclador de Resinas,Analisis
+2,Mezclador de Resinas,Analisis
+1,Mezclador de Resinas Sr.,Analisis
+2,Mezclador de Resinas Sr.,Analisis
+1,Operador Universal - Nivel 1,Analisis
+1,Operador Universal - Nivel 2,Analisis
+1,Operador Universal - Nivel 3,Analisis
+1,Operador Universal - Nivel 4,Analisis
+2,Operador Universal - Nivel 1,Analisis
+2,Operador Universal - Nivel 2,Analisis
+2,Operador Universal - Nivel 3,Analisis
+2,Operador Universal - Nivel 4,Analisis
+1,Tecnico de Moldeo III (IR),Analisis
+2,Tecnico de Moldeo III (IR),Analisis
+1,Tecnico de Set Up "I" (IR),Analisis
+2,Tecnico de Set Up "I" (IR),Analisis
+1,Tecnico de Set Up "III" (IR),Analisis
+2,Tecnico de Set Up "III" (IR),Analisis
+1,Operador de Maquina - Nivel 1,Analisis
+1,Operador de Maquina - Nivel 2,Analisis
+1,Operador de Maquina - Nivel 3,Analisis
+2,Operador de Maquina - Nivel 1,Analisis
+2,Operador de Maquina - Nivel 2,Analisis
+2,Operador de Maquina - Nivel 3,Analisis
+1,Control de Produccion (IR),Analisis
+2,Control de Produccion (IR),Analisis
+1,Asist de Sup de Ensamble (IR),Analisis
+2,Asist de Sup de Ensamble (IR),Analisis
+1,Asistente de Supervisor Sr IR - Nivel 1,Analisis
+1,Asistente de Supervisor Sr IR - Nivel 2,Analisis
+1,Asistente de Supervisor Sr IR - Nivel 3,Analisis
+2,Asistente de Supervisor Sr IR - Nivel 1,Analisis
+2,Asistente de Supervisor Sr IR - Nivel 2,Analisis
+2,Asistente de Supervisor Sr IR - Nivel 3,Analisis
+1,Tecnico de Procesos,Analisis
+2,Tecnico de Procesos,Analisis
+1,Tecnico de Moldeo I (IR),Analisis
+2,Tecnico de Moldeo I (IR),Analisis
+1,Tecnico de Moldeo II (DD),Analisis
+2,Tecnico de Moldeo II (DD),Analisis
+2,Asist de Sup de Ensamble (FX),Analisis
+2,Tecnico en Pintura,Analisis
+2,Aprendiz de Pintor,Analisis
+2,Coordinador Técnicos CNC,Analisis
+2,Operador CNC (FX),Analisis
+2,Operador Universal (FX) - Nivel 1,Analisis
+2,Operador Universal (FX) - Nivel 2,Analisis
+2,Operador Universal (FX) - Nivel 3,Analisis
+2,Operador Universal (FX) - Nivel 4,Analisis
+2,Pintor I,Analisis
+2,Pintor II,Analisis
+2,Pulidor (FX),Analisis
+2,Tecnico "II" CNC,Analisis
+2,Sup. de Produccion "II"(FX),Analisis
+2,Tecnico de Moldeo I (HCM),Analisis
+2,Separador de partes (HCM) - Nivel 1,Analisis
+2,Separador de partes (HCM) - Nivel 2,Analisis
+2,Coord Tecnico de Moldeo (HCM),Analisis
+2,Mezclador de Resinas (HCM),Analisis
+2,Mezclador de Resinas Sr. (HCM),Analisis
+2,Operador Ops Secundarias (HCM),Analisis
+2,Operador Universal (HCM) - Nivel 1,Analisis
+2,Operador Universal (HCM) - Nivel 2,Analisis
+2,Operador Universal (HCM) - Nivel 3,Analisis
+2,Operador Universal (HCM) - Nivel 4,Analisis
+2,Surtidor de Materiales (HCM),Analisis
+2,Tecnico de Set Up "III" (HCM),Analisis
+2,Tecnico de Set Up "I" (HCM),Analisis
+3,Asistente Control Produccion,Analisis
+3,Tecnico de Procesos,Analisis
+3,Coord Tecnico de Moldeo (DD),Analisis
+3,Asist de Sup de Ensamble (DD),Analisis
+3,Limpiador de Moldes (DD),Analisis
+3,Ensamblador - Nivel 1,Analisis
+3,Ensamblador - Nivel 2,Analisis
+3,Ensamblador - Nivel 3,Analisis
+3,Ensamblador - Nivel 4,Analisis
+3,Ensamblador - Nivel 5,Analisis
+3,Mezclador de Resinas (DD),Analisis
+3,Mezclador de Resinas Sr. (DD),Analisis
+3,Operador Universal (DD) - Nivel 1,Analisis
+3,Operador Universal (DD) - Nivel 2,Analisis
+3,Operador Universal (DD) - Nivel 3,Analisis
+3,Operador Universal (DD) - Nivel 4,Analisis
+3,Separador de Partes - Nivel 1,Analisis
+3,Separador de Partes - Nivel 2,Analisis
+3,Surtidor de Materiales (DD),Analisis
+3,Tecnico de Moldeo I (DD),Analisis
+3,Tecnico de Moldeo II (DD),Analisis
+3,Tecnico de Moldeo III (DD),Analisis
+3,Tecnico de Set Up "I" (DD),Analisis
+3,Tecnico de Set Up "III" (DD),Analisis
+3,Auxiliar Control de Produccion,Analisis

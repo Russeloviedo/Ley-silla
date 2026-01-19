@@ -1,0 +1,3802 @@
+[
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad III"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01B",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador Jr Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01C",
+    "area": "Facilities",
+    "puesto": "Mecanico de Facilities \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01D",
+    "area": "Facilities",
+    "puesto": "Mecanico de Facilities \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador Jr Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Tec Electromecanico Sr."
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador Jr Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Security",
+    "puesto": "Coordinador Guardias Seguridad"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01",
+    "area": "Facilities",
+    "puesto": "Coordinador Mantenimiento Edificio"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador de Limpieza"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01A",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador Jr Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01C",
+    "area": "Facilities",
+    "puesto": "Aux. Mantenimiento Edificio"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01C",
+    "area": "Facilities",
+    "puesto": "Mecanico de Facilities \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01C",
+    "area": "Facilities",
+    "puesto": "Mecanico de Facilities \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01D",
+    "area": "Facilities",
+    "puesto": "Aux. Mantenimiento Edificio"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01D",
+    "area": "Facilities",
+    "puesto": "Mecanico de Facilities \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AM01D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Facilities I"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador Jr Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A002",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A002",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Ensamble \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad III"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "L",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "L",
+    "area": "Patrimonial",
+    "puesto": "Monitorista CCTV"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "Mantenimiento",
+    "puesto": "Tec Electromecanico Sr."
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS02",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "M010",
+    "area": "Facilities",
+    "puesto": "Mecanico de Facilities \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "M011",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A",
+    "area": "Patrimonial",
+    "puesto": "Monitorista CCTV"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Tool crib",
+    "puesto": "Coordinador de Tool Crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Mantenimiento",
+    "puesto": "Coordinador Jr Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Mantenimiento",
+    "puesto": "Auxiliar de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "Security",
+    "puesto": "Coordinador Guardias Seguridad"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Patrimonial",
+    "puesto": "Monitorista CCTV"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "C",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "C",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "C",
+    "area": "Patrimonial",
+    "puesto": "Monitorista CCTV"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Patrimonial",
+    "puesto": "Monitorista CCTV"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Tool crib",
+    "puesto": "Auxiliar de Tool-crib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "L",
+    "area": "Patrimonial",
+    "puesto": "Guardia de Seguridad II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "VQC",
+    "area": "Mantenimiento",
+    "puesto": "Mecanico de Moldeo \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "Materiales",
+    "puesto": "Auxiliar de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "F",
+    "area": "Materiales",
+    "puesto": "Auxiliar Control de Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "LS02",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A",
+    "area": "Materiales",
+    "puesto": "Chofer"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Materiales",
+    "puesto": "Auxiliar de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Materiales",
+    "puesto": "Coordinador de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A002",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A002",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "Materiales",
+    "puesto": "Chofer"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "Materiales",
+    "puesto": "Chofer"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS02",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS03",
+    "area": "Materiales",
+    "puesto": "Auxiliar de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Asistente Control Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Materiales",
+    "puesto": "Auxiliar de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Materiales",
+    "puesto": "Chofer"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Materiales",
+    "puesto": "Coordinador de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Asistente Control Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "Materiales",
+    "puesto": "Auxiliar de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "Materiales",
+    "puesto": "Coordinador de Conteo Ciclico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "MaterialesDD Prod Admin",
+    "puesto": "Asistente Control Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "B",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Auxiliar Control de Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "C",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "C",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "C",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Asistente Control Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "MaterialesDD Prod Admin",
+    "puesto": "Auxiliar Control de Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "F",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "F",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Asistente Control Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "G",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "J",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Asistente Control Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "J",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Auxiliar Control de Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "Almacen",
+    "puesto": "Almacenista \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "Almacen",
+    "puesto": "Coordinador de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Almacen",
+    "puesto": "Materialista"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "F",
+    "area": "Almacen",
+    "puesto": "Almacenista \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "C",
+    "area": "Materiales",
+    "puesto": "Chofer"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Dibujante"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "Tool Room",
+    "puesto": "Toolmaker Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "D",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Aprendiz Toolmaker"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Mecanico de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"I\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Toolmaker Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Tool Room",
+    "puesto": "Aprendiz Toolmaker"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Tool Room",
+    "puesto": "Toolmaker Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A002",
+    "area": "Tool Room",
+    "puesto": "Mecanico de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A002",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A002",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "B",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "B",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "C",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "C",
+    "area": "Tool Room",
+    "puesto": "Aprendiz Toolmaker"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "C",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "D",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "D",
+    "area": "Tool Room",
+    "puesto": "Toolmaker \"II\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "LS02",
+    "area": "Tool Room",
+    "puesto": "Almacenista de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad I (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad II (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad III (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IR",
+    "puesto": "Tecnico de Calidad  (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad III (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "FX",
+    "puesto": "Inspector de Calidad II (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "IR",
+    "puesto": "Tecnico de Calidad  (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad III (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad III (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IR",
+    "puesto": "Tecnico de Calidad  (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad I (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad II (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad III (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad I (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad II (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad III (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad III (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad I (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad II (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "LS02",
+    "area": "FX",
+    "puesto": "Asistente de Sup de Calidad FX"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A",
+    "area": "HCM",
+    "puesto": "Inspector de Calidad II (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Tecnico de Calidad  (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "FX",
+    "puesto": "Inspector de Calidad I (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "HCM",
+    "puesto": "Asistente de Sup de Calidad HC"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "HCM",
+    "puesto": "Tecnico de Calidad  (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "IR",
+    "puesto": "Asistente de Sup de Calidad IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad III (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A002",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A002",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad II (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "HCM",
+    "puesto": "Inspector de Calidad I (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "HCM",
+    "puesto": "Inspector de Calidad II (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "HCM",
+    "puesto": "Tecnico de Calidad  (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "HCM",
+    "puesto": "Inspector de Calidad II (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "HCM",
+    "puesto": "Tecnico de Calidad  (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "HCM",
+    "puesto": "Inspector de Calidad II (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "IR moldeo",
+    "puesto": "Inspector de Calidad II (IR moldeo)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "FX",
+    "puesto": "Asistente de Sup de Calidad FX"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "FX",
+    "puesto": "Inspector de Calidad I (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "FX",
+    "puesto": "Inspector de Calidad II (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "FX",
+    "puesto": "Inspector de Calidad III (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "IR ensamble",
+    "puesto": "Inspector de Calidad I (IR ensamble)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS02",
+    "area": "FX",
+    "puesto": "Inspector de Calidad I (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS02",
+    "area": "FX",
+    "puesto": "Inspector de Calidad III (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Inspector de Calidad II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Inspector de Calidad III (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Tecnico de Calidad (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "DD",
+    "puesto": "Asistente de Sup de Calidad DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "DD",
+    "puesto": "Inspector de Calidad II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "DD",
+    "puesto": "Asistente de Sup de Calidad DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "DD",
+    "puesto": "Inspector de Calidad II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "DD",
+    "puesto": "Asistente de Sup de Calidad DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "DD",
+    "puesto": "Inspector de Calidad I (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "DD",
+    "puesto": "Inspector de Calidad II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "DD",
+    "puesto": "Inspector de Calidad I (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "DD",
+    "puesto": "Inspector de Calidad II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "DD",
+    "puesto": "Inspector de Calidad III (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "DD",
+    "puesto": "Asistente de Sup de Calidad DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "DD",
+    "puesto": "Inspector de Calidad I (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "DD",
+    "puesto": "Inspector de Calidad II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A",
+    "area": "Moldeo",
+    "puesto": "Limpiador de Moldes (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Administrativo ",
+    "puesto": "Asistente Ejecutivo"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Administrativo ",
+    "puesto": "Gerente Sr Automatizacion"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Administrativo ",
+    "puesto": "Ingeniero Sistemas Manufactura"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Automatizacion",
+    "puesto": "Ingeniero de Automatizacion Jr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Asistente de control de doctos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Gerente de Calidad (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Ingeniero Calidad Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Ingeniero de Calidad III (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Supervisor de Calidad II (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Técnico de Calibración"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Compras ",
+    "puesto": "Agente de Compras I"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Compras MRO",
+    "puesto": "Coordinador de Compras MRO"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Analista Cumplimiento Aduanero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Analista de Nomina"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Asist de Cumplimiento Aduanero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Auxiliar Contable"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Auxiliar de Cuentas por Pagar"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Coord de Fiscal y Comercio Ext"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Gerente de Comercio Exterior"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Supervisor de Contabilidad"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Gerente de Ingenieria"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Gerente Manufactura IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Ing Mecanico de Manufactura III"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Ing. de Manufactura \"I\" (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Ing. de Manufactura II (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Ingeniero de Moldeo \"I\" (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Ingeniero Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Principal Supervisor de Moldeo"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Sup. de  Produccion \"I\"  (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Supervisor de Ingenieria (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR - Moldeo",
+    "puesto": "Ingeniero de Proceso (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR - Moldeo",
+    "puesto": "Sup. de Produccion \"III\" (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor Sr de Moldeo"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR - PGJ",
+    "puesto": "Ing. de Manufactura II (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "IRR - PGJ",
+    "puesto": "Supervisor de Ingenieria (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Materiales",
+    "puesto": "Gerente Materiales Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Materiales IRR",
+    "puesto": "Gerente de Materiales (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Materiales",
+    "puesto": "Planner/Buyer (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Materiales",
+    "puesto": "Planner/Buyer Sr.(IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Planner/Buyer Jr (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Director de Recursos Humanos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Especialista Desarrollo Organizacional"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Especialista Operaciones RH"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Analista Sr Soporte Técnico"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Soporte Tecnico Jr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Administrativo ",
+    "puesto": "VicePresidente Operaciones Manufactura"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Calidad",
+    "puesto": "Gerente de Calidad Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "EHS",
+    "puesto": "Supervisor Sr Seg e Higiene"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Finanzas",
+    "puesto": "Asist de Cumplimiento Aduanero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Finanzas",
+    "puesto": "Auxiliar cumplimiento aduanero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Finanzas",
+    "puesto": "Coordinador de Logistica"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Finanzas",
+    "puesto": "Mensajero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "IRR",
+    "puesto": "Gerente de Operaciones (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Materiales",
+    "puesto": "Planner/Buyer Sr.(IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Moldeo",
+    "puesto": "Ingeniero de Proceso (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Recursos Humanos",
+    "puesto": "Asistente de Recursos Humanos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Recursos Humanos",
+    "puesto": "Talent Management Business Partner"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Sistemas",
+    "puesto": "Gerente Service Desk"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Sistemas",
+    "puesto": "Soporte Tecnico II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Sistemas",
+    "puesto": "Soporte Tecnico III"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Sistemas",
+    "puesto": "Gerente Service Desk"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Tool Room",
+    "puesto": "Ingeniero de Procesos Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD02",
+    "area": "Tool Room",
+    "puesto": "Ingeniero Tooling III (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD03",
+    "area": "Calidad",
+    "puesto": "Asistente de control de doctos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD03",
+    "area": "Calidad",
+    "puesto": "Supervisor de Calidad II (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD03",
+    "area": "Finanzas",
+    "puesto": "Supervisor Cumplim. Aduanero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD03",
+    "area": "Recursos Humanos",
+    "puesto": "Gerente Recursos Humanos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AD03",
+    "area": "Sistemas",
+    "puesto": "Soporte Tecnico II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01",
+    "area": "Finanzas",
+    "puesto": "Asist de Cumplimiento Aduanero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01",
+    "area": "Finanzas",
+    "puesto": "Contralor"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01",
+    "area": "Finanzas",
+    "puesto": "Supervisor de Nominas"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01",
+    "area": "Mantenimiento",
+    "puesto": "Supervisor de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "AM01",
+    "area": "Mantenimiento",
+    "puesto": "Supervisor de Mantenimiento Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A001",
+    "area": "IRR",
+    "puesto": "Supervisor Sr de Produccion IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "IRR",
+    "puesto": "Supervisor Sr de Produccion IR"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "IRR - Ensamble Pro-Spray",
+    "puesto": "Sup. de  Produccion \"I\"  (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "A002",
+    "area": "Recursos Humanos",
+    "puesto": "Asistente Relaciones Laborales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "B",
+    "area": "Moldeo",
+    "puesto": "Limpiador de Moldes (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "C",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "D",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "PP",
+    "area": "Finanzas",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "PP",
+    "area": "IRR",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "PP",
+    "area": "IRR Moldeo",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "PP",
+    "area": "Mantenimiento",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "1",
+    "turno": "RH2",
+    "area": "EHS",
+    "puesto": "Enfermero(a)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Administracion de Produccion",
+    "puesto": "Gerente de Produccion"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Automatizacion",
+    "puesto": "Ingeniero de Automatizacion Jr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Ingeniero Calidad Jr. FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Ingeniero de Calidad \"II\" (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "EHS",
+    "puesto": "Ingeniero de Seg./Medio Amb."
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "FX",
+    "puesto": "Gerente de Ingenieria (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "FX",
+    "puesto": "Ing. de Manufactura II  (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "FX",
+    "puesto": "Ingeniero Jr. (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Analista Customer Services"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Gerente de Marketing"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Gerente de Operaciones (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Gerente de Programa"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Ing de Manufactura III (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Ing. de Manufactura II  (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Ingeniero de Moldeo \"II\" HCM"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "HCM",
+    "puesto": "Ingeniero Jr. (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "IRR",
+    "puesto": "Sup. de  Produccion \"II\" (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "IRR - G-85",
+    "puesto": "Tec de maquinas y herramientas"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo  (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Materiales",
+    "puesto": "Planner/Buyer Sr. (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Materiales",
+    "puesto": "Supervisor de conteos ciclicos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Materiales FX",
+    "puesto": "Planner/Buyer (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Materiales HCM",
+    "puesto": "Supervisor de Materiales (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Prod Admin Custom Molding",
+    "puesto": "Planner/Buyer (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Asistente Engagement Organizacional"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Supervisor Engagement Organizacional"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Supervisor Relaciones Laborales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Ingeniero Proyectos de Tooling"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Calidad",
+    "puesto": "Asistente de control de doctos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Calidad",
+    "puesto": "Supervisor de Calidad Sr. (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "FX",
+    "puesto": "Ing. de Manufactura \"I\" (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "IRR - Moldeo",
+    "puesto": "Principal Ingeniero Procesos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Mantenimiento",
+    "puesto": "Supervisor de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Mantenimiento",
+    "puesto": "Supervisor de Toolcrib"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Materiales FX",
+    "puesto": "Gerente de Materiales (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD02",
+    "area": "Moldeo",
+    "puesto": "Ingeniero de Proceso (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD03",
+    "area": "Calidad",
+    "puesto": "Gerente de Calidad (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD03",
+    "area": "Calidad",
+    "puesto": "Ingeniero de Calidad \"I\" (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD03",
+    "area": "Recursos Humanos",
+    "puesto": "Analista Engagement Organizacional"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "AD10",
+    "area": "EHS",
+    "puesto": "Asesor de Salud y Bienestar"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "EHS",
+    "puesto": "Operador de Residuos Peligroso"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "HCM",
+    "puesto": "Supervisor de Ingenieria (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "A001",
+    "area": "Moldeo",
+    "puesto": "Limpiador de Moldes (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "B",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "C",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "D",
+    "area": "IRR - Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "FX",
+    "puesto": "Sup. de  Produccion \"I\"  (FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "FX",
+    "puesto": "Sup. de  Produccion \"II\"(FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS01",
+    "area": "HCM",
+    "puesto": "Sup. de Produccion \"I\" (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS02",
+    "area": "FX",
+    "puesto": "Sup. de  Produccion \"II\"(FX)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS02",
+    "area": "HCM",
+    "puesto": "Supervisor de Moldeo Jr. (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "LS03",
+    "area": "HCM",
+    "puesto": "Supervisor de Moldeo Jr. (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "PP",
+    "area": "FX",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "PP",
+    "area": "HCM",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "2",
+    "turno": "PP",
+    "area": "IRR - G-85",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Administrativo ",
+    "puesto": "Ing Asociado Sistemas Manufact"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Administrativo Marketing",
+    "puesto": "Coordinador Programa Soporte"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Administrativo ",
+    "puesto": "Coord Regional de Operaciones"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Almacen",
+    "puesto": "Gerente de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Almacen",
+    "puesto": "Supervisor de Almacen Jr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Almacen",
+    "puesto": "Supervisor de Almacen Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Asistente de control de doctos"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Ingeniero Calidad Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Ingeniero de Calidad \"I\" (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Supervisor de Calidad Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Calidad",
+    "puesto": "Supervisor de Calidad Sr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Analista Cambios de Ingenieria"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Coord. Gestión Herramientas Mfg"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Coordinador Manufactura Aditiva"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Gerente de Manufactura DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Ing. de Manufactura \"I\" (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Ing. de Manufactura II (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Ingeniero Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Ingeniero Proyectos III (NPI)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Principal Supervisor de Moldeo"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD",
+    "puesto": "Supervisor Sr Ingenieria (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "DD Moldeo",
+    "puesto": "Ingeniero de Moldeo \"II\" DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "EHS",
+    "puesto": "Asistente de EHS"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "EHS",
+    "puesto": "Ingeniero de Seg./Medio Amb."
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "EHS",
+    "puesto": "Ingeniero Sustentabilidad y Cumplimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "EHS",
+    "puesto": "Sup. Seguridad e Higiene"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Analista de Logistica"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Analista Financiero"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Auxiliar de Cuentas por Pagar"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Contador Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Contador Sr Cuentas por Pagar"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Finanzas",
+    "puesto": "Supervisor de Cash Management"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Gastos Administrativos - Design",
+    "puesto": "Coordinador Projectos de Diseño"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Gastos Administrativos - Design",
+    "puesto": "Especialista Soporte Especificaciones"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Mantenimiento",
+    "puesto": "Asistente de Administracion"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Mantenimiento",
+    "puesto": "Gerente de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Analista Control de Materiales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Planner/Buyer (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Materiales DD Prod Admin",
+    "puesto": "Supervisor Sr de Materiales (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Asistente Adquisicion Talento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Especialista Adquisicion Talento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Recursos Humanos",
+    "puesto": "Supervisor Adquisicion Talento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Administrador de Sistemas"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Analista de IT III"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Analista de Sistemas \"III\""
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Analista de Sistemas Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Analista Sistemas Negocio"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Especialista ERP"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Gerente Global Sr Des. Aplicac"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Sistemas"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Sistemas AWS"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Sistemas Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Software I"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Software II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Software III"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Software Jr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Supervisor de Tool Room (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Administrativo ",
+    "puesto": "Area Manager II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Administrativo ",
+    "puesto": "Gerente de Area"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Administrativo ",
+    "puesto": "Regional Sales Manager"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Almacen DD Prod Admin",
+    "puesto": "Supervisor de Almacen"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD03",
+    "area": "DD",
+    "puesto": "Coordinador Control de Materiales NPI"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "DD",
+    "puesto": "Ing de Manufactura III (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Materiales",
+    "puesto": "Gerente de Materiales (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Recursos Humanos",
+    "puesto": "Analista Adquisicion Talento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD02",
+    "area": "Sistemas",
+    "puesto": "Ingeniero de Desktop"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AD03",
+    "area": "Recursos Humanos",
+    "puesto": "Especialista Relaciones Laborales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "DD",
+    "puesto": "Diseñador Grafico de Empaque"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "DD",
+    "puesto": "Ing de Manufactura III (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Finanzas",
+    "puesto": "Auxiliar de Cuentas por Pagar"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Finanzas",
+    "puesto": "Staff Accountant"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "AM01",
+    "area": "Mantenimiento",
+    "puesto": "Supervisor de Mantenimiento"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "DD",
+    "puesto": "Supervisor Sr de Produccion DD"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "EHS",
+    "puesto": "Coordinador de Enfermeria"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A001",
+    "area": "EHS",
+    "puesto": "Enfermero(a)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "DD",
+    "puesto": "Supervisor de Moldeo III (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "A002",
+    "area": "EHS",
+    "puesto": "Ingeniero de Seg./Medio Amb."
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "DD",
+    "puesto": "Sup. de  Produccion \"II\" (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "DD Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS01",
+    "area": "DD Moldeo ensamble",
+    "puesto": "Supervisor de Moldeo Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "DD",
+    "puesto": "Sup. de Produccion \"III\" (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS02",
+    "area": "DD Moldeo ensamble",
+    "puesto": "Supervisor de Moldeo Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "DD Moldeo",
+    "puesto": "Supervisor de Moldeo Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "LS03",
+    "area": "DD Moldeo ensamble",
+    "puesto": "Supervisor de Moldeo Jr. (DD)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP",
+    "area": "Calidad",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP",
+    "area": "DD Ingenieria",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP",
+    "area": "DD Moldeo",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP",
+    "area": "DD Moldeo ensamble",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP",
+    "area": "Mantenimiento",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP",
+    "area": "EHS",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP3",
+    "area": "Calidad",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "PP3",
+    "area": "DD Ingenieria",
+    "puesto": "Practicas Profesionales"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "3",
+    "turno": "RH3",
+    "area": "EHS",
+    "puesto": "Enfermero(a)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Asistente de Administracion"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Diseñador de Moldes"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Ingeniero de Tooling Sr"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Supervisor de Maquinados"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD01",
+    "area": "Tool Room",
+    "puesto": "Supervisor Toolmakers Coach"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD02",
+    "area": "Tool Room",
+    "puesto": "Gerente de Tooling"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD02",
+    "area": "Tool Room",
+    "puesto": "Ingeniero de Tooling Sr (IRR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD02",
+    "area": "Tool Room",
+    "puesto": "Ingeniero Tooling III (HCM)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD02",
+    "area": "Tool Room",
+    "puesto": "Ingeniero Tooling III (IR)"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AD03",
+    "area": "Tool Room",
+    "puesto": "Asistente de Administracion"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Supervisor de Toolmakers"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "AM01",
+    "area": "Tool Room",
+    "puesto": "Supervisor de Toolmakers II"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "A001",
+    "area": "Tool Room",
+    "puesto": "Asistente de Administracion"
+  },
+  {
+    "unidadNegocio": "SOPORTE",
+    "planta": "4",
+    "turno": "PP",
+    "area": "Tool Room",
+    "puesto": "Practicas Profesionales"
+  }
+]
+
+
+
+
+
+

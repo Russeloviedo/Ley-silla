@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "departamentoehsmexico"
+  },
+  "targets": {
+    "departamentoehsmexico": {
+      "hosting": {
+        "analisbipedestacionhunter": [
+          "analisbipedestacionhunter"
+        ],
+        "analisisbipedestacionhunter": [
+          "analisisbipedestacionhunter"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
