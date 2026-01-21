@@ -1,6 +1,6 @@
-import { StyleSheet, ScrollView, TouchableOpacity, View, Image, Alert, Platform } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View, Image, Alert, Platform, Animated, Dimensions, Easing } from 'react-native';
 import { Text } from '@/components/Themed';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { AppColors } from '@/constants/Colors';
 import AnimatedBackground from '@/components/AnimatedBackground';
@@ -8,6 +8,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { CleanupService } from '@/utils/cleanupService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GoogleSheetsService } from '@/utils/googleSheetsService';
+
+const { width } = Dimensions.get('window');
 
 const FLUJO = [
   {
@@ -58,6 +60,11 @@ export default function DiagramaFlujoScreen() {
   const router = useRouter();
   const [showHelpModal, setShowHelpModal] = useState(false);
 
+  // Animaciones
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+  const slideAnim = useRef(new Animated.Value(0)).current;
+  const progressAnim = useRef(new Animated.Value(0)).current;
+
   // Limpiar estado del flujo al montar el componente para asegurar un nuevo análisis
   useEffect(() => {
     const limpiarEstadoFlujo = async () => {
@@ -79,39 +86,84 @@ export default function DiagramaFlujoScreen() {
     limpiarEstadoFlujo();
   }, []);
 
+  // Efecto para la barra de progreso
+  useEffect(() => {
+    const progress = final ? 100 : (paso / FLUJO.length) * 100;
+    Animated.timing(progressAnim, {
+      toValue: progress,
+      duration: 500,
+      useNativeDriver: false, // width no soporta native driver
+      easing: Easing.out(Easing.ease),
+    }).start();
+  }, [paso, final]);
+
+  const animateTransition = (callback: () => void) => {
+    Animated.sequence([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 20,
+        duration: 0,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      callback();
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.spring(slideAnim, {
+          toValue: 0,
+          friction: 8,
+          tension: 40,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    });
+  };
+
   const handleRespuesta = async (valor: 'si' | 'no') => {
-    const actual = FLUJO.find((p) => p.id === paso);
-    if (!actual) return;
+    animateTransition(async () => {
+      const actual = FLUJO.find((p) => p.id === paso);
+      if (!actual) return;
 
-    // Guardar la respuesta del flujo
-    const nuevasRespuestasFlujo = { ...respuestasFlujo, [paso]: valor === 'si' ? 'Sí' : 'No' };
-    setRespuestasFlujo(nuevasRespuestasFlujo);
+      // Guardar la respuesta del flujo
+      const nuevasRespuestasFlujo = { ...respuestasFlujo, [paso]: valor === 'si' ? 'Sí' : 'No' };
+      setRespuestasFlujo(nuevasRespuestasFlujo);
 
-    // Guardar respuestas en AsyncStorage
-    try {
-      await AsyncStorage.setItem('data:flujo', JSON.stringify(nuevasRespuestasFlujo));
-      console.log('💾 Respuestas flujo guardadas en AsyncStorage:', nuevasRespuestasFlujo);
-    } catch (error) {
-      console.error('❌ Error al guardar respuestas flujo:', error);
-    }
+      // Guardar respuestas en AsyncStorage
+      try {
+        await AsyncStorage.setItem('data:flujo', JSON.stringify(nuevasRespuestasFlujo));
+        console.log('💾 Respuestas flujo guardadas en AsyncStorage:', nuevasRespuestasFlujo);
+      } catch (error) {
+        console.error('❌ Error al guardar respuestas flujo:', error);
+      }
 
-    const next = actual[valor];
-    if (typeof next === 'number') {
-      setHistorial((prev) => [...prev, paso]);
-      setPaso(next);
-    } else {
-      setHistorial((prev) => [...prev, paso]);
-      setFinal(next);
-    }
+      const next = actual[valor];
+      if (typeof next === 'number') {
+        setHistorial((prev) => [...prev, paso]);
+        setPaso(next);
+      } else {
+        setHistorial((prev) => [...prev, paso]);
+        setFinal(next);
+      }
+    });
   };
 
   const handleVolver = () => {
     if (historial.length > 0) {
-      const prev = [...historial];
-      const anterior = prev.pop();
-      setHistorial(prev);
-      setFinal(null);
-      if (anterior) setPaso(anterior);
+      animateTransition(() => {
+        const prev = [...historial];
+        const anterior = prev.pop();
+        setHistorial(prev);
+        setFinal(null);
+        if (anterior) setPaso(anterior);
+      });
     }
   };
 
@@ -311,6 +363,13 @@ export default function DiagramaFlujoScreen() {
     setShowHelpModal(true);
   };
 
+  const getProgressWidth = () => {
+    return progressAnim.interpolate({
+      inputRange: [0, 100],
+      outputRange: ['0%', '100%']
+    });
+  };
+
   if (final) {
     return (
       <AnimatedBackground>
@@ -335,9 +394,27 @@ export default function DiagramaFlujoScreen() {
             </TouchableOpacity>
           </LinearGradient>
 
+          {/* Barra de progreso completa */}
+          <View style={styles.progressBarContainer}>
+            <LinearGradient
+              colors={['#4CAF50', '#81C784']}
+              style={{ width: '100%', height: '100%' }}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            />
+          </View>
+
           {/* Contenido del resultado */}
           <View style={styles.content}>
-            <View style={styles.resultadoBox}>
+            <Animated.View
+              style={[
+                styles.resultadoBox,
+                {
+                  opacity: fadeAnim,
+                  transform: [{ translateY: slideAnim }]
+                }
+              ]}
+            >
               <View style={styles.resultadoIcon}>
                 <Text style={styles.resultadoIconText}>
                   {final === 'NO_DECRETO' ? '📋' : '✅'}
@@ -350,30 +427,32 @@ export default function DiagramaFlujoScreen() {
               <Text style={styles.recomendacionFinal}>
                 Se recomienda a los sujetos obligados documentar todas las medidas de cumplimiento.
               </Text>
-            </View>
+            </Animated.View>
 
-            <TouchableOpacity
-              style={styles.botonContinuar}
-              onPress={handleContinuar}
-              activeOpacity={0.8}
-            >
-              <LinearGradient
-                colors={['#b80404', '#ff4444']}
-                style={styles.gradientButton}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
+            <Animated.View style={{ opacity: fadeAnim }}>
+              <TouchableOpacity
+                style={styles.botonContinuar}
+                onPress={handleContinuar}
+                activeOpacity={0.8}
               >
-                <Text style={styles.botonContinuarIcon}>
-                  {final === 'NO_DECRETO' ? '☁️' : '📊'}
-                </Text>
-                <Text style={styles.botonContinuarTexto}>
-                  {final === 'NO_DECRETO'
-                    ? 'Guardar y Ver Resultados'
-                    : 'Ir al Cuestionario de Ponderación'
-                  }
-                </Text>
-              </LinearGradient>
-            </TouchableOpacity>
+                <LinearGradient
+                  colors={['#b80404', '#ff4444']}
+                  style={styles.gradientButton}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                >
+                  <Text style={styles.botonContinuarIcon}>
+                    {final === 'NO_DECRETO' ? '☁️' : '📊'}
+                  </Text>
+                  <Text style={styles.botonContinuarTexto}>
+                    {final === 'NO_DECRETO'
+                      ? 'Guardar y Ver Resultados'
+                      : 'Ir al Cuestionario de Ponderación'
+                    }
+                  </Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            </Animated.View>
           </View>
         </View>
       </AnimatedBackground>
@@ -406,17 +485,45 @@ export default function DiagramaFlujoScreen() {
           </TouchableOpacity>
         </LinearGradient>
 
+        {/* Barra de progreso */}
+        <View style={styles.progressBarContainer}>
+          <Animated.View style={[styles.progressBarFill, { width: getProgressWidth() }]}>
+            <LinearGradient
+              colors={['#00BCD4', '#4DD0E1']}
+              style={{ width: '100%', height: '100%' }}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            />
+          </Animated.View>
+        </View>
+
         {/* Contenido principal */}
         <View style={styles.content}>
-          <View style={styles.preguntaBox}>
+          <Animated.View
+            style={[
+              styles.preguntaBox,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }]
+              }
+            ]}
+          >
             <View style={styles.numeroPreguntaBox}>
               <Text style={styles.numeroPregunta}>{paso}</Text>
             </View>
             <Text style={styles.preguntaTexto}>{actual.texto}</Text>
-          </View>
+          </Animated.View>
 
           {/* Botones de respuesta */}
-          <View style={styles.opciones}>
+          <Animated.View
+            style={[
+              styles.opciones,
+              {
+                opacity: fadeAnim,
+                transform: [{ translateY: slideAnim }]
+              }
+            ]}
+          >
             <TouchableOpacity
               style={[styles.boton, styles.botonSi]}
               onPress={() => handleRespuesta('si')}
@@ -448,7 +555,7 @@ export default function DiagramaFlujoScreen() {
                 <Text style={styles.botonTexto}>No</Text>
               </LinearGradient>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
 
           {/* Botón volver */}
           {historial.length > 0 && (
@@ -553,6 +660,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 18,
     borderBottomRightRadius: 18,
     elevation: 4,
+    zIndex: 10,
   },
   topBarContent: {
     flexDirection: 'row',
@@ -564,7 +672,6 @@ const styles = StyleSheet.create({
     height: 35,
     marginRight: 10,
   },
-
   topBarTitle: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -572,6 +679,18 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flex: 1,
     lineHeight: 20,
+  },
+
+  // Barra de progreso
+  progressBarContainer: {
+    height: 6,
+    width: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    borderRadius: 3,
   },
 
   // Contenido principal
@@ -583,18 +702,18 @@ const styles = StyleSheet.create({
   },
   // Tarjeta de pregunta
   preguntaBox: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    borderRadius: 24,
     padding: 30,
     marginBottom: 40,
     width: '100%',
-    maxWidth: 400,
-    boxShadow: '0px 8px 16px rgba(0, 188, 212, 0.2)',
-    elevation: 8,
+    maxWidth: 500,
+    boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.15)', // Sombra más suave y moderna
+    elevation: 10,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    backdropFilter: 'blur(10px)',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    backdropFilter: 'blur(20px)', // Efecto glassmorphism
   },
   numeroPreguntaBox: {
     backgroundColor: '#00c4cc',
@@ -604,21 +723,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    boxShadow: '0px 4px 8px rgba(0, 196, 204, 0.3)',
-    elevation: 4,
+    boxShadow: '0px 4px 12px rgba(0, 196, 204, 0.4)',
+    elevation: 8,
   },
   numeroPregunta: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 24,
-    letterSpacing: 1.2,
   },
   preguntaTexto: {
     fontSize: 20,
-    color: '#222',
+    color: '#37474F', // Texto un poco más suave que negro puro
     textAlign: 'center',
     fontWeight: '600',
-    lineHeight: 28,
+    lineHeight: 30,
   },
   // Botones de respuesta
   opciones: {
@@ -626,67 +744,71 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 20,
     marginBottom: 30,
+    width: '100%', // Asegurar que ocupe el ancho
+    maxWidth: 500, // Limitar ancho en tablets
   },
   boton: {
-    minWidth: 140,
+    flex: 1, // Que los botones ocupen espacio igual
+    minWidth: 120,
+    maxWidth: 200,
     backgroundColor: '#fff',
-    paddingVertical: 20,
-    paddingHorizontal: 30,
-    borderRadius: 16,
+    borderRadius: 20,
     alignItems: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 59, 76, 0.1)',
-    elevation: 4,
-    borderWidth: 2,
-    borderColor: 'transparent',
+    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.15)',
+    elevation: 6,
+    overflow: 'hidden', // Para el gradiente
   },
   botonSi: {
-    borderColor: '#4caf50',
+    // borderColor: '#4caf50',
+    // borderWidth: 2,
   },
   botonNo: {
-    borderColor: '#f44336',
+    // borderColor: '#f44336',
+    // borderWidth: 2,
   },
   gradientButton: {
     width: '100%',
     height: '100%',
-    borderRadius: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 30,
   },
   botonIcon: {
-    fontSize: 24,
+    fontSize: 28,
     marginBottom: 8,
+    transform: [{ scale: 1.1 }],
   },
   botonTexto: {
     fontSize: 18,
     color: '#fff',
-    fontWeight: 'bold',
-    letterSpacing: 1.1,
+    fontWeight: '800', // Extra bold
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   // Botón volver
   botonVolver: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 12,
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-    elevation: 2,
+    width: 140,
+    height: 48,
+    borderRadius: 24,
+    overflow: 'hidden',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+    elevation: 4,
+    marginTop: 10,
   },
   gradientButtonVolver: {
     width: '100%',
     height: '100%',
-    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
     flexDirection: 'row',
   },
   botonVolverIcon: {
     fontSize: 16,
     marginRight: 8,
+    color: '#fff',
   },
   botonVolverTexto: {
     fontSize: 16,
@@ -695,74 +817,78 @@ const styles = StyleSheet.create({
   },
   // Estilos para el resultado final
   resultadoBox: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 30,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 24,
+    padding: 40,
     marginBottom: 30,
     width: '100%',
-    maxWidth: 400,
-    shadowColor: '#003b4c',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    elevation: 8,
+    maxWidth: 500,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.15,
+    shadowRadius: 20,
+    elevation: 12,
     alignItems: 'center',
   },
   resultadoIcon: {
-    backgroundColor: '#00c4cc',
-    borderRadius: 60,
-    width: 80,
-    height: 80,
+    backgroundColor: '#E0F7FA',
+    borderRadius: 80,
+    width: 100,
+    height: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
-    shadowColor: '#00c4cc',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
+    marginBottom: 25,
+    borderWidth: 4,
+    borderColor: '#00BCD4',
   },
   resultadoIconText: {
-    fontSize: 32,
+    fontSize: 40,
   },
   resultadoTitulo: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#003b4c',
+    color: '#006064',
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: 20,
   },
   resultado: {
-    fontSize: 16,
-    color: '#444',
+    fontSize: 18,
+    color: '#424242',
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: 28,
     fontWeight: '500',
   },
   recomendacionFinal: {
-    marginTop: 16,
+    marginTop: 20,
     fontSize: 14,
-    color: '#b80404',
+    color: '#D32F2F',
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 22,
     fontWeight: '600',
+    backgroundColor: '#FFEBEE',
+    padding: 10,
+    borderRadius: 8,
+    width: '100%',
   },
   botonContinuar: {
-    paddingVertical: 18,
-    paddingHorizontal: 30,
-    borderRadius: 16,
+    width: '100%',
+    maxWidth: 350,
+    height: 60,
+    borderRadius: 30,
     alignItems: 'center',
-    shadowColor: '#00c4cc',
+    shadowColor: '#d32f2f',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 8,
     flexDirection: 'row',
+    overflow: 'hidden',
   },
 
   botonContinuarIcon: {
-    fontSize: 20,
+    fontSize: 24,
     marginRight: 10,
+    color: '#fff',
   },
   botonContinuarTexto: {
     fontSize: 16,
@@ -772,16 +898,18 @@ const styles = StyleSheet.create({
 
   // Botón de ayuda
   topBarButton: {
-    backgroundColor: AppColors.secondary,
-    borderRadius: 16,
-    width: 32,
-    height: 32,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 20,
+    width: 36,
+    height: 36,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.4)',
   },
   topBarButtonText: {
-    color: AppColors.textWhite,
+    color: '#fff',
     fontWeight: 'bold',
     fontSize: 20,
   },
@@ -792,71 +920,57 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
+    backdropFilter: 'blur(5px)',
   },
   modalContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 20,
-    padding: 20,
-    margin: 20,
+    backgroundColor: '#fff',
     width: '90%',
     maxWidth: 400,
     maxHeight: '80%',
-    boxShadow: '0px 12px 20px rgba(0, 188, 212, 0.3)',
-    elevation: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(15px)',
+    borderRadius: 20,
+    overflow: 'hidden',
+    elevation: 20,
   },
   modalHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
-    paddingBottom: 15,
+    padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: '#eee',
+    backgroundColor: '#f9f9f9',
   },
   modalTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: AppColors.primary,
+    color: '#333',
   },
   modalCloseButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#f0f0f0',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 5,
   },
   modalCloseText: {
-    fontSize: 18,
-    color: '#666',
-    fontWeight: 'bold',
+    fontSize: 24,
+    color: '#999',
   },
   modalScrollView: {
-    flex: 1,
+    padding: 20,
   },
   definitionItem: {
     marginBottom: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
   },
   definitionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: AppColors.primary,
-    marginBottom: 8,
+    color: '#00BCD4',
+    marginBottom: 5,
   },
   definitionText: {
     fontSize: 14,
-    color: '#333',
-    lineHeight: 20,
-    textAlign: 'justify',
+    color: '#555',
+    lineHeight: 22,
   },
-}); 
+});

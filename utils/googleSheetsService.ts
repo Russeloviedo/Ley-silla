@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmF7H5DFgPID8IhDJ7ZN2ycsDMAg2PuLeL5Z-O7YxfW_peHwjYBGGrjFYVKKGsVuVQWg/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzeg-xbS16QdqO3LgGbxNUXvQJX357UgLmN8daGK58DCHWYP9zE5r7TaL2YQDGWRq4p9A/exec';
 
 export const GoogleSheetsService = {
     /**
