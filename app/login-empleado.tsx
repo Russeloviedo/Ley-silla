@@ -28,7 +28,7 @@ export default function LoginEmpleadoScreen() {
     console.log('🔍 handleContinue ejecutándose en login-empleado.tsx...');
     console.log('👤 Nombre:', nombre);
     console.log('🆔 Número Empleado:', numeroEmpleado);
-    
+
     if (!numeroEmpleado.trim()) {
       console.log('❌ Número de empleado vacío');
       Alert.alert('Error', 'Por favor ingresa tu número de empleado');
@@ -36,7 +36,7 @@ export default function LoginEmpleadoScreen() {
     }
 
     console.log('✅ Número de empleado válido, iniciando verificación...');
-    
+
     try {
       console.log('🔄 Llamando a AuthService.verifyUser...');
       const result = await AuthService.verifyUser(nombre, numeroEmpleado.trim());
@@ -78,7 +78,7 @@ export default function LoginEmpleadoScreen() {
         <View style={styles.formContainer}>
           <Text style={styles.title}>Verificación de Empleado</Text>
           <Text style={styles.subtitle}>Confirma tu identidad</Text>
-          
+
           {/* Información del usuario */}
           <View style={styles.userInfoSection}>
             <View style={styles.userInfoRow}>
@@ -149,14 +149,18 @@ const styles = StyleSheet.create({
   logoEmoji: {
     fontSize: 50,
     marginBottom: 10,
-    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
   },
   logoText: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#1976D2',
     marginBottom: 5,
-    textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)',
+    textShadowColor: 'rgba(255, 255, 255, 0.8)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   logoSubtext: {
     fontSize: 16,
@@ -168,7 +172,10 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 30,
     marginHorizontal: 20,
-    boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
     elevation: 8,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -222,7 +229,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
     elevation: 2,
   },
   inputIcon: {
@@ -250,7 +260,10 @@ const styles = StyleSheet.create({
     padding: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
     elevation: 6,
   },
   continueButtonContainer: {
@@ -260,7 +273,10 @@ const styles = StyleSheet.create({
     padding: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
     elevation: 6,
   },
   backButtonText: {
